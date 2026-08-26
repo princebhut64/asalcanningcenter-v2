@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News & Media Coverage | Asal Canning Center</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  
+    <link rel="stylesheet" href="css/news.css" />
+    <link rel="stylesheet" href="css/shared.css" />
+  </head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-item">
+        <i class="fa-solid fa-shield-check"></i>
+        <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+      </div>
+      <div class="top-bar-item">
+        <i class="fa-brands fa-facebook"></i>
+        <a href="#" style="text-decoration: underline;">Follow on Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="brand">
+        <div class="brand-badge">Est. 2000</div>
+        <div class="brand-title">
+          <h1>ASAL CANNING CENTER</h1>
+          <span>Cottage Industry & Food Processing</span>
+        </div>
+      </div>
+
+      <a class="header-cta" href="contact.html">Start a batch <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav id="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="news.html" class="active">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= WOWSLIDER 3D SLICED HERO ================= -->
+  <section class="wow-slider-wrapper" id="heroSlider">
+    <div class="slide-bg-base" id="slideBg"></div>
+    <div class="slice-canvas" id="sliceCanvas"></div>
+    <div class="slider-overlay-gradient"></div>
+
+    <div class="hero-caption" id="sliderCaption">
+      <h2 id="captionTitle">Recognized Across Leading Media</h2>
+      <p id="captionDesc">Statewide press coverage, honorary awards, and magazine highlights since 2000.</p>
+    </div>
+
+    <button class="slider-nav-btn prev" onclick="prevSliceSlide()" aria-label="Previous Slide">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="slider-nav-btn next" onclick="nextSliceSlide()" aria-label="Next Slide">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="slider-dots-box" id="dotsContainer"></div>
+  </section>
+
+  <!-- ================= MEDIA ARCHIVE SECTION ================= -->
+  <section class="media-section">
+    <div class="container">
+      
+      <div class="media-intro" data-aos="fade-up">
+        <h2>Press Clippings & Recognition Archive</h2>
+        <p>Featured in leading Gujarati and National dailies including Divya Bhaskar, Gujarat Samachar, Sandesh, Times of India, and Umiya Parivar magazine.</p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="media-filters" data-aos="fade-up" data-aos-delay="100">
+        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Clippings (12)</button>
+        <button class="filter-btn" data-filter="newspaper"><i class="fa-solid fa-newspaper"></i> Newspaper Dailies</button>
+        <button class="filter-btn" data-filter="awards"><i class="fa-solid fa-award"></i> Awards & Certifications</button>
+        <button class="filter-btn" data-filter="magazine"><i class="fa-solid fa-book-open"></i> Magazine Features</button>
+      </div>
+
+      <!-- Press Cards Grid -->
+      <div class="press-grid" id="pressGrid">
+        <!-- Rendered via JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= DOCUMENT LIGHTBOX MODAL ================= -->
+  <div class="document-lightbox" id="docLightbox" role="dialog" aria-modal="true" aria-labelledby="modalDocTitle" aria-hidden="true">
+    <div class="lightbox-frame">
+      <div class="lightbox-header">
+        <h3 id="modalDocTitle">Press Clipping Detail</h3>
+        <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+      </div>
+      <div class="lightbox-body">
+        <img src="" alt="Clipping Document" id="modalDocImg" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+          <div class="footer-brand">
+            <h3>ASAL CANNING CENTER</h3>
+            <span>Cottage Industry & Food Processing</span>
+            <p>Empowering local producers and households since 2000 with professional canning, pulping, and packaging preservation services.</p>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Overview</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Our Center</a></li>
+            <li><a href="products.html"><i class="fa-solid fa-chevron-right"></i> Pulp Products</a></li>
+            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News & Media</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Facilitator</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+          <h4>Certifications</h4>
+          <div class="cert-badge-box">
+            <span>FSSAI Certified</span>
+            <small>Lic. No.: 10718026000263</small>
+          </div>
+          <div class="cert-badge-box">
+            <span>FDCA Registered</span>
+            <small>Reg. No.: 20715034000001</small>
+          </div>
+          <div class="cert-badge-box">
+            <span>Govt. Recognized</span>
+            <small>Cottage Industry Facilitator</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
+        <p>Engineered with High-Performance Motion</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  
+    <script src="js/main.js"></script>
+    <script src="js/site-motion.js"></script>
+    <script src="js/news.js"></script>
+  </body>
+</html>

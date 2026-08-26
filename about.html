@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Asal Canning Center - Cottage Industry</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="stylesheet" href="css/shared.css" />
+  </head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-item">
+        <i class="fa-solid fa-shield-check"></i>
+        <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+      </div>
+      <div class="top-bar-item">
+        <i class="fa-brands fa-facebook"></i>
+        <a href="#" style="text-decoration: underline;">Follow on Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="brand">
+        <div class="brand-badge">Est. 2000</div>
+        <div class="brand-title">
+          <h1>ASAL CANNING CENTER</h1>
+          <span>Cottage Industry & Food Processing</span>
+        </div>
+      </div>
+
+      <a class="header-cta" href="contact.html">Start a batch <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav id="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= WOWSLIDER 3D SLICED HERO ================= -->
+  <section class="wow-slider-wrapper" id="heroSlider">
+    <div class="slide-bg-base" id="slideBg"></div>
+    <div class="slice-canvas" id="sliceCanvas"></div>
+    <div class="slider-overlay-gradient"></div>
+
+    <div class="hero-caption" id="sliderCaption">
+      <h2 id="captionTitle">Expert in Canning & Packaging</h2>
+      <p id="captionDesc">Pioneering cottage preservation and empowering independent enterprises since 2000.</p>
+    </div>
+
+    <button class="slider-nav-btn prev" onclick="prevSliceSlide()" aria-label="Previous Slide">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="slider-nav-btn next" onclick="nextSliceSlide()" aria-label="Next Slide">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="slider-dots-box" id="dotsContainer"></div>
+  </section>
+
+  <!-- Floating Stats Highlights -->
+  <div class="stats-bar-section container" data-aos="fade-up" data-aos-duration="800">
+    <div class="stats-card-wrap">
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
+        <div class="stat-text">
+          <h4>2007</h4>
+          <p>GCCI Award Winner</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+        <div class="stat-text">
+          <h4><span class="counter" data-target="24">0</span>+ Years</h4>
+          <p>Of Industry Trust</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+        <div class="stat-text">
+          <h4><span class="counter" data-target="1000">0</span>+</h4>
+          <p>Women Trained</p>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-globe"></i></div>
+        <div class="stat-text">
+          <h4>Global</h4>
+          <p>Special Client Export</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ABOUT SECTION ================= -->
+  <section class="about-main-section">
+    <div class="container about-layout">
+      
+      <!-- Left Column: Founder Card & Badges -->
+      <div class="founder-col" data-aos="fade-right" data-aos-duration="800">
+        <div class="founder-profile-card">
+          <div class="founder-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Jalpa G. Patel" />
+          </div>
+          <h3>Jalpa G. Patel</h3>
+          <span>Founder & Chief Facilitator</span>
+          <p style="font-size: 0.85rem; color: #64748b;">Leading food processing innovations and independent cottage entrepreneurship since September 18, 2000.</p>
+        </div>
+
+        <!-- Franchise Support -->
+        <div class="interactive-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon-box"><i class="fa-solid fa-network-wired"></i></div>
+          <h5>Franchise & Setup Support</h5>
+          <p>Guidance and training for women aiming to establish cottage and small scale home food processing setups.</p>
+        </div>
+
+        <!-- Social Responsibility -->
+        <div class="interactive-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon-box" style="color: var(--accent);"><i class="fa-solid fa-hand-holding-heart"></i></div>
+          <h5>Social Responsibility</h5>
+          <p>Free awareness camps and seminars helping women gain economic independence.</p>
+        </div>
+      </div>
+
+      <!-- Center Column: Main Story -->
+      <div class="about-narrative" data-aos="fade-up" data-aos-duration="900">
+        <span class="badge-pill">Our Heritage & Mission</span>
+        <h2>About Asal Canning Center</h2>
+
+        <p><strong>Jalpa G. Patel</strong> is the founder of Asal Canning Center which is situated in <strong>Paldi area of Ahmedabad</strong>. Started on <strong>18th September, 2000</strong>, Asal Canning Center was the first ever canning center established and led by a woman in the region.</p>
+
+        <p>Since then, the center has grown leap and bounds and has now become a renowned example in the cottage industries all over Gujarat. The organization takes pride in handling extraction and packing for Mango pulp, Tomato sauce, mixed fruit jams, squashes, pickles, and herbal health drinks.</p>
+
+        <!-- Award Box -->
+        <div class="award-spotlight" data-aos="zoom-in" data-aos-delay="150">
+          <i class="fa-solid fa-trophy"></i>
+          <div>
+            <h4>Gujarat Chamber of Commerce Award (2007)</h4>
+            <p>Honored for outstanding contributions to cottage food industries, extensively featured across leading newspapers, magazines, and TV channels.</p>
+          </div>
+        </div>
+
+        <div class="highlight-quote">
+          “Mrs. Jalpaben believes that there is no other freedom like being <strong>‘Independent’</strong>. Her dream is that every woman should stand on her own two feet.”
+        </div>
+
+        <p>For this purpose, she continuously conducts seminars for fellow women to provide guidelines to start various cottage and home industries. Women interested in starting small-scale home/cottage food processing units may call directly for personal advice and mentoring.</p>
+
+        <p><strong>International Orders:</strong> Asal Canning Center also accepts special processing orders for foreign clients. Email or call for comprehensive custom packaging parameters.</p>
+
+        <div class="key-features-grid">
+          <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Standardized Hygiene</div>
+          <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Pure Natural Formulations</div>
+          <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Tin & Pouch Preservations</div>
+          <div class="feature-item"><i class="fa-solid fa-circle-check"></i> Custom Commercial Batches</div>
+        </div>
+      </div>
+
+      <!-- Right Column: Quick Contact & FDCA Info -->
+      <div class="sidebar-col" data-aos="fade-left" data-aos-duration="800">
+        <div class="sidebar-card">
+          <h4>Quick Contact</h4>
+          
+          <div class="contact-row">
+            <i class="fa-solid fa-building"></i>
+            <div><strong>Asal Canning Center</strong></div>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>Chhaya Chitra, 5, Kailash Society, Mahalaxmi Five Roads, Paldi, Ahmedabad, India</div>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-phone"></i>
+            <div>+91-79-26642018</div>
+          </div>
+          <div class="contact-row">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <div>09825062293</div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="fdca-badge-box">
+            <div class="fdca-emblem">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h5>FDCA Gujarat State</h5>
+            <small style="color: var(--primary); font-weight: 700; display: block; margin: 4px 0;">Govt. Recognized Center</small>
+            <span>Reg. No.: 20715034000001</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+          <div class="footer-brand">
+            <h3>ASAL CANNING CENTER</h3>
+            <span>Cottage Industry & Food Processing</span>
+            <p>Empowering local producers and households since 2000 with professional canning, pulping, and packaging preservation services.</p>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Overview</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Our Center</a></li>
+            <li><a href="products.html"><i class="fa-solid fa-chevron-right"></i> Pulp Products</a></li>
+            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News & Media</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Facilitator</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+          <h4>Certifications</h4>
+          <div class="cert-badge-box">
+            <span>FSSAI Certified</span>
+            <small>Lic. No.: 10718026000263</small>
+          </div>
+          <div class="cert-badge-box">
+            <span>FDCA Registered</span>
+            <small>Reg. No.: 20715034000001</small>
+          </div>
+          <div class="cert-badge-box">
+            <span>Govt. Recognized</span>
+            <small>Cottage Industry Facilitator</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
+        <p>Engineered with High-Performance Motion</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  
+    <script src="js/main.js"></script>
+    <script src="js/site-motion.js"></script>
+    <script src="js/about.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asal Canning Center | Food Processing & Preservation</title>
+
+  <style>
+    :root {
+      --green-950: #061f17;
+      --green-900: #0a3023;
+      --green-800: #104632;
+      --green-700: #176044;
+      --cream: #f7f1e6;
+      --cream-2: #eef5ec;
+      --white: #ffffff;
+      --orange: #e75b2c;
+      --orange-2: #ff7a3f;
+      --gold: #f6c34d;
+      --text: #15352a;
+      --muted: #6d7d73;
+      --shadow: 0 22px 55px rgba(0, 0, 0, .14);
+      --radius: 18px;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mag-x: 0px;
+      --mag-y: 0px;
+      --hero-x: 0px;
+      --hero-y: 0px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    section {
+      scroll-margin-top: 110px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      z-index: 99999;
+      background: linear-gradient(90deg, var(--orange), var(--gold));
+    }
+
+    /* Loader */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background: var(--green-950);
+      transition: opacity .55s ease, visibility .55s ease;
+    }
+
+    .preloader.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .jar {
+      width: 62px;
+      height: 82px;
+      position: relative;
+      overflow: hidden;
+      border: 4px solid rgba(255,255,255,.9);
+      border-radius: 13px 13px 20px 20px;
+      box-shadow: 0 0 40px rgba(231, 91, 44, .32);
+    }
+
+    .jar::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      top: -13px;
+      height: 12px;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .jar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 20%;
+      background: linear-gradient(180deg, #ff8a42, #c71e17);
+      animation: jarFill 1.45s ease-in-out infinite;
+    }
+
+    @keyframes jarFill {
+      0%, 100% { height: 18%; }
+      50% { height: 78%; }
+    }
+
+    /* Header */
+    .site-header {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      z-index: 1000;
+      width: min(1120px, calc(100% - 32px));
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 10px 12px 10px 16px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(6, 31, 23, .42);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(16px);
+      transition: .35s ease;
+    }
+
+    .site-header.scrolled {
+      top: 8px;
+      color: var(--text);
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 15px 36px rgba(0,0,0,.12);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+    }
+
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      position: relative;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 35% 25%, #ffb089, transparent 22%),
+        linear-gradient(135deg, #f15a2c, #9f1014);
+      box-shadow: inset 0 -5px 10px rgba(0,0,0,.18);
+    }
+
+    .brand-logo::before,
+    .brand-logo::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      width: 14px;
+      height: 8px;
+      border-radius: 50% 50% 50% 0;
+      background: #66bf75;
+    }
+
+    .brand-logo::before {
+      left: 7px;
+      transform: rotate(-28deg);
+    }
+
+    .brand-logo::after {
+      right: 7px;
+      transform: rotate(28deg);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: .95;
+      letter-spacing: .3px;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 3px;
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      opacity: .8;
+    }
+
+    .nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link {
+      padding: 10px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: .9;
+      transition: .25s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff;
+      background: var(--orange);
+      opacity: 1;
+    }
+
+    .btn {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 19px;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+      transform: translate3d(var(--mag-x), var(--mag-y), 0);
+      transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+
+    .btn:hover {
+      transform: translate3d(var(--mag-x), calc(var(--mag-y) - 3px), 0);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange), #c93d1b);
+      box-shadow: 0 15px 28px rgba(231, 91, 44, .28);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 22px 42px rgba(231, 91, 44, .38);
+    }
+
+    .btn-light {
+      color: #fff;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.34);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-dark {
+      color: #fff;
+      background: var(--green-900);
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -70%;
+      width: 42%;
+      z-index: -1;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent);
+      transform: skewX(-18deg);
+      transition: .75s ease;
+    }
+
+    .btn:hover::before {
+      left: 125%;
+    }
+
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.38);
+      transform: scale(0);
+      pointer-events: none;
+      animation: ripple .65s ease-out forwards;
+    }
+
+    @keyframes ripple {
+      to {
+        opacity: 0;
+        transform: scale(1);
+      }
+    }
+
+    .hamburger {
+      display: none;
+      width: 42px;
+      height: 42px;
+      margin-left: auto;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+      background: var(--green-900);
+      place-items: center;
+    }
+
+    .hamburger span,
+    .hamburger span::before,
+    .hamburger span::after {
+      width: 18px;
+      height: 2px;
+      background: #fff;
+      display: block;
+      transition: .25s ease;
+    }
+
+    .hamburger span {
+      position: relative;
+    }
+
+    .hamburger span::before,
+    .hamburger span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .hamburger span::before {
+      top: -6px;
+    }
+
+    .hamburger span::after {
+      top: 6px;
+    }
+
+    .hamburger.open span {
+      background: transparent;
+    }
+
+    .hamburger.open span::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    .hamburger.open span::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 700px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      background: var(--green-950);
+      color: #fff;
+    }
+
+    .hero-bg,
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-bg {
+      z-index: 0;
+    }
+
+    .hero-slide {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-slide img {
+      filter: saturate(1.08) contrast(1.05);
+      transform: scale(1.04);
+      transition: transform 7.5s ease;
+    }
+
+    .hero-slide.active img {
+      transform: scale(1.13) translate3d(var(--hero-x), var(--hero-y), 0);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(3,22,16,.88), rgba(3,22,16,.36) 52%, rgba(3,22,16,.56)),
+        radial-gradient(circle at 78% 16%, rgba(255,255,255,.14), transparent 26%);
+    }
+
+    .hero-orb {
+      position: absolute;
+      z-index: 2;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(231,91,44,.28), transparent 62%);
+      filter: blur(4px);
+      animation: floatOrb 6s ease-in-out infinite;
+    }
+
+    .hero-orb.one {
+      left: -80px;
+      bottom: 120px;
+    }
+
+    .hero-orb.two {
+      right: 8%;
+      top: 18%;
+      animation-delay: -2s;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-22px); }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      padding-top: 95px;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+    }
+
+    .hero-copy.animate {
+      animation: heroText .5s ease both;
+    }
+
+    @keyframes heroText {
+      from {
+        opacity: .15;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      color: #ffd18b;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    .hero h1 {
+      margin: 0 0 18px;
+      font-family: var(--serif);
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: .95;
+      letter-spacing: -.04em;
+    }
+
+    .hero p {
+      max-width: 560px;
+      margin: 0 0 28px;
+      color: rgba(255,255,255,.86);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      z-index: 4;
+      width: 45px;
+      height: 45px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 50%;
+      overflow: hidden;
+      color: #fff;
+      background: rgba(0,0,0,.25);
+      cursor: pointer;
+      font-size: 28px;
+      transform: translateY(-50%);
+      transition: .25s ease;
+    }
+
+    .slider-btn:hover {
+      background: var(--orange);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .slider-prev {
+      left: 22px;
+    }
+
+    .slider-next {
+      right: 22px;
+    }
+
+    .hero-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 118px;
+      z-index: 4;
+      display: flex;
+      gap: 8px;
+      transform: translateX(-50%);
+    }
+
+    .hero-dot {
+      width: 9px;
+      height: 9px;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      background: rgba(255,255,255,.48);
+      transition: .25s ease;
+    }
+
+    .hero-dot.active {
+      width: 30px;
+      background: var(--orange);
+    }
+
+    /* Stats */
+    .stats {
+      position: relative;
+      z-index: 10;
+      margin-top: -55px;
+    }
+
+    .stats-card {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px;
+      border-right: 1px solid #e8e7de;
+    }
+
+    .stat:last-child {
+      border-right: 0;
+    }
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: var(--green-800);
+      background: #edf5ed;
+      font-weight: 900;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--green-900);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .stat small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    /* Sections */
+    .section {
+      position: relative;
+      padding: 96px 0;
+    }
+
+    .section-head {
+      max-width: 680px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 8px;
+      font-family: var(--serif);
+      font-size: clamp(31px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .dark-section {
+      color: #fff;
+      background: var(--green-800);
+      overflow: hidden;
+    }
+
+    .dark-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 16% 10%, rgba(231,91,44,.18), transparent 30%),
+        radial-gradient(circle at 84% 20%, rgba(246,195,77,.12), transparent 28%);
+    }
+
+    .dark-section .section-head p {
+      color: rgba(255,255,255,.72);
+    }
+
+    [data-reveal] {
+      opacity: 0;
+      filter: blur(5px);
+      transform: translateY(26px) scale(.985);
+      transition:
+        opacity .78s cubic-bezier(.22,1,.36,1),
+        transform .78s cubic-bezier(.22,1,.36,1),
+        filter .78s cubic-bezier(.22,1,.36,1);
+      transition-delay: var(--delay, 0ms);
+    }
+
+    [data-reveal].in {
+      opacity: 1;
+      filter: blur(0);
+      transform: none;
+    }
+
+    /* Product cards */
+    .product-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product-card {
+      overflow: hidden;
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      box-shadow: 0 16px 32px rgba(0,0,0,.18);
+      transform-style: preserve-3d;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 30px 60px rgba(0,0,0,.28);
+    }
+
+    .product-media {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background: #f5f4eb;
+    }
+
+    .product-media img {
+      transition: transform .65s cubic-bezier(.22,1,.36,1);
+    }
+
+    .product-card:hover .product-media img {
+      transform: scale(1.12);
+    }
+
+    .product-badge {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(6,31,23,.72);
+      backdrop-filter: blur(8px);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .product-body {
+      padding: 17px 16px 18px;
+    }
+
+    .product-body h3 {
+      margin: 0 0 10px;
+      font-family: var(--serif);
+      font-size: 18px;
+    }
+
+    .product-link {
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    /* About */
+    .about-section {
+      background: var(--cream-2);
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 230px 1fr 290px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .glass-card {
+      border: 1px solid rgba(20,60,43,.08);
+      border-radius: 12px;
+      background: rgba(255,255,255,.84);
+      box-shadow: 0 18px 42px rgba(35,50,42,.08);
+    }
+
+    .profile-card {
+      padding: 24px;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 96px;
+      height: 96px;
+      margin: 0 auto 14px;
+      overflow: hidden;
+      border-radius: 50%;
+      box-shadow: 0 14px 26px rgba(0,0,0,.16);
+    }
+
+    .profile-card h3,
+    .quick-contact h3,
+    .about-copy h2 {
+      font-family: var(--serif);
+    }
+
+    .profile-card h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .profile-card p {
+      margin: 6px 0 18px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .mini-link {
+      display: block;
+      margin-top: 9px;
+      padding: 10px;
+      border-radius: 9px;
+      color: var(--green-800);
+      background: #f5f4ed;
+      font-size: 12px;
+      font-weight: 900;
+      transition: .25s ease;
+    }
+
+    .mini-link:hover {
+      color: #fff;
+      background: var(--green-800);
+      transform: translateY(-2px);
+    }
+
+    .about-copy {
+      padding: 4px 0;
+    }
+
+    .about-copy h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 3vw, 38px);
+    }
+
+    .about-copy p {
+      margin: 0 0 14px;
+      color: #627369;
+      line-height: 1.8;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 0;
+      margin: 22px 0 0;
+      list-style: none;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .feature-list li::before {
+      content: "●";
+      color: var(--orange);
+      font-size: 16px;
+    }
+
+    .quick-contact {
+      padding: 24px;
+    }
+
+    .quick-contact h3 {
+      margin: 0 0 18px;
+    }
+
+    .contact-line {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: #617169;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .contact-line b {
+      color: var(--orange);
+    }
+
+    .reg-box {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 9px;
+      color: var(--green-800);
+      background: #f3f3ec;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    /* Process */
+    .process-section {
+      background: #fbf6ed;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .video-card {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 18px 34px rgba(0,0,0,.12);
+      transition: .3s ease;
+    }
+
+    .video-card img {
+      transition: transform .65s cubic-bezier(.22,1,.36,1);
+    }
+
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 28px 52px rgba(0,0,0,.18);
+    }
+
+    .video-card:hover img {
+      transform: scale(1.12);
+    }
+
+    .video-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.52));
+    }
+
+    .video-title {
+      position: absolute;
+      left: 13px;
+      bottom: 12px;
+      z-index: 2;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      width: 48px;
+      height: 48px;
+      margin: auto;
+      border: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      color: #fff;
+      background: var(--orange);
+      cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(231,91,44,.48);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      70% { box-shadow: 0 0 0 18px rgba(231,91,44,0); }
+      100% { box-shadow: 0 0 0 0 rgba(231,91,44,0); }
+    }
+
+    /* Services */
+    .services-section {
+      background: #fff;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 27px;
+      transition: .3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-9px);
+      box-shadow: 0 28px 56px rgba(0,0,0,.13);
+    }
+
+    .service-icon {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 15px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange), #b91c1c);
+      font-weight: 900;
+    }
+
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-family: var(--serif);
+      font-size: 22px;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* Gallery */
+    .gallery-section {
+      background: var(--cream);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      grid-auto-rows: 180px;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 18px 38px rgba(0,0,0,.11);
+    }
+
+    .gallery-item.large {
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      transition: .7s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.12);
+    }
+
+    .gallery-item::after {
+      content: attr(data-title);
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: #fff;
+      background: rgba(6,31,23,.72);
+      backdrop-filter: blur(8px);
+      font-size: 13px;
+      font-weight: 900;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: .3s ease;
+    }
+
+    .gallery-item:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Contact */
+    .contact-section {
+      color: #fff;
+      background: var(--green-900);
+      overflow: hidden;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      margin: 0 0 16px;
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.05;
+    }
+
+    .contact-info p {
+      color: rgba(255,255,255,.75);
+      line-height: 1.8;
+    }
+
+    .contact-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .contact-pills span {
+      padding: 10px 13px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.1);
+      font-size: 13px;
+    }
+
+    .contact-form {
+      padding: 26px;
+      color: var(--text);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: var(--green-800);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #dde5db;
+      border-radius: 11px;
+      outline: 0;
+      padding: 12px 13px;
+      background: #fbfbf8;
+      transition: .25s ease;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--orange);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(231,91,44,.13);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 54px 0 22px;
+      color: rgba(255,255,255,.72);
+      background: var(--green-950);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr .8fr 1fr;
+      gap: 40px;
+      margin-bottom: 34px;
+    }
+
+    .footer h3,
+    .footer h4 {
+      margin: 0 0 14px;
+      color: #fff;
+      font-family: var(--serif);
+    }
+
+    .footer p,
+    .footer li {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .footer ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .footer a {
+      display: inline-block;
+      padding: 4px 0;
+      transition: .25s ease;
+    }
+
+    .footer a:hover {
+      color: var(--orange-2);
+      transform: translateX(4px);
+    }
+
+    .social {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .social a {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .cert {
+      margin-bottom: 8px;
+      padding: 13px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.06);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: 12px;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0,0,0,.62);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: .25s ease;
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      width: min(580px, 100%);
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      border-radius: 18px;
+      background: #fff;
+      color: var(--text);
+      box-shadow: 0 35px 85px rgba(0,0,0,.36);
+      transform: translateY(18px) scale(.98);
+      transition: .25s ease;
+    }
+
+    .modal.open .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      border-bottom: 1px solid #ecece5;
+    }
+
+    .modal-head h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 25px;
+    }
+
+    .modal-close {
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 50%;
+      background: #f0f0e9;
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .video-preview {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 15px;
+      background: var(--green-900);
+    }
+
+    .video-preview::after {
+      content: "Animated preview";
+      position: absolute;
+      inset: auto 18px 18px auto;
+      z-index: 2;
+      padding: 10px 13px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(0,0,0,.48);
+      backdrop-filter: blur(8px);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 7000;
+      max-width: 330px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--green-950);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px);
+      transition: .3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .product-grid,
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-layout,
+      .contact-layout,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-item.large {
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .quote-btn {
+        display: none;
+      }
+
+      .hamburger {
+        display: grid;
+      }
+
+      .nav {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 66px;
+        display: grid;
+        gap: 4px;
+        margin: 0;
+        padding: 12px;
+        border-radius: 20px;
+        color: var(--text);
+        background: rgba(255,255,255,.96);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: .25s ease;
+      }
+
+      .nav.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-link {
+        padding: 13px 14px;
+      }
+
+      .hero {
+        min-height: 650px;
+      }
+
+      .slider-btn {
+        display: none;
+      }
+
+      .hero-dots {
+        bottom: 98px;
+      }
+
+      .stats-card {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat:nth-child(2) {
+        border-right: 0;
+      }
+
+      .stat {
+        border-bottom: 1px solid #ecebe4;
+      }
+
+      .stat:nth-child(3),
+      .stat:nth-child(4) {
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand-text strong {
+        font-size: 14px;
+      }
+
+      .brand-text span {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .stats-card,
+      .product-grid,
+      .video-grid,
+      .service-grid,
+      .gallery-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        border-right: 0;
+      }
+
+      .feature-list {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="preloader" id="preloader">
+    <div class="jar"></div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="#home" aria-label="Asal Canning Center Home">
+      <span class="brand-logo"></span>
+      <span class="brand-text">
+        <strong>ASAL CANNING<br>CENTER</strong>
+        <span>Cottage Industry & Food Processing</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="navMenu">
+      <a class="nav-link active" href="#home">Home</a>
+      <a class="nav-link" href="#about">About Us</a>
+      <a class="nav-link" href="#products">Products</a>
+      <a class="nav-link" href="#media">News & Media</a>
+      <a class="nav-link" href="#gallery">Gallery</a>
+      <a class="nav-link" href="#contact">Contact Us</a>
+    </nav>
+
+    <button class="btn btn-primary quote-btn magnetic" type="button" data-open="quote">
+      Start a batch →
+    </button>
+
+    <button class="hamburger" id="hamburger" type="button" aria-label="Open menu">
+      <span></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-slide active">
+          <img
+            src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=1900&q=85"
+            data-fallback="https://loremflickr.com/1900/1000/tomatoes,food?lock=101"
+            alt=""
+          >
+        </div>
+        <div class="hero-slide">
+          <img
+            src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=1900&q=85"
+            data-fallback="https://loremflickr.com/1900/1000/mango,fruit?lock=102"
+            alt=""
+          >
+        </div>
+        <div class="hero-slide">
+          <img
+            src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1900&q=85"
+            data-fallback="https://loremflickr.com/1900/1000/fresh,vegetables?lock=103"
+            alt=""
+          >
+        </div>
+      </div>
+
+      <span class="hero-orb one"></span>
+      <span class="hero-orb two"></span>
+
+      <button class="slider-btn slider-prev" type="button" data-slide="-1" aria-label="Previous slide">‹</button>
+      <button class="slider-btn slider-next" type="button" data-slide="1" aria-label="Next slide">›</button>
+
+      <div class="container hero-inner">
+        <div class="hero-copy animate" id="heroCopy" data-reveal>
+          <span class="eyebrow" id="heroEyebrow">Fresh Processing</span>
+          <h1 id="heroTitle">Fresh Produce, Carefully Preserved.</h1>
+          <p id="heroText">
+            Quality pulp, puree, jams, pickles, chutneys and fruit extracts crafted for homes,
+            retailers and food brands.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary magnetic" href="#products">Explore Products</a>
+            <button class="btn btn-light magnetic" type="button" data-open="quote">Request Processing</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-dots">
+        <button class="hero-dot active" type="button" data-dot="0" aria-label="Slide 1"></button>
+        <button class="hero-dot" type="button" data-dot="1" aria-label="Slide 2"></button>
+        <button class="hero-dot" type="button" data-dot="2" aria-label="Slide 3"></button>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-card" data-reveal>
+          <div class="stat">
+            <span class="stat-icon">▣</span>
+            <div>
+              <strong><span class="count" data-count="24">0</span>+</strong>
+              <small>Years Processing Excellence</small>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span class="stat-icon">◈</span>
+            <div>
+              <strong><span class="count" data-count="50">0</span>+</strong>
+              <small>Product Formulations</small>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span class="stat-icon">♣</span>
+            <div>
+              <strong><span class="count" data-count="10000">0</span>+</strong>
+              <small>Satisfied Clients</small>
+            </div>
+          </div>
+
+          <div class="stat">
+            <span class="stat-icon">✓</span>
+            <div>
+              <strong><span class="count" data-count="100">0</span>%</strong>
+              <small>Quality Standard</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section dark-section" id="products">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Asal / Crafted Preservation</span>
+          <h2>Popular Preserves & Extracts</h2>
+          <p>Product-specific images, clean cards, hover zoom and smooth scroll animation.</p>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card tilt" data-reveal>
+            <div class="product-media">
+              <img
+                src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=85"
+                data-fallback="https://loremflickr.com/800/650/mango,fruit?lock=201"
+                alt="Mango pulp"
+                loading="lazy"
+              >
+              <span class="product-badge">Fruit Pulp</span>
+            </div>
+            <div class="product-body">
+              <h3>Mango Pulp</h3>
+              <a class="product-link" href="#contact">Order Now →</a>
+            </div>
+          </article>
+
+          <article class="product-card tilt" data-reveal>
+            <div class="product-media">
+              <img
+                src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=85"
+                data-fallback="https://loremflickr.com/800/650/tomatoes,food?lock=202"
+                alt="Tomato pulp and puree"
+                loading="lazy"
+              >
+              <span class="product-badge">Puree</span>
+            </div>
+            <div class="product-body">
+              <h3>Tomato Pulp & Puree</h3>
+              <a class="product-link" href="#contact">Order Now →</a>
+            </div>
+          </article>
+
+          <article class="product-card tilt" data-reveal>
+            <div class="product-media">
+              <img
+                src="https://loremflickr.com/800/650/amla,gooseberry?lock=203"
+                data-fallback="https://loremflickr.com/800/650/gooseberry,fruit?lock=204"
+                alt="Amla pulp"
+                loading="lazy"
+              >
+              <span class="product-badge">Amla</span>
+            </div>
+            <div class="product-body">
+              <h3>Amla Pulp</h3>
+              <a class="product-link" href="#contact">Order Now →</a>
+            </div>
+          </article>
+
+          <article class="product-card tilt" data-reveal>
+            <div class="product-media">
+              <img
+                src="https://loremflickr.com/800/650/fruit,jam,jar?lock=205"
+                data-fallback="https://loremflickr.com/800/650/jam,preserve?lock=206"
+                alt="Mixed fruit jam"
+                loading="lazy"
+              >
+              <span class="product-badge">Jam</span>
+            </div>
+            <div class="product-body">
+              <h3>Mixed Fruit Jam</h3>
+              <a class="product-link" href="#contact">Order Now →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="about-layout">
+          <aside class="profile-card glass-card" data-reveal>
+            <div class="profile-img">
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=85"
+                data-fallback="https://loremflickr.com/300/300/portrait,woman?lock=301"
+                alt="Jalpa G. Patel"
+                loading="lazy"
+              >
+            </div>
+            <h3>Jalpa G. Patel</h3>
+            <p>Key Facilitator & Coordinator</p>
+            <a class="mini-link" href="#products">Homegrown Products</a>
+            <a class="mini-link" href="#services">Social Responsibility</a>
+          </aside>
+
+          <div class="about-copy" data-reveal>
+            <h2>Welcome to Asal Canning Center</h2>
+            <p>
+              New to Nature. We preserve mango pulp, tomato puree, fruit squash,
+              pickles, chutneys, vegetables and more. Located in Ahmedabad, our center
+              supports professional canning, extraction and preservation.
+            </p>
+            <p>
+              Whether you need small-batch processing, pouch packing, domestic canning
+              training or formulation support, Asal Canning Center helps convert fresh
+              produce into dependable shelf-ready products.
+            </p>
+
+            <ul class="feature-list">
+              <li>Cottage Industry Guidelines</li>
+              <li>Commercial & Foreign Orders</li>
+              <li>Tin & Pouch Packing Services</li>
+              <li>Domestic Canning Training</li>
+            </ul>
+          </div>
+
+          <aside class="quick-contact glass-card" data-reveal>
+            <h3>Quick Contact</h3>
+            <div class="contact-line">
+              <b>●</b>
+              <span>Ahmedabad, Gujarat, India</span>
+            </div>
+            <div class="contact-line">
+              <b>☎</b>
+              <span>+91 79 2652 2418</span>
+            </div>
+            <div class="contact-line">
+              <b>✉</b>
+              <span>info@asalcanning.example</span>
+            </div>
+            <div class="reg-box">
+              FCRA Registered<br>
+              Reg. No. 2075656400001
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section process-section" id="media">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Asal / Crafted Preservation</span>
+          <h2>Processing in Action</h2>
+          <p>Animated video cards with correct food-processing style thumbnails.</p>
+        </div>
+
+        <div class="video-grid">
+          <article class="video-card" data-video-title="Fruit Cleaning & Sorting" data-reveal>
+            <img src="https://loremflickr.com/900/560/citrus,orange,fruit?lock=401" alt="Fruit cleaning" loading="lazy">
+            <button class="play-btn" type="button" aria-label="Play video">▶</button>
+            <span class="video-title">Fruit Cleaning</span>
+          </article>
+
+          <article class="video-card" data-video-title="Vegetable Preparation" data-reveal>
+            <img src="https://loremflickr.com/900/560/carrots,vegetable?lock=402" alt="Vegetable preparation" loading="lazy">
+            <button class="play-btn" type="button" aria-label="Play video">▶</button>
+            <span class="video-title">Vegetable Preparation</span>
+          </article>
+
+          <article class="video-card" data-video-title="Pulping & Extraction" data-reveal>
+            <img src="https://loremflickr.com/900/560/food,processing,vegetables?lock=403" alt="Pulping and extraction" loading="lazy">
+            <button class="play-btn" type="button" aria-label="Play video">▶</button>
+            <span class="video-title">Pulping & Extraction</span>
+          </article>
+
+          <article class="video-card" data-video-title="Jam & Preserve Packing" data-reveal>
+            <img src="https://loremflickr.com/900/560/jam,jar,preserve?lock=404" alt="Jam packing" loading="lazy">
+            <button class="play-btn" type="button" aria-label="Play video">▶</button>
+            <span class="video-title">Jam Packing</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section services-section" id="services">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">What We Offer</span>
+          <h2>Food Processing Services</h2>
+          <p>Complete support from raw produce selection to finished packed products.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card glass-card" data-reveal>
+            <div class="service-icon">01</div>
+            <h3>Pulp & Puree</h3>
+            <p>Mango, tomato, amla and seasonal fruit pulping with hygienic handling.</p>
+          </article>
+
+          <article class="service-card glass-card" data-reveal>
+            <div class="service-icon">02</div>
+            <h3>Pickles & Chutneys</h3>
+            <p>Traditional recipes and commercial formulations for longer shelf life.</p>
+          </article>
+
+          <article class="service-card glass-card" data-reveal>
+            <div class="service-icon">03</div>
+            <h3>Pouch & Tin Packing</h3>
+            <p>Batch-based packing options for retail, catering and institutional needs.</p>
+          </article>
+
+          <article class="service-card glass-card" data-reveal>
+            <div class="service-icon">04</div>
+            <h3>Training</h3>
+            <p>Domestic canning guidance for home producers and cottage industries.</p>
+          </article>
+
+          <article class="service-card glass-card" data-reveal>
+            <div class="service-icon">05</div>
+            <h3>Bulk Orders</h3>
+            <p>Processing support for restaurants, food startups and farm groups.</p>
+          </article>
+
+          <article class="service-card glass-card" data-reveal>
+            <div class="service-icon">06</div>
+            <h3>Quality Control</h3>
+            <p>Clean workflow, sorting discipline and consistent product output.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Gallery</span>
+          <h2>Freshness to Finished Product</h2>
+          <p>A clean image gallery with hover captions and smooth zoom animation.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item large" data-title="Fresh Tomatoes" data-reveal>
+            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=900&q=85" alt="Fresh tomatoes" loading="lazy">
+          </div>
+
+          <div class="gallery-item" data-title="Mango Processing" data-reveal>
+            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=700&q=85" alt="Mangoes" loading="lazy">
+          </div>
+
+          <div class="gallery-item" data-title="Amla Selection" data-reveal>
+            <img src="https://loremflickr.com/700/500/amla,gooseberry?lock=501" alt="Amla" loading="lazy">
+          </div>
+
+          <div class="gallery-item" data-title="Vegetable Preparation" data-reveal>
+            <img src="https://loremflickr.com/700/500/vegetables,processing?lock=502" alt="Vegetable preparation" loading="lazy">
+          </div>
+
+          <div class="gallery-item" data-title="Jam Packing" data-reveal>
+            <img src="https://loremflickr.com/700/500/jam,jar?lock=503" alt="Jam jar" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="contact-layout">
+          <div class="contact-info" data-reveal>
+            <span class="eyebrow">Contact Us</span>
+            <h2>Start your processing batch with Asal.</h2>
+            <p>
+              Share your product, quantity and packing requirement. Our team will contact
+              you with the next steps for processing, training or bulk production.
+            </p>
+
+            <div class="contact-pills">
+              <span>Fruit Pulp</span>
+              <span>Tomato Puree</span>
+              <span>Pickles</span>
+              <span>Jam</span>
+              <span>Pouch Packing</span>
+            </div>
+          </div>
+
+          <form class="contact-form glass-card" data-form data-reveal>
+            <div class="form-grid">
+              <div class="field">
+                <label>Your Name</label>
+                <input type="text" name="name" required placeholder="Enter your name">
+              </div>
+
+              <div class="field">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" required placeholder="+91">
+              </div>
+
+              <div class="field">
+                <label>Product Type</label>
+                <select name="product" required>
+                  <option value="">Select product</option>
+                  <option>Mango Pulp</option>
+                  <option>Tomato Puree</option>
+                  <option>Amla Pulp</option>
+                  <option>Mixed Fruit Jam</option>
+                  <option>Pickle / Chutney</option>
+                  <option>Training Inquiry</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Quantity</label>
+                <input type="text" name="quantity" placeholder="Example: 50 kg">
+              </div>
+
+              <div class="field full">
+                <label>Message</label>
+                <textarea name="message" required placeholder="Tell us about your requirement"></textarea>
+              </div>
+
+              <div class="field full">
+                <button class="btn btn-primary magnetic" type="submit">Send Inquiry →</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>ASAL CANNING CENTER</h3>
+          <p>
+            Empowering local producers and households with professional canning,
+            pulping and packaging preservation services.
+          </p>
+
+          <div class="social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">◎</a>
+            <a href="#" aria-label="YouTube">▶</a>
+            <a href="#" aria-label="WhatsApp">☏</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home Overview</a></li>
+            <li><a href="#about">About Our Center</a></li>
+            <li><a href="#products">Pulp Products</a></li>
+            <li><a href="#media">Process Videos</a></li>
+            <li><a href="#contact">Contact Facilitator</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Certifications</h4>
+          <div class="cert"><strong>FSSAI Certified</strong><br>Lic. No. 10718026000035</div>
+          <div class="cert"><strong>FCRA Registered</strong><br>Reg. No. 2075656400001</div>
+          <div class="cert"><strong>Govt. Recognised</strong><br>Cottage Industry Application</div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Asal Canning Center. All Rights Reserved.</span>
+        <span>Designed with Smooth Motion UI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Quote Modal -->
+  <div class="modal" id="quoteModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Start a Batch</h3>
+        <button class="modal-close" type="button" data-close-modal>×</button>
+      </div>
+
+      <div class="modal-body">
+        <form data-form>
+          <div class="form-grid">
+            <div class="field">
+              <label>Name</label>
+              <input type="text" required placeholder="Your name">
+            </div>
+
+            <div class="field">
+              <label>Phone</label>
+              <input type="tel" required placeholder="+91">
+            </div>
+
+            <div class="field full">
+              <label>Requirement</label>
+              <textarea required placeholder="Example: Need tomato puree processing for 100 kg"></textarea>
+            </div>
+
+            <div class="field full">
+              <button class="btn btn-primary magnetic" type="submit">Submit Request →</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="videoModalTitle">Processing Video</h3>
+        <button class="modal-close" type="button" data-close-modal>×</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="video-preview">
+          <img id="videoPreviewImg" src="" alt="Video preview">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const $ = (selector, scope = document) => scope.querySelector(selector);
+    const $$ = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
+    /* Loader */
+    const preloader = $("#preloader");
+    const hideLoader = () => preloader?.classList.add("hide");
+    window.addEventListener("load", () => setTimeout(hideLoader, 350));
+    setTimeout(hideLoader, 1400);
+
+    /* Image fallback */
+
+    $$("img[data-fallback]").forEach(img => {
+      img.addEventListener("error", function () {
+        if (this.dataset.fallback && !this.dataset.fallbackUsed) {
+          this.dataset.fallbackUsed = "1";
+          this.src = this.dataset.fallback;
+        }
+      });
+
+      if (img.complete && img.naturalWidth === 0) {
+        img.dispatchEvent(new Event("error"));
+      }
+    });
+
+    /* Header + progress */
+    const header = $("#siteHeader");
+    const progress = $("#scrollProgress");
+
+    function onScroll() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progress.style.width = percent + "%";
+      header.classList.toggle("scrolled", window.scrollY > 45);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    /* Mobile menu */
+    const hamburger = $("#hamburger");
+    const navMenu = $("#navMenu");
+
+    hamburger.addEventListener("click", () => {
+      const isOpen = navMenu.classList.toggle("open");
+      hamburger.classList.toggle("open", isOpen);
+    });
+
+
+    $$(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+        hamburger.classList.remove("open");
+      });
+    });
+
+    /* Hero slider */
+    const hero = $(".hero");
+    const slides = $$(".hero-slide");
+    const dots = $$(".hero-dot");
+    const heroCopy = $("#heroCopy");
+    const heroEyebrow = $("#heroEyebrow");
+    const heroTitle = $("#heroTitle");
+    const heroText = $("#heroText");
+
+    const heroData = [
+      {
+        eyebrow: "Fresh Processing",
+        title: "Fresh Produce, Carefully Preserved.",
+        text: "Quality pulp, puree, jams, pickles, chutneys and fruit extracts crafted for homes, retailers and food brands."
+      },
+      {
+        eyebrow: "Seasonal Fruit Care",
+        title: "Mango, Amla and Fruit Pulp Specialists.",
+        text: "From careful sorting to clean extraction, we help turn seasonal produce into consistent preserved products."
+      },
+      {
+        eyebrow: "Cottage Industry Support",
+        title: "Bulk Processing, Packing and Training.",
+        text: "Professional guidance for food entrepreneurs, households, farmers and commercial production requirements."
+      }
+    ];
+
+    let currentSlide = 0;
+    let heroTimer;
+
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === currentSlide));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === currentSlide));
+
+      const item = heroData[currentSlide];
+      heroEyebrow.textContent = item.eyebrow;
+      heroTitle.textContent = item.title;
+      heroText.textContent = item.text;
+
+      heroCopy.classList.remove("animate");
+      void heroCopy.offsetWidth;
+      heroCopy.classList.add("animate");
+
+      clearInterval(heroTimer);
+      heroTimer = setInterval(() => showSlide(currentSlide + 1), 5600);
+    }
+
+
+    $$("[data-slide]").forEach(btn => {
+      btn.addEventListener("click", () => showSlide(currentSlide + Number(btn.dataset.slide)));
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener("click", () => showSlide(Number(dot.dataset.dot)));
+    });
+
+    heroTimer = setInterval(() => showSlide(currentSlide + 1), 5600);
+
+    hero.addEventListener("pointermove", event => {
+      const x = ((event.clientX / window.innerWidth) - .5) * 14;
+      const y = ((event.clientY / window.innerHeight) - .5) * 10;
+      hero.style.setProperty("--hero-x", `${x}px`);
+      hero.style.setProperty("--hero-y", `${y}px`);
+    });
+
+    /* Reveal on scroll */
+    const revealItems = $$("[data-reveal]");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .16 });
+
+      revealItems.forEach((item, index) => {
+        item.style.setProperty("--delay", `${Math.min((index % 6) * 75, 360)}ms`);
+        revealObserver.observe(item);
+      });
+    } else {
+      revealItems.forEach(item => item.classList.add("in"));
+    }
+
+    /* Counter animation */
+    const statsCard = $(".stats-card");
+    const counters = $$(".count");
+    let countersStarted = false;
+
+    function animateCounter(el) {
+      const target = Number(el.dataset.count || 0);
+      const duration = 1450;
+      const start = performance.now();
+      const formatter = new Intl.NumberFormat("en-IN");
+
+      function frame(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = formatter.format(Math.floor(target * eased));
+
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          el.textContent = formatter.format(target);
+        }
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    function startCounters() {
+      if (countersStarted) return;
+      countersStarted = true;
+      counters.forEach(animateCounter);
+    }
+
+    if ("IntersectionObserver" in window) {
+      const counterObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) startCounters();
+      }, { threshold: .55 });
+
+      counterObserver.observe(statsCard);
+    } else {
+      startCounters();
+    }
+
+    /* Button ripple animation */
+    document.addEventListener("click", event => {
+      const target = event.target.closest(".btn, .slider-btn, .play-btn");
+      if (!target) return;
+
+      const rect = target.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height) * 1.8;
+      const ripple = document.createElement("span");
+
+      ripple.className = "ripple";
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+      ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
+
+      target.appendChild(ripple);
+      ripple.addEventListener("animationend", () => ripple.remove());
+    });
+
+    /* Magnetic buttons */
+
+    $$(".magnetic").forEach(btn => {
+      btn.addEventListener("pointermove", event => {
+        const rect = btn.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        btn.style.setProperty("--mag-x", `${x * .16}px`);
+        btn.style.setProperty("--mag-y", `${y * .16}px`);
+      });
+
+      btn.addEventListener("pointerleave", () => {
+        btn.style.setProperty("--mag-x", "0px");
+        btn.style.setProperty("--mag-y", "0px");
+      });
+    });
+
+    /* 3D product tilt */
+
+    $$(".tilt").forEach(card => {
+      card.addEventListener("pointermove", event => {
+        if (window.innerWidth < 768) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - .5) * 10;
+        const rotateX = (.5 - (y / rect.height)) * 10;
+
+        card.style.transform =
+          `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+      });
+
+      card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+      });
+    });
+
+    /* Active nav link */
+    const sections = $$("main section[id]");
+    const navLinks = $$(".nav-link");
+
+    if ("IntersectionObserver" in window) {
+      const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach(link => {
+              link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+            });
+          }
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+
+      sections.forEach(section => navObserver.observe(section));
+    }
+
+    /* Modals */
+    const quoteModal = $("#quoteModal");
+    const videoModal = $("#videoModal");
+
+    function openModal(modal) {
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeModal(modal) {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+
+      if (!$(".modal.open")) {
+        document.body.classList.remove("modal-open");
+      }
+    }
+
+
+    $$("[data-open='quote']").forEach(btn => {
+      btn.addEventListener("click", () => openModal(quoteModal));
+    });
+
+
+    $$("[data-close-modal]").forEach(btn => {
+      btn.addEventListener("click", () => closeModal(btn.closest(".modal")));
+    });
+
+
+    $$(".modal").forEach(modal => {
+      modal.addEventListener("click", event => {
+        if (event.target === modal) closeModal(modal);
+      });
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+
+        $$(".modal.open").forEach(closeModal);
+      }
+    });
+
+    /* Video modal */
+
+    $$(".video-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const img = $("img", card);
+        $("#videoModalTitle").textContent = card.dataset.videoTitle || "Processing Video";
+        $("#videoPreviewImg").src = img.src;
+        openModal(videoModal);
+      });
+    });
+
+    /* Forms */
+    const toast = $("#toast");
+    let toastTimer;
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 3300);
+    }
+
+
+    $$("form[data-form]").forEach(form => {
+      form.addEventListener("submit", event => {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        form.reset();
+
+        const modal = form.closest(".modal");
+        if (modal) closeModal(modal);
+
+        showToast("Thank you! Your inquiry has been captured.");
+      });
+    });
+  </script>
+</body>
+</html>

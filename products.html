@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Category Catalog & Product Details | Asal Canning Center</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  
+    <link rel="stylesheet" href="css/products.css" />
+    <link rel="stylesheet" href="css/shared.css" />
+  </head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-item"><i class="fa-solid fa-shield-check"></i><span><strong>FSSAI Lic. No.:</strong> 10718026000263</span></div>
+      <div class="top-bar-item"><i class="fa-brands fa-facebook"></i><a href="#" style="text-decoration: underline;">Follow on Facebook</a></div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="brand">
+        <div class="brand-badge">Est. 2000</div>
+        <div class="brand-title">
+          <h1>ASAL CANNING CENTER</h1>
+          <span>Cottage Industry & Food Processing</span>
+        </div>
+      </div>
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      <nav id="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html" class="active">Products</a></li>
+          <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= CATALOG WITH HIERARCHICAL CATEGORIES ================= -->
+  <section class="catalog-wrapper">
+    <div class="container catalog-grid">
+      
+      <!-- Left Sidebar: Category Hierarchy -->
+      <aside class="category-tree-panel">
+        <div class="tree-title"><i class="fa-solid fa-layer-group"></i> Main Categories</div>
+        
+        <ul class="tree-list">
+          <!-- All Categories Link -->
+          <li class="main-cat-item">
+            <button class="cat-toggle-btn active" onclick="filterCategory('all', this)">
+              <span>All Products</span>
+              <i class="fa-solid fa-border-all"></i>
+            </button>
+          </li>
+
+          <!-- 1. Main Category: Pulp -->
+          <li class="main-cat-item">
+            <button class="cat-toggle-btn" onclick="toggleSubMenu('pulp-sub', this)">
+              <span>Pulp</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <ul class="sub-tree-list open" id="pulp-sub">
+              <li><span class="sub-cat-link" onclick="filterCategory('Sitafal Pulp', this)">Sitafal Pulp (Custard Apple)</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Jamun Pulp', this)">Jamun Pulp</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Falsa Pulp', this)">Falsa Pulp</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Mango Pulp', this)">Mango Pulp (Tin / Pouch)</span></li>
+            </ul>
+          </li>
+
+          <!-- 2. Main Category: Sauces & Gravies -->
+          <li class="main-cat-item">
+            <button class="cat-toggle-btn" onclick="toggleSubMenu('sauces-sub', this)">
+              <span>Sauces & Gravies</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <ul class="sub-tree-list" id="sauces-sub">
+              <li><span class="sub-cat-link" onclick="filterCategory('Tomato Sauce', this)">Tomato Sauce</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Italian Pizza Gravy', this)">Italian Pizza Gravy</span></li>
+            </ul>
+          </li>
+
+          <!-- 3. Main Category: Jams, Squashes & Pickles -->
+          <li class="main-cat-item">
+            <button class="cat-toggle-btn" onclick="toggleSubMenu('preserves-sub', this)">
+              <span>Jams & Pickles</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <ul class="sub-tree-list" id="preserves-sub">
+              <li><span class="sub-cat-link" onclick="filterCategory('Fruit Jam', this)">Fruit Jams</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Fruit Squash', this)">Fruit Squash & Syrups</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Pickles', this)">Gol/Khati Mango & Pickles</span></li>
+            </ul>
+          </li>
+
+          <!-- 4. Main Category: Amla & Ayurvedic Health -->
+          <li class="main-cat-item">
+            <button class="cat-toggle-btn" onclick="toggleSubMenu('health-sub', this)">
+              <span>Amla & Herbal Care</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <ul class="sub-tree-list" id="health-sub">
+              <li><span class="sub-cat-link" onclick="filterCategory('Amla Products', this)">Chyawanprash & Murabba</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Health Drinks', this)">Therapeutic Juices</span></li>
+              <li><span class="sub-cat-link" onclick="filterCategory('Herbal Hair Oil', this)">18 Herb Hair Oil & Aloevera</span></li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- Right Products Grid Container -->
+      <main>
+        <div class="catalog-header">
+          <div>
+
+          <a class="header-cta" href="contact.html">Start a batch <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <h2 id="currentCategoryHeading">All Products</h2>
+            <p id="productCountText">Showing all available formulations and pulp extractions</p>
+          </div>
+        </div>
+
+        <div class="product-cards-wrap" id="productsGrid">
+          <!-- Rendered dynamically by JavaScript -->
+        </div>
+      </main>
+
+    </div>
+  </section>
+
+  <!-- ================= SINGLE PRODUCT QUICK-VIEW MODAL ================= -->
+  <div class="product-modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-hidden="true">
+    <div class="product-modal-card">
+      <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
+      
+      <div class="modal-gallery">
+        <img src="" alt="Product Detail" class="modal-main-img" id="mImg" />
+      </div>
+
+      <div class="modal-info-panel">
+        <span class="modal-cat-badge" id="mBadge">Category</span>
+        <h3 class="modal-title" id="mTitle">Product Name</h3>
+        <p class="modal-desc" id="mDesc">Description</p>
+
+        <table class="modal-spec-table">
+          <tr>
+            <td>Packaging Option</td>
+            <td id="mPkg">Tin / Pouch / Sealed Bottle</td>
+          </tr>
+          <tr>
+            <td>Shelf Life & Storage</td>
+            <td id="mStorage">Cool, dry place / Leak-free Frozen Bag</td>
+          </tr>
+          <tr>
+            <td>Preparation Base</td>
+            <td id="mBase">100% Natural Farm Yield</td>
+          </tr>
+          <tr>
+            <td>Standard Hygiene</td>
+            <td>FSSAI & FDCA Certified Processing</td>
+          </tr>
+        </table>
+
+        <div class="modal-action-row">
+          <a href="tel:09825062293" class="btn-inquire">
+            <i class="fa-solid fa-phone"></i> Inquire Processing / Order
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+    <script src="js/main.js"></script>
+    <script src="js/site-motion.js"></script>
+    <script src="js/products.js"></script>
+  </body>
+</html>
