@@ -3,53 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Photo & Video Gallery | Asal Canning Center</title>
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
-  <!-- AOS Animation Library -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <title>Facility Tour & Photo Gallery | Asal Canning Center</title>
 
-  
-    <link rel="stylesheet" href="css/gallery.css" />
-    <link rel="stylesheet" href="css/shared.css" />
-  </head>
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 <body>
 
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="container">
-      <div class="top-bar-item">
-        <i class="fa-solid fa-shield-check"></i>
-        <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+      <div class="top-bar-info">
+        <div class="top-bar-item">
+          <i class="fa-solid fa-shield-check"></i>
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+        </div>
+        <div class="top-bar-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Paldi, Ahmedabad, Gujarat</span>
+        </div>
       </div>
-      <div class="top-bar-item">
-        <i class="fa-brands fa-facebook"></i>
-        <a href="#" style="text-decoration: underline;">Follow on Facebook</a>
+      <div class="top-bar-links">
+        <a href="contact.html"><i class="fa-solid fa-clock"></i> Mon - Sat: 9am - 7pm</a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- Header Navigation -->
   <header>
     <div class="container header-content">
-      <div class="brand">
+      <a href="index.html" class="brand">
         <div class="brand-badge">Est. 2000</div>
         <div class="brand-title">
           <h1>ASAL CANNING CENTER</h1>
           <span>Cottage Industry & Food Processing</span>
         </div>
-      </div>
+      </a>
 
-      <a class="header-cta" href="contact.html">Start a batch <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-
-      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+      <button class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <nav id="navbar">
+      <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
@@ -59,135 +63,224 @@
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </nav>
+
+      <a href="contact.html" class="btn btn-accent btn-sm">Start a Batch <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </header>
 
-  <!-- ================= WOWSLIDER 3D SLICED HERO ================= -->
-  <section class="wow-slider-wrapper" id="heroSlider">
-    <div class="slide-bg-base" id="slideBg"></div>
-    <div class="slice-canvas" id="sliceCanvas"></div>
-    <div class="slider-overlay-gradient"></div>
-
-    <div class="hero-caption" id="sliderCaption">
-      <h2 id="captionTitle">Processing & Infrastructure Gallery</h2>
-      <p id="captionDesc">A visual walkthrough of our canning equipment, extraction batches, and training programs.</p>
+  <!-- Gallery Hero Banner -->
+  <section class="hero-section" style="min-height: 40vh; padding: 3.5rem 0 2rem;">
+    <div class="ambient-light-beam ambient-light-gold"></div>
+    <div class="container text-center" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="section-tag"><i class="fa-solid fa-camera"></i> Visual Showcase</div>
+      <h1 class="heading-serif" style="font-size: 3.2rem; color: var(--primary);">Infrastructure & Canning Gallery</h1>
+      <p style="color: var(--text-muted); font-size: 1.05rem;">A visual walkthrough of our fruit extraction machinery, retort thermal autoclaves, cottage training auditorium, and pure natural preserves.</p>
     </div>
-
-    <button class="slider-nav-btn prev" onclick="prevSliceSlide()" aria-label="Previous Slide">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <button class="slider-nav-btn next" onclick="nextSliceSlide()" aria-label="Next Slide">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-    <div class="slider-dots-box" id="dotsContainer"></div>
   </section>
 
-  <!-- ================= GALLERY SECTION ================= -->
-  <section class="gallery-section">
+  <!-- 1. PHOTO GALLERY GRID SECTION -->
+  <section class="gallery-section" style="padding-top: 1rem; padding-bottom: 3.5rem;">
     <div class="container">
-      
-      <div class="gallery-intro" data-aos="fade-up">
-        <h2>Production Facility & Live Demos</h2>
-        <p>Explore our hygienic preservation facility, industrial pulpers, sealing machinery, and hands-on domestic canning classes.</p>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-tabs gsap-reveal" style="margin-bottom: 2rem;">
+        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All Photos</button>
+        <button class="filter-btn" data-filter="facility"><i class="fa-solid fa-industry"></i> Facility & Machinery</button>
+        <button class="filter-btn" data-filter="operations"><i class="fa-solid fa-blender"></i> Extraction & Batching</button>
+        <button class="filter-btn" data-filter="products"><i class="fa-solid fa-jar"></i> Preserves & Products</button>
+        <button class="filter-btn" data-filter="workshops"><i class="fa-solid fa-users-gear"></i> Training Seminars</button>
       </div>
 
-      <!-- Filter Controls -->
-      <div class="gallery-filters" data-aos="fade-up" data-aos-delay="100">
-        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All Media</button>
-        <button class="filter-btn" data-filter="facility"><i class="fa-solid fa-industry"></i> Facility & Machines</button>
-        <button class="filter-btn" data-filter="pulping"><i class="fa-solid fa-blender"></i> Pulping & Processing</button>
-        <button class="filter-btn" data-filter="packaging"><i class="fa-solid fa-box-open"></i> Bottling & Packaging</button>
-        <button class="filter-btn" data-filter="training"><i class="fa-solid fa-chalkboard-user"></i> Training Sessions</button>
-        <button class="filter-btn" data-filter="videos"><i class="fa-solid fa-video"></i> Video Demos</button>
-      </div>
+      <!-- Authentic Gallery Grid -->
+      <div class="gallery-grid gsap-grid-stagger">
+        
+        <!-- Photo 1: Machinery -->
+        <div class="gallery-item light-sheen-card" data-category="facility">
+          <img src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80" alt="Stainless Steel Fruit Pulper" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Stainless Steel Fruit Pulper</h4>
+            <p>Hygienic Extraction Equipment</p>
+          </div>
+        </div>
 
-      <!-- Media Grid -->
-      <div class="gallery-grid" id="galleryGrid">
-        <!-- Rendered via JavaScript -->
-      </div>
+        <!-- Photo 2: Mango Extraction -->
+        <div class="gallery-item light-sheen-card" data-category="operations">
+          <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80" alt="Alphonso Mango Pulping" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Alphonso Mango Extraction</h4>
+            <p>Pure Seasonal Batching</p>
+          </div>
+        </div>
 
+        <!-- Photo 3: Domestic Training Seminar -->
+        <div class="gallery-item light-sheen-card" data-category="workshops">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Women Entrepreneurship Workshop" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Domestic Canning Workshop</h4>
+            <p>Led by Jalpa G. Patel</p>
+          </div>
+        </div>
+
+        <!-- Photo 4: Tomato Puree Batch -->
+        <div class="gallery-item light-sheen-card" data-category="products">
+          <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80" alt="Concentrated Tomato Puree" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Concentrated Tomato Puree</h4>
+            <p>Commercial Batch Supply</p>
+          </div>
+        </div>
+
+        <!-- Photo 5: Amla Pressing -->
+        <div class="gallery-item light-sheen-card" data-category="operations">
+          <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80" alt="Cold Press Amla Extraction" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Cold Press Amla Juice</h4>
+            <p>Immunity Health Extract</p>
+          </div>
+        </div>
+
+        <!-- Photo 6: Jam Packaging -->
+        <div class="gallery-item light-sheen-card" data-category="products">
+          <img src="https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?auto=format&fit=crop&w=800&q=80" alt="Artisanal Fruit Jam Jars" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Artisanal Fruit Jam Jars</h4>
+            <p>Hermetic Glass Sealing</p>
+          </div>
+        </div>
+
+        <!-- Photo 7: Thermal Autoclave Sterilizer -->
+        <div class="gallery-item light-sheen-card" data-category="facility">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Thermal Autoclave Sterilizer" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Thermal Autoclave Pasteurizer</h4>
+            <p>Zero Preservative Longevity</p>
+          </div>
+        </div>
+
+        <!-- Photo 8: Women Workshop Class -->
+        <div class="gallery-item light-sheen-card" data-category="workshops">
+          <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=800&q=80" alt="Cottage Canning Seminar" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Cottage Training Seminar</h4>
+            <p>Hands-on Practical Training</p>
+          </div>
+        </div>
+
+        <!-- Photo 9: Kesar Mango Packaging -->
+        <div class="gallery-item light-sheen-card" data-category="operations">
+          <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=800&q=80" alt="Gir Kesar Pulp Packaging" class="lightbox-trigger" />
+          <div class="gallery-overlay">
+            <h4>Gir Kesar Pulp Packaging</h4>
+            <p>Tin Cans & Retort Pouches</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- ================= LIGHTBOX SLIDER MODAL ================= -->
-  <div class="gallery-lightbox-modal" id="galleryLightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-hidden="true">
-    <button class="lightbox-close-btn" onclick="closeGalleryLightbox()">&times;</button>
-    <button class="lightbox-nav-btn prev" onclick="navigateLightbox(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-    <button class="lightbox-nav-btn next" onclick="navigateLightbox(1)"><i class="fa-solid fa-chevron-right"></i></button>
+  <!-- 2. HIGH-TECH OPERATIONS BANNER WITH GLOWING S-CURVE DESIGN -->
+  <section style="padding-bottom: 3.5rem;">
+    <div class="container">
+      <div class="facility-tour-banner gsap-reveal" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #0B0E13 0%, #1A222E 100%);">
+        
+        <!-- Glowing S-Curve Wave Background -->
+        <svg class="s-curve-bg" viewBox="0 0 1200 600" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.22; pointer-events: none; z-index: 1;">
+          <path d="M0,150 C350,400 650,-80 950,280 C1080,440 1160,220 1200,320 L1200,600 L0,600 Z" fill="url(#goldSGradient)"></path>
+          <path d="M0,280 C250,80 550,480 850,180 C1020,320 1140,150 1200,200 L1200,600 L0,600 Z" fill="url(#terracottaSGradient)"></path>
+          <defs>
+            <linearGradient id="goldSGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E0A238" stop-opacity="0.8" />
+              <stop offset="50%" stop-color="#C98D28" stop-opacity="0.4" />
+              <stop offset="100%" stop-color="#E0A238" stop-opacity="0.9" />
+            </linearGradient>
+            <linearGradient id="terracottaSGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#B85C38" stop-opacity="0.6" />
+              <stop offset="100%" stop-color="#E0A238" stop-opacity="0.2" />
+            </linearGradient>
+          </defs>
+        </svg>
 
-    <div class="lightbox-content-box">
-      <div class="lightbox-media-holder" id="lightboxMediaHolder">
-        <!-- Dynamic Image or Video Iframe -->
-      </div>
-      <div class="lightbox-bar">
-        <h3 id="lightboxTitle">Media Title</h3>
-        <span id="lightboxIndex" style="font-size: 0.85rem; color: #94a3b8;">1 / 10</span>
+        <div class="ambient-light-beam ambient-light-gold"></div>
+        <div class="ambient-light-beam ambient-light-terracotta"></div>
+
+        <div class="section-tag" style="background: rgba(224,162,56,0.2); color: var(--accent); position: relative; z-index: 2;"><i class="fa-solid fa-industry"></i> High-Tech Operations</div>
+        <h2 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--white); margin-bottom: 0.75rem; position: relative; z-index: 2;">Inside Asal Canning Center: Precision & Hygiene</h2>
+        <p style="color: rgba(255,255,255,0.85); max-width: 750px; font-size: 1rem; position: relative; z-index: 2;">Our processing unit in Paldi, Ahmedabad is engineered for zero-touch extraction, hermetic double-seam tinning, and temperature-controlled retort pasteurization.</p>
+
+        <div class="facility-tour-grid" style="position: relative; z-index: 2;">
+          <div class="facility-card light-sheen-card">
+            <div class="facility-card-icon"><i class="fa-solid fa-gears"></i></div>
+            <h4>SS-304 Extraction Machinery</h4>
+            <p>Food-grade stainless steel destoning pulpers and fruit crushers operating under strict sterile standards.</p>
+          </div>
+
+          <div class="facility-card light-sheen-card">
+            <div class="facility-card-icon"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+            <h4>Hermetic Thermal Seaming</h4>
+            <p>Vacuum double-seamer tin capping and retort pouch autoclaves guaranteeing 12 to 24 month shelf life.</p>
+          </div>
+
+          <div class="facility-card light-sheen-card">
+            <div class="facility-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h4>Cottage Training Auditorium</h4>
+            <p>Dedicated workshop center empowering women entrepreneurs and home producers in small-scale food preservation.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
-          <div class="footer-brand">
-            <h3>ASAL CANNING CENTER</h3>
-            <span>Cottage Industry & Food Processing</span>
-            <p>Empowering local producers and households since 2000 with professional canning, pulping, and packaging preservation services.</p>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          </div>
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <h4>ASAL CANNING CENTER</h4>
+        <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
+        <div class="top-bar-item" style="color: var(--accent);">
+          <i class="fa-solid fa-shield-check"></i>
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
+      </div>
 
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Overview</a></li>
-            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Our Center</a></li>
-            <li><a href="products.html"><i class="fa-solid fa-chevron-right"></i> Pulp Products</a></li>
-            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News & Media</a></li>
-            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Facilitator</a></li>
-          </ul>
-        </div>
+      <div class="footer-col footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="news.html">News & Media</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
 
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
-          <h4>Certifications</h4>
-          <div class="cert-badge-box">
-            <span>FSSAI Certified</span>
-            <small>Lic. No.: 10718026000263</small>
-          </div>
-          <div class="cert-badge-box">
-            <span>FDCA Registered</span>
-            <small>Reg. No.: 20715034000001</small>
-          </div>
-          <div class="cert-badge-box">
-            <span>Govt. Recognized</span>
-            <small>Cottage Industry Facilitator</small>
-          </div>
-        </div>
+      <div class="footer-col footer-links">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="products.html">Mango & Fruit Extraction</a></li>
+          <li><a href="products.html">Tomato Puree & Sauce</a></li>
+          <li><a href="products.html">Tin & Pouch Canning</a></li>
+          <li><a href="about.html">Domestic Canning Training</a></li>
+          <li><a href="contact.html">Commercial & Export Orders</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p><i class="fa-solid fa-location-dot text-gold"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p><i class="fa-solid fa-phone text-gold"></i> +91 98250 00000</p>
+        <p><i class="fa-solid fa-envelope text-gold"></i> info@asalcanningcenter.com</p>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
-        <p>Engineered with High-Performance Motion</p>
-      </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
+      <p>Pioneering Pure Natural Preservation Since 2000.</p>
     </div>
   </footer>
 
-  <!-- AOS JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-  
-    <script src="js/main.js"></script>
-    <script src="js/site-motion.js"></script>
-    <script src="js/gallery.js"></script>
-  </body>
+  <!-- Custom JavaScript -->
+  <script src="js/main.js"></script>
+</body>
 </html>

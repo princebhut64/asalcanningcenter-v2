@@ -4,52 +4,56 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>News & Media Coverage | Asal Canning Center</title>
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
-  <!-- AOS Animation Library -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 
-  
-    <link rel="stylesheet" href="css/news.css" />
-    <link rel="stylesheet" href="css/shared.css" />
-  </head>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- GSAP Motion Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 <body>
 
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="container">
-      <div class="top-bar-item">
-        <i class="fa-solid fa-shield-check"></i>
-        <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+      <div class="top-bar-info">
+        <div class="top-bar-item">
+          <i class="fa-solid fa-shield-check"></i>
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+        </div>
+        <div class="top-bar-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Paldi, Ahmedabad, Gujarat</span>
+        </div>
       </div>
-      <div class="top-bar-item">
-        <i class="fa-brands fa-facebook"></i>
-        <a href="#" style="text-decoration: underline;">Follow on Facebook</a>
+      <div class="top-bar-links">
+        <a href="contact.html"><i class="fa-solid fa-clock"></i> Mon - Sat: 9am - 7pm</a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- Header Navigation -->
   <header>
     <div class="container header-content">
-      <div class="brand">
+      <a href="index.html" class="brand">
         <div class="brand-badge">Est. 2000</div>
         <div class="brand-title">
           <h1>ASAL CANNING CENTER</h1>
           <span>Cottage Industry & Food Processing</span>
         </div>
-      </div>
+      </a>
 
-      <a class="header-cta" href="contact.html">Start a batch <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-
-      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+      <button class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <nav id="navbar">
+      <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
@@ -59,129 +63,197 @@
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </nav>
+
+      <a href="contact.html" class="btn btn-accent btn-sm">Start a Batch <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </header>
 
-  <!-- ================= WOWSLIDER 3D SLICED HERO ================= -->
-  <section class="wow-slider-wrapper" id="heroSlider">
-    <div class="slide-bg-base" id="slideBg"></div>
-    <div class="slice-canvas" id="sliceCanvas"></div>
-    <div class="slider-overlay-gradient"></div>
-
-    <div class="hero-caption" id="sliderCaption">
-      <h2 id="captionTitle">Recognized Across Leading Media</h2>
-      <p id="captionDesc">Statewide press coverage, honorary awards, and magazine highlights since 2000.</p>
+  <!-- News Hero Section -->
+  <section class="hero-section" style="min-height: 45vh; padding-top: 6rem; padding-bottom: 3rem;">
+    <div class="ambient-light-beam ambient-light-gold"></div>
+    <div class="container text-center" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="section-tag"><i class="fa-solid fa-newspaper"></i> Press & Awards Archive</div>
+      <h1 class="heading-serif" style="font-size: 3.5rem; color: var(--primary);">Recognized Across Leading Media</h1>
+      <p style="color: var(--text-muted); font-size: 1.15rem;">Statewide press coverage, honorary GCCI awards, and magazine highlights recognizing Asal Canning Center's 24+ years of cottage food processing.</p>
     </div>
-
-    <button class="slider-nav-btn prev" onclick="prevSliceSlide()" aria-label="Previous Slide">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <button class="slider-nav-btn next" onclick="nextSliceSlide()" aria-label="Next Slide">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-    <div class="slider-dots-box" id="dotsContainer"></div>
   </section>
 
-  <!-- ================= MEDIA ARCHIVE SECTION ================= -->
-  <section class="media-section">
+  <!-- News & Media Section -->
+  <section class="blog-section" style="padding-top: 2rem;">
     <div class="container">
-      
-      <div class="media-intro" data-aos="fade-up">
-        <h2>Press Clippings & Recognition Archive</h2>
-        <p>Featured in leading Gujarati and National dailies including Divya Bhaskar, Gujarat Samachar, Sandesh, Times of India, and Umiya Parivar magazine.</p>
+
+      <!-- Category Filter Tabs -->
+      <div class="filter-tabs gsap-reveal" style="margin-bottom: 3rem;">
+        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Media (6)</button>
+        <button class="filter-btn" data-filter="press"><i class="fa-solid fa-newspaper"></i> Newspaper Dailies</button>
+        <button class="filter-btn" data-filter="awards"><i class="fa-solid fa-award"></i> Awards & Recognition</button>
+        <button class="filter-btn" data-filter="guides"><i class="fa-solid fa-book-open"></i> Preservation Guides</button>
       </div>
 
-      <!-- Filter Controls -->
-      <div class="media-filters" data-aos="fade-up" data-aos-delay="100">
-        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Clippings (12)</button>
-        <button class="filter-btn" data-filter="newspaper"><i class="fa-solid fa-newspaper"></i> Newspaper Dailies</button>
-        <button class="filter-btn" data-filter="awards"><i class="fa-solid fa-award"></i> Awards & Certifications</button>
-        <button class="filter-btn" data-filter="magazine"><i class="fa-solid fa-book-open"></i> Magazine Features</button>
-      </div>
+      <!-- Articles Grid -->
+      <div class="blog-grid gsap-grid-stagger">
 
-      <!-- Press Cards Grid -->
-      <div class="press-grid" id="pressGrid">
-        <!-- Rendered via JavaScript -->
-      </div>
+        <!-- News Item 1 -->
+        <article class="blog-card light-sheen-card" data-category="press">
+          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80" alt="Divya Bhaskar Feature" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> Divya Bhaskar Daily</span>
+              <span><i class="fa-regular fa-newspaper"></i> Front Page Feature</span>
+            </div>
+            <h3>Pioneering Domestic Food Preservation in Ahmedabad</h3>
+            <p>How Jalpa G. Patel revolutionized seasonal mango pulp extraction and home canning for families across Gujarat.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
 
+        <!-- News Item 2 -->
+        <article class="blog-card light-sheen-card" data-category="awards">
+          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="GCCI Award 2007" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-solid fa-award text-gold"></i> GCCI Award 2007</span>
+              <span><i class="fa-solid fa-building-columns"></i> State Industry Board</span>
+            </div>
+            <h3>Awarded for Outstanding Cottage Industry Innovation</h3>
+            <p>Recognized by the Gujarat Chamber of Commerce & Industry for small-scale food processing excellence.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- News Item 3 -->
+        <article class="blog-card light-sheen-card" data-category="press">
+          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80" alt="Gujarat Samachar Coverage" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> Gujarat Samachar</span>
+              <span><i class="fa-regular fa-newspaper"></i> Food Tech Special</span>
+            </div>
+            <h3>Commercial Retort Pouch Packing for Tomato Concentrates</h3>
+            <p>Coverage on how retort pouches maintain 18+ month shelf life without synthetic chemical preservatives.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- News Item 4 -->
+        <article class="blog-card light-sheen-card" data-category="guides">
+          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80" alt="Amla Health Guide" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> Umiya Parivar Journal</span>
+              <span><i class="fa-solid fa-heart-pulse"></i> Health Feature</span>
+            </div>
+            <h3>Therapeutic Benefits of Cold Press Amla & Herbal Extracts</h3>
+            <p>An in-depth article detailing cold-pressed gooseberry processing for maximum natural Vitamin C retention.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- News Item 5 -->
+        <article class="blog-card light-sheen-card" data-category="awards">
+          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=600&q=80" alt="Women Empowerment Seminar" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> Sandesh News</span>
+              <span><i class="fa-solid fa-users"></i> Community Impact</span>
+            </div>
+            <h3>Training Over 1,000 Women in Home Canning Businesses</h3>
+            <p>Highlighting Asal Canning Center's practical workshops empowering women to launch independent food ventures.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- News Item 6 -->
+        <article class="blog-card light-sheen-card" data-category="guides">
+          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
+            <img src="https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?auto=format&fit=crop&w=600&q=80" alt="Fruit Jam Preservation" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> Cottage Food Monthly</span>
+              <span><i class="fa-solid fa-book"></i> Preservation Guide</span>
+            </div>
+            <h3>Mastering Hermetic Double-Seam Canning Standards</h3>
+            <p>Technical guidelines on temperature controls, vacuum seaming, and sterile storage for home & cottage preservers.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 
-  <!-- ================= DOCUMENT LIGHTBOX MODAL ================= -->
-  <div class="document-lightbox" id="docLightbox" role="dialog" aria-modal="true" aria-labelledby="modalDocTitle" aria-hidden="true">
-    <div class="lightbox-frame">
-      <div class="lightbox-header">
-        <h3 id="modalDocTitle">Press Clipping Detail</h3>
-        <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
-      </div>
-      <div class="lightbox-body">
-        <img src="" alt="Clipping Document" id="modalDocImg" />
-      </div>
+  <!-- Newsletter / Press Kit Request Banner -->
+  <section class="cert-section" style="padding: 4rem 0;">
+    <div class="container text-center" style="max-width: 750px; margin: 0 auto;">
+      <div class="section-tag" style="background: rgba(224,162,56,0.2); color: var(--accent);"><i class="fa-solid fa-paper-plane"></i> Press Inquiries</div>
+      <h2 class="heading-serif" style="font-size: 2.8rem; color: var(--white); margin-bottom: 0.75rem;">Interested in Media Coverage or Interviews?</h2>
+      <p style="color: rgba(255,255,255,0.8); font-size: 1.05rem; margin-bottom: 2rem;">Contact our press relations team in Paldi, Ahmedabad for official press kits, founder interviews, or cottage training documentation.</p>
+      
+      <a href="contact.html" class="btn btn-accent">Request Press Kit <i class="fa-solid fa-arrow-right"></i></a>
     </div>
-  </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
-          <div class="footer-brand">
-            <h3>ASAL CANNING CENTER</h3>
-            <span>Cottage Industry & Food Processing</span>
-            <p>Empowering local producers and households since 2000 with professional canning, pulping, and packaging preservation services.</p>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          </div>
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <h4>ASAL CANNING CENTER</h4>
+        <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
+        <div class="top-bar-item" style="color: var(--accent);">
+          <i class="fa-solid fa-shield-check"></i>
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
+      </div>
 
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Overview</a></li>
-            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Our Center</a></li>
-            <li><a href="products.html"><i class="fa-solid fa-chevron-right"></i> Pulp Products</a></li>
-            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News & Media</a></li>
-            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Facilitator</a></li>
-          </ul>
-        </div>
+      <div class="footer-col footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="news.html">News & Media</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
 
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
-          <h4>Certifications</h4>
-          <div class="cert-badge-box">
-            <span>FSSAI Certified</span>
-            <small>Lic. No.: 10718026000263</small>
-          </div>
-          <div class="cert-badge-box">
-            <span>FDCA Registered</span>
-            <small>Reg. No.: 20715034000001</small>
-          </div>
-          <div class="cert-badge-box">
-            <span>Govt. Recognized</span>
-            <small>Cottage Industry Facilitator</small>
-          </div>
-        </div>
+      <div class="footer-col footer-links">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="products.html">Mango & Fruit Extraction</a></li>
+          <li><a href="products.html">Tomato Puree & Sauce</a></li>
+          <li><a href="products.html">Tin & Pouch Canning</a></li>
+          <li><a href="about.html">Domestic Canning Training</a></li>
+          <li><a href="contact.html">Commercial & Export Orders</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p><i class="fa-solid fa-location-dot text-gold"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p><i class="fa-solid fa-phone text-gold"></i> +91 98250 00000</p>
+        <p><i class="fa-solid fa-envelope text-gold"></i> info@asalcanningcenter.com</p>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
-        <p>Engineered with High-Performance Motion</p>
-      </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
+      <p>Pioneering Pure Natural Preservation Since 2000.</p>
     </div>
   </footer>
 
-  <!-- AOS JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-  
-    <script src="js/main.js"></script>
-    <script src="js/site-motion.js"></script>
-    <script src="js/news.js"></script>
-  </body>
+  <!-- Custom JavaScript -->
+  <script src="js/main.js"></script>
+</body>
 </html>

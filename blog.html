@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogs & News | Asal Canning Center - Food Preservation Insights</title>
+
+  <!-- Google Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- GSAP Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-info">
+        <div class="top-bar-item">
+          <i class="fa-solid fa-shield-check"></i>
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+        </div>
+        <div class="top-bar-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Paldi, Ahmedabad, Gujarat</span>
+        </div>
+      </div>
+      <div class="top-bar-links">
+        <a href="contact.html"><i class="fa-solid fa-clock"></i> Mon - Sat: 9am - 7pm</a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="brand">
+        <div class="brand-badge">Est. 2000</div>
+        <div class="brand-title">
+          <h1>ASAL CANNING CENTER</h1>
+          <span>Cottage Industry & Food Processing</span>
+        </div>
+      </a>
+
+      <button class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="news.html" class="active">Blogs</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <a href="contact.html" class="btn btn-accent btn-sm">Start a Batch <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </header>
+
+  <!-- Inner Banner -->
+  <section class="hero-section" style="min-height: 35vh; padding: 3.5rem 0;">
+    <div class="container text-center">
+      <div class="section-tag"><i class="fa-solid fa-newspaper"></i> Articles & Media</div>
+      <h1 class="heading-serif" style="font-size: 3.2rem; margin-bottom: 1rem; color: var(--primary);">Preservation Knowledge & News</h1>
+      <p style="max-width: 600px; margin: 0 auto; color: var(--text-muted);">Explore our latest articles on cottage food processing, fruit pulp preservation, domestic workshops, and industry updates.</p>
+    </div>
+  </section>
+
+  <!-- Blog Listing Grid -->
+  <section class="blog-section">
+    <div class="container">
+      
+      <!-- Category Filter -->
+      <div class="filter-tabs gsap-reveal">
+        <button class="filter-btn active" data-filter="all">All Articles</button>
+        <button class="filter-btn" data-filter="guides">Processing Guides</button>
+        <button class="filter-btn" data-filter="empowerment">Women Empowerment</button>
+        <button class="filter-btn" data-filter="packaging">Packaging Insights</button>
+      </div>
+
+      <div class="blog-grid gsap-grid-stagger">
+        <!-- Article 1 -->
+        <article class="blog-card" data-category="guides">
+          <div class="blog-img-box">
+            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80" alt="Alphonso Preservation" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> August 15, 2026</span>
+              <span><i class="fa-regular fa-user"></i> By Jalpa Patel</span>
+            </div>
+            <h3>How to Store & Can Alphonso Mango Pulp for 12+ Months</h3>
+            <p>Discover step-by-step thermal sterilization techniques to preserve natural flavor, aroma, and color without chemical additives.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Guide <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article class="blog-card" data-category="empowerment">
+          <div class="blog-img-box">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Women Entrepreneurship Workshop" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> July 28, 2026</span>
+              <span><i class="fa-regular fa-user"></i> Community Team</span>
+            </div>
+            <h3>Empowering Women Through Domestic Canning Workshops</h3>
+            <p>How Asal Canning Center in Paldi, Ahmedabad has trained over 1,000 women to create home business units.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article class="blog-card" data-category="packaging">
+          <div class="blog-img-box">
+            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80" alt="Tin vs Pouch Canning" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> June 10, 2026</span>
+              <span><i class="fa-regular fa-user"></i> Technical Unit</span>
+            </div>
+            <h3>Commercial Tin vs Pouch Packing for Tomato Concentrates</h3>
+            <p>A comprehensive comparison of durability, shipping costs, thermal integrity, and shelf life for food suppliers.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Analysis <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Article 4 -->
+        <article class="blog-card" data-category="guides">
+          <div class="blog-img-box">
+            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80" alt="Amla Health Benefits" />
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span><i class="fa-regular fa-calendar"></i> May 22, 2026</span>
+              <span><i class="fa-regular fa-user"></i> Health & Nutrition</span>
+            </div>
+            <h3>Maximizing Vitamin C Retention in Amla Extraction</h3>
+            <p>Why cold pressing and gentle thermal pasteurization keep essential minerals intact in gooseberry products.</p>
+            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <h4>ASAL CANNING CENTER</h4>
+        <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
+        <div class="top-bar-item" style="color: var(--accent);">
+          <i class="fa-solid fa-shield-check"></i>
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+        </div>
+      </div>
+
+      <div class="footer-col footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="news.html">Blogs & News</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-links">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="products.html">Mango & Fruit Extraction</a></li>
+          <li><a href="products.html">Tomato Puree & Sauce</a></li>
+          <li><a href="products.html">Tin & Pouch Canning</a></li>
+          <li><a href="about.html">Domestic Canning Training</a></li>
+          <li><a href="contact.html">Commercial & Export Orders</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p><i class="fa-solid fa-location-dot text-gold"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p><i class="fa-solid fa-phone text-gold"></i> +91 98250 00000</p>
+        <p><i class="fa-solid fa-envelope text-gold"></i> info@asalcanningcenter.com</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
+      <p>Pioneering Pure Natural Preservation Since 2000.</p>
+    </div>
+  </footer>
+
+  <!-- Custom JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
