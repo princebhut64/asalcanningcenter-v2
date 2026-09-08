@@ -3,53 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us | Asal Canning Center - Cottage Industry</title>
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  
-  <!-- AOS Animation Library -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <title>Contact Us | Asal Canning Center - Paldi, Ahmedabad</title>
 
-  
-    <link rel="stylesheet" href="css/contact.css" />
-    <link rel="stylesheet" href="css/shared.css" />
-  </head>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- GSAP Motion Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    .contact-clean-banner {
+      padding: 2.25rem 0 1.25rem;
+      background: linear-gradient(135deg, #FAFAF8 0%, #F5F3ED 100%);
+      text-align: center;
+      position: relative;
+    }
+
+    .contact-main-grid {
+      display: grid;
+      grid-template-columns: 270px 1fr 280px;
+      gap: 1.75rem;
+      padding: 2.25rem 0 3.5rem;
+      align-items: start;
+    }
+
+    .founder-sidebar-box {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      margin-bottom: 1.15rem;
+    }
+
+    .founder-img-holder {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 0.85rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+    }
+
+    .founder-img-holder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .support-widget-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 0.85rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .support-widget-card i {
+      font-size: 1.25rem;
+      color: var(--accent);
+      width: 38px;
+      height: 38px;
+      background: var(--cream-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-details-box {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-row {
+      display: flex;
+      gap: 0.85rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .info-row i {
+      font-size: 1.15rem;
+      color: var(--accent-hover);
+      margin-top: 0.15rem;
+    }
+
+    .time-badge-box {
+      background: var(--cream-dark);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      border: 1px solid var(--border-medium);
+    }
+
+    .map-frame-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.25rem;
+    }
+
+    .map-frame-card iframe {
+      width: 100%;
+      height: 240px;
+      border: none;
+    }
+
+    .qr-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+      .contact-main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
 <body>
 
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="container">
-      <div class="top-bar-item">
-        <i class="fa-solid fa-shield-check"></i>
-        <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+      <div class="top-bar-info">
+        <div class="top-bar-item" style="display: flex; align-items: center;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-top-logo" style="margin-right: 8px;" />
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+        </div>
+        <div class="top-bar-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Paldi, Ahmedabad, Gujarat</span>
+        </div>
       </div>
-      <div class="top-bar-item">
-        <i class="fa-brands fa-facebook"></i>
-        <a href="#" style="text-decoration: underline;">Follow on Facebook</a>
+      <div class="top-bar-links">
+        <a href="contact.html"><i class="fa-solid fa-clock"></i> Mon - Sat: 9am - 7pm</a>
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- Header -->
+  <!-- Header Navigation -->
   <header>
     <div class="container header-content">
-      <div class="brand">
+      <a href="index.html" class="brand">
         <div class="brand-badge">Est. 2000</div>
         <div class="brand-title">
           <h1>ASAL CANNING CENTER</h1>
           <span>Cottage Industry & Food Processing</span>
         </div>
-      </div>
+      </a>
 
-      <a class="header-cta" href="contact.html">Start a batch <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-
-      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+      <button class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <nav id="navbar">
+      <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
@@ -59,135 +190,122 @@
           <li><a href="contact.html" class="active">Contact Us</a></li>
         </ul>
       </nav>
+
+      <a href="contact.html" class="btn btn-accent btn-sm">Start a Batch <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </header>
 
-  <!-- ================= WOWSLIDER 3D SLICED HERO ================= -->
-  <section class="wow-slider-wrapper" id="heroSlider">
-    <div class="slide-bg-base" id="slideBg"></div>
-    <div class="slice-canvas" id="sliceCanvas"></div>
-    <div class="slider-overlay-gradient"></div>
-
-    <div class="hero-caption" id="sliderCaption">
-      <h2 id="captionTitle">Connect With Our Center</h2>
-      <p id="captionDesc">Direct consultation for cottage canning setups, pulping appointments, and custom batches.</p>
+  <!-- Clean Light Contact Banner -->
+  <section class="contact-clean-banner">
+    <div class="ambient-light-beam ambient-light-gold"></div>
+    <div class="container text-center" style="max-width: 750px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="section-tag" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-headset"></i> Direct Facilitator Inquiries</div>
+      <h1 class="heading-serif" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.25rem;">Contact Asal Canning Center</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Direct consultation for cottage canning setups, fruit pulping appointments, and custom batch seaming in Paldi, Ahmedabad.</p>
     </div>
-
-    <button class="slider-nav-btn prev" onclick="prevSliceSlide()" aria-label="Previous Slide">
-      <i class="fa-solid fa-chevron-left"></i>
-    </button>
-    <button class="slider-nav-btn next" onclick="nextSliceSlide()" aria-label="Next Slide">
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-    <div class="slider-dots-box" id="dotsContainer"></div>
   </section>
 
-  <!-- ================= CONTACT MAIN SECTION ================= -->
-  <section class="contact-section">
-    <div class="container contact-grid-main">
-      
+  <!-- Contact Main Layout -->
+  <section style="background: var(--cream-dark);">
+    <div class="container contact-main-grid">
+
       <!-- Left Column: Founder & Support -->
-      <div class="founder-col" data-aos="fade-right">
-        <div class="founder-sidebar-box">
+      <div>
+        <div class="founder-sidebar-box light-sheen-card gsap-reveal">
           <div class="founder-img-holder">
             <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Jalpa G. Patel" />
           </div>
-          <h3>Ms. Jalpa G. Patel</h3>
-          <span>Founder & Coordinator</span>
-          <p style="font-size: 0.85rem; color: #64748b;">Direct consultation available for home canning training, cottage industry licenses, and bulk foreign export orders.</p>
+          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">Ms. Jalpa G. Patel</h3>
+          <span style="color: var(--accent-hover); font-weight: 700; font-size: 0.775rem; text-transform: uppercase; display: block; margin-bottom: 0.5rem;">Founder & Coordinator</span>
+          <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.45;">Direct consultation available for home canning training, cottage industry licenses, and bulk foreign export orders.</p>
         </div>
 
-        <div class="support-widget-card" data-aos="fade-up" data-aos-delay="100">
-          <div class="support-icon"><i class="fa-solid fa-network-wired"></i></div>
-          <h5>Franchise & Setup</h5>
-          <p>Complete guidelines for setting up food preservation units.</p>
+        <div class="support-widget-card light-sheen-card gsap-reveal">
+          <i class="fa-solid fa-network-wired"></i>
+          <div>
+            <h5 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--primary);">Franchise & Setup</h5>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin: 0;">Complete guidelines for setting up food preservation units.</p>
+          </div>
         </div>
 
-        <div class="support-widget-card" data-aos="fade-up" data-aos-delay="200">
-          <div class="support-icon" style="color: var(--accent);"><i class="fa-solid fa-hand-holding-heart"></i></div>
-          <h5>Social Responsibility</h5>
-          <p>Empowering women with economic self-reliance seminars.</p>
+        <div class="support-widget-card light-sheen-card gsap-reveal">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+          <div>
+            <h5 style="font-family: var(--font-serif); font-size: 1.05rem; color: var(--primary);">Social Responsibility</h5>
+            <p style="font-size: 0.775rem; color: var(--text-muted); margin: 0;">Empowering women with economic self-reliance seminars.</p>
+          </div>
         </div>
       </div>
 
-      <!-- Center Column: Full Contact Details & Message Form -->
-      <div class="contact-details-box" data-aos="fade-up">
-        <h2>Asal Canning Center</h2>
-        <span class="sub-heading">(Cottage Industry Food Processing)</span>
+      <!-- Center Column: Full Contact Details & Instant Message Form -->
+      <div class="contact-details-box light-sheen-card gsap-reveal">
+        <h2 class="heading-serif" style="font-size: 2rem; color: var(--primary); margin-bottom: 0.2rem;">Asal Canning Center</h2>
+        <span style="color: var(--accent-hover); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 1.25rem;">(Cottage Industry Food Processing)</span>
 
-        <div class="info-item-group">
-          <div class="info-row">
-            <div class="row-icon"><i class="fa-solid fa-location-dot"></i></div>
-            <div class="row-text">
-              <h4>Address</h4>
-              <p>Chhaya Chitra 5, Kailash Society, Nr. Mahalaxmi Cross Roads, Paldi, Ahmedabad &ndash; 380007, Gujarat, India</p>
-            </div>
+        <div class="info-row">
+          <i class="fa-solid fa-location-dot"></i>
+          <div>
+            <h4 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--primary);">Address</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">Chhaya Chitra 5, Kailash Society, Nr. Mahalaxmi Cross Roads, Paldi, Ahmedabad &ndash; 380007, Gujarat, India</p>
           </div>
+        </div>
 
-          <div class="info-row">
-            <div class="row-icon"><i class="fa-solid fa-phone"></i></div>
-            <div class="row-text">
-              <h4>Phone & Mobile</h4>
-              <p>
-                <a href="tel:+917926642018">+91-79 26642018</a><br />
-                <a href="tel:+919426362293">+91- 9426362293</a> / <a href="tel:09825062293">09825062293</a>
-              </p>
-            </div>
+        <div class="info-row">
+          <i class="fa-solid fa-phone"></i>
+          <div>
+            <h4 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--primary);">Phone & Mobile</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">
+              <a href="tel:+917926642018" style="color: var(--primary); font-weight: 700;">+91-79 26642018</a><br />
+              <a href="tel:+919426362293" style="color: var(--primary); font-weight: 700;">+91 94263 62293</a> / <a href="tel:09825062293" style="color: var(--primary); font-weight: 700;">09825062293</a>
+            </p>
           </div>
+        </div>
 
-          <div class="info-row">
-            <div class="row-icon"><i class="fa-solid fa-envelope"></i></div>
-            <div class="row-text">
-              <h4>Email & Online</h4>
-              <p>
-                <a href="mailto:asalcanning@gmail.com">asalcanning@gmail.com</a><br />
-                <span>www.asalcanningcenter.com</span>
-              </p>
-            </div>
+        <div class="info-row">
+          <i class="fa-solid fa-envelope"></i>
+          <div>
+            <h4 style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--primary);">Email & Online</h4>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">
+              <a href="mailto:asalcanning@gmail.com" style="color: var(--accent-hover); font-weight: 700;">asalcanning@gmail.com</a><br />
+              <span>www.asalcanningcenter.com</span>
+            </p>
           </div>
         </div>
 
         <!-- Working Hours Matrix -->
         <div class="time-badge-box">
-          <div class="time-slot">
-            <small><i class="fa-regular fa-clock"></i> Center Working Hours</small>
-            <span>Mon &ndash; Sat : 10:00 AM &ndash; 6:00 PM</span>
+          <div>
+            <small style="color: var(--accent-hover); font-weight: 700; text-transform: uppercase; font-size: 0.725rem;"><i class="fa-regular fa-clock"></i> Center Working Hours</small>
+            <p style="font-size: 0.825rem; font-weight: 600; margin: 0.15rem 0 0;">Mon &ndash; Sat: 10:00 AM &ndash; 6:00 PM</p>
           </div>
-          <div class="time-slot">
-            <small><i class="fa-solid fa-gears"></i> Machine Working Hours</small>
-            <span>Mon &ndash; Sat : 10:00 AM &ndash; 4:00 PM</span>
+          <div>
+            <small style="color: var(--accent-hover); font-weight: 700; text-transform: uppercase; font-size: 0.725rem;"><i class="fa-solid fa-gears"></i> Machine Working Hours</small>
+            <p style="font-size: 0.825rem; font-weight: 600; margin: 0.15rem 0 0;">Mon &ndash; Sat: 10:00 AM &ndash; 4:00 PM</p>
           </div>
         </div>
 
         <!-- Quick Inquiry Form -->
-        <div class="quick-inquiry-form">
-          <h4>Send an Instant Message</h4>
-          <form onsubmit="event.preventDefault(); alert('Thank you! Your inquiry has been sent to Asal Canning Center.');">
-            <div class="form-row-2">
-              <input type="text" class="form-control" placeholder="Your Name" required />
-              <input type="tel" class="form-control" placeholder="Phone Number" required />
-            </div>
-            <div class="form-row-2">
-              <input type="email" class="form-control" placeholder="Email Address" required />
-              <input type="text" class="form-control" placeholder="Subject (Pulping / Training / Order)" required />
-            </div>
+        <form onsubmit="event.preventDefault(); alert('Thank you! Your inquiry has been sent to Asal Canning Center.');" style="margin-top: 1.25rem;">
+          <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--primary); margin-bottom: 0.85rem;">Send an Instant Message</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;" class="form-group">
+            <input type="text" class="form-control" placeholder="Your Name" required />
+            <input type="tel" class="form-control" placeholder="Phone Number" required />
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;" class="form-group">
+            <input type="email" class="form-control" placeholder="Email Address" required />
+            <input type="text" class="form-control" placeholder="Subject (Pulping / Training / Order)" required />
+          </div>
+          <div class="form-group">
             <textarea class="form-control" placeholder="Describe your quantity, fruit yield, or batch requirements..."></textarea>
-            <button type="submit" class="btn-send"><i class="fa-solid fa-paper-plane"></i> Submit Inquiry</button>
-          </form>
-        </div>
+          </div>
+          <button type="submit" class="btn btn-accent btn-sm"><i class="fa-solid fa-paper-plane"></i> Submit Inquiry</button>
+        </form>
       </div>
 
       <!-- Right Column: Interactive Map & QR Code -->
-      <div class="map-qr-sidebar" data-aos="fade-left">
-        <!-- Embedded Google Map -->
-        <div class="map-frame-card">
-          <div class="map-header">
-            <span><i class="fa-solid fa-map-location-dot"></i> Location Map</span>
-            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">Open in Maps <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
+      <div>
+        <div class="map-frame-card gsap-reveal">
           <iframe 
-            class="map-embed" 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.9796695279694!2d72.5562!3d23.0137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84f58c70752b%3A0x286395729606fa70!2sPaldi%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
             allowfullscreen="" 
             loading="lazy" 
@@ -195,82 +313,95 @@
           </iframe>
         </div>
 
-        <!-- QR Code Card -->
-        <div class="qr-card">
-          <h4>Scan for Contact Info</h4>
-          <p>Scan to instantly save phone number and facility location.</p>
-          <div class="qr-box">
-            <!-- Universal QR Code representation -->
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=MECARD:N:Patel,Jalpa;ORG:Asal%20Canning%20Center;TEL:+919825062293;EMAIL:asalcanning@gmail.com;ADR:Paldi,%20Ahmedabad;;" alt="Contact QR Code" />
-          </div>
+        <div class="qr-card light-sheen-card gsap-reveal">
+          <h4 style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--primary); margin-bottom: 0.2rem;">Scan for Contact Info</h4>
+          <p style="font-size: 0.775rem; color: var(--text-muted); margin-bottom: 0.65rem;">Scan to save phone number and facility location.</p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=MECARD:N:Patel,Jalpa;ORG:Asal%20Canning%20Center;TEL:+919825062293;EMAIL:asalcanning@gmail.com;ADR:Paldi,%20Ahmedabad;;" alt="Contact QR Code" style="width: 130px; margin: 0 auto; border-radius: var(--radius-sm); border: 2px solid var(--border-gold);" />
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
+  <!-- Certifications Bar -->
+  <section class="cert-section">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
-          <div class="footer-brand">
-            <h3>ASAL CANNING CENTER</h3>
-            <span>Cottage Industry & Food Processing</span>
-            <p>Empowering local producers and households since 2000 with professional canning, pulping, and packaging preservation services.</p>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          </div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Official Logo" class="fssai-cert-logo" />
+          <h4>FSSAI Certified</h4>
+          <p>Lic. No.: 10718026000263</p>
         </div>
-
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Overview</a></li>
-            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Our Center</a></li>
-            <li><a href="products.html"><i class="fa-solid fa-chevron-right"></i> Pulp Products</a></li>
-            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News & Media</a></li>
-            <li><a href="gallery.html"><i class="fa-solid fa-chevron-right"></i> Photo Gallery</a></li>
-            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Facilitator</a></li>
-          </ul>
+        <div class="cert-card">
+          <i class="fa-solid fa-award"></i>
+          <h4>GCCI Winner</h4>
+          <p>Innovation Award 2007</p>
         </div>
-
-        <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
-          <h4>Certifications</h4>
-          <div class="cert-badge-box">
-            <span>FSSAI Certified</span>
-            <small>Lic. No.: 10718026000263</small>
-          </div>
-          <div class="cert-badge-box">
-            <span>FDCA Registered</span>
-            <small>Reg. No.: 20715034000001</small>
-          </div>
-          <div class="cert-badge-box">
-            <span>Govt. Recognized</span>
-            <small>Cottage Industry Facilitator</small>
-          </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-building-flag"></i>
+          <h4>Govt. Recognized</h4>
+          <p>Cottage Industry Center</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-globe"></i>
+          <h4>Export Ready</h4>
+          <p>Hermetic & Retort Packing</p>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
-        <p>Engineered with High-Performance Motion</p>
+  <!-- Master Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col footer-about">
+        <h4>ASAL CANNING CENTER</h4>
+        <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
+        <div style="color: var(--accent); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-footer-logo" />
+          <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+        </div>
       </div>
+
+      <div class="footer-col footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products Catalog</a></li>
+          <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-links">
+        <h4>Preservation Services</h4>
+        <ul>
+          <li><a href="products.html">Mango & Fruit Extraction</a></li>
+          <li><a href="products.html">Tomato Sauce & Gravies</a></li>
+          <li><a href="products.html">Fruit Jam & Pickle Canning</a></li>
+          <li><a href="about.html">Domestic Canning Training</a></li>
+          <li><a href="contact.html">Commercial Contract Canning</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-location-dot" style="color: var(--accent); margin-right: 6px;"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-phone" style="color: var(--accent); margin-right: 6px;"></i> +91 98250 62293</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-envelope" style="color: var(--accent); margin-right: 6px;"></i> asalcanning@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
+      <p>Pioneering Pure Natural Preservation Since 2000.</p>
     </div>
   </footer>
 
-  <!-- AOS JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-  
-    <script src="js/main.js"></script>
-    <script src="js/site-motion.js"></script>
-    <script src="js/contact.js"></script>
-  </body>
+  <!-- Custom JavaScript -->
+  <script src="js/main.js"></script>
+  <script src="js/site-motion.js"></script>
+</body>
 </html>
