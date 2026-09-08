@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo & Video Gallery | Asal Canning Center</title>
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- AOS Animation Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+  
+    <link rel="stylesheet" href="css/gallery.css" />
+    <link rel="stylesheet" href="css/shared.css" />
+  </head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="top-bar-item">
+        <i class="fa-solid fa-shield-check"></i>
+        <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
+      </div>
+      <div class="top-bar-item">
+        <i class="fa-brands fa-facebook"></i>
+        <a href="#" style="text-decoration: underline;">Follow on Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <div class="brand">
+        <div class="brand-badge">Est. 2000</div>
+        <div class="brand-title">
+          <h1>ASAL CANNING CENTER</h1>
+          <span>Cottage Industry & Food Processing</span>
+        </div>
+      </div>
+
+      <a class="header-cta" href="contact.html">Start a batch <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <nav id="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html" class="active">Gallery</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= WOWSLIDER 3D SLICED HERO ================= -->
+  <section class="wow-slider-wrapper" id="heroSlider">
+    <div class="slide-bg-base" id="slideBg"></div>
+    <div class="slice-canvas" id="sliceCanvas"></div>
+    <div class="slider-overlay-gradient"></div>
+
+    <div class="hero-caption" id="sliderCaption">
+      <h2 id="captionTitle">Processing & Infrastructure Gallery</h2>
+      <p id="captionDesc">A visual walkthrough of our canning equipment, extraction batches, and training programs.</p>
+    </div>
+
+    <button class="slider-nav-btn prev" onclick="prevSliceSlide()" aria-label="Previous Slide">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="slider-nav-btn next" onclick="nextSliceSlide()" aria-label="Next Slide">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <div class="slider-dots-box" id="dotsContainer"></div>
+  </section>
+
+  <!-- ================= GALLERY SECTION ================= -->
+  <section class="gallery-section">
+    <div class="container">
+      
+      <div class="gallery-intro" data-aos="fade-up">
+        <h2>Production Facility & Live Demos</h2>
+        <p>Explore our hygienic preservation facility, industrial pulpers, sealing machinery, and hands-on domestic canning classes.</p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="gallery-filters" data-aos="fade-up" data-aos-delay="100">
+        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All Media</button>
+        <button class="filter-btn" data-filter="facility"><i class="fa-solid fa-industry"></i> Facility & Machines</button>
+        <button class="filter-btn" data-filter="pulping"><i class="fa-solid fa-blender"></i> Pulping & Processing</button>
+        <button class="filter-btn" data-filter="packaging"><i class="fa-solid fa-box-open"></i> Bottling & Packaging</button>
+        <button class="filter-btn" data-filter="training"><i class="fa-solid fa-chalkboard-user"></i> Training Sessions</button>
+        <button class="filter-btn" data-filter="videos"><i class="fa-solid fa-video"></i> Video Demos</button>
+      </div>
+
+      <!-- Media Grid -->
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Rendered via JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= LIGHTBOX SLIDER MODAL ================= -->
+  <div class="gallery-lightbox-modal" id="galleryLightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle" aria-hidden="true">
+    <button class="lightbox-close-btn" onclick="closeGalleryLightbox()">&times;</button>
+    <button class="lightbox-nav-btn prev" onclick="navigateLightbox(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="lightbox-nav-btn next" onclick="navigateLightbox(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+    <div class="lightbox-content-box">
+      <div class="lightbox-media-holder" id="lightboxMediaHolder">
+        <!-- Dynamic Image or Video Iframe -->
+      </div>
+      <div class="lightbox-bar">
+        <h3 id="lightboxTitle">Media Title</h3>
+        <span id="lightboxIndex" style="font-size: 0.85rem; color: #94a3b8;">1 / 10</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+          <div class="footer-brand">
+            <h3>ASAL CANNING CENTER</h3>
+            <span>Cottage Industry & Food Processing</span>
+            <p>Empowering local producers and households since 2000 with professional canning, pulping, and packaging preservation services.</p>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Home Overview</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> About Our Center</a></li>
+            <li><a href="products.html"><i class="fa-solid fa-chevron-right"></i> Pulp Products</a></li>
+            <li><a href="news.html"><i class="fa-solid fa-chevron-right"></i> News & Media</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contact Facilitator</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+          <h4>Certifications</h4>
+          <div class="cert-badge-box">
+            <span>FSSAI Certified</span>
+            <small>Lic. No.: 10718026000263</small>
+          </div>
+          <div class="cert-badge-box">
+            <span>FDCA Registered</span>
+            <small>Reg. No.: 20715034000001</small>
+          </div>
+          <div class="cert-badge-box">
+            <span>Govt. Recognized</span>
+            <small>Cottage Industry Facilitator</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Asal Canning Center. All Rights Reserved.</p>
+        <p>Engineered with High-Performance Motion</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  
+    <script src="js/main.js"></script>
+    <script src="js/site-motion.js"></script>
+    <script src="js/gallery.js"></script>
+  </body>
+</html>
