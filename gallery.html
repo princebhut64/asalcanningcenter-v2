@@ -69,52 +69,84 @@
   </header>
 
   <!-- Gallery Hero Banner -->
-  <section class="hero-section" style="min-height: 40vh; padding: 3.5rem 0 2rem;">
+  <section class="hero-section" style="padding: 3.5rem 0 0; border-bottom: 1px solid var(--border-light);">
     <div class="ambient-light-beam ambient-light-gold"></div>
-    <div class="container text-center" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
-      <div class="section-tag"><i class="fa-solid fa-camera"></i> Visual Showcase</div>
-      <h1 class="heading-serif" style="font-size: 3.2rem; color: var(--primary);">Infrastructure & Canning Gallery</h1>
-      <p style="color: var(--text-muted); font-size: 1.05rem;">A visual walkthrough of our fruit extraction machinery, retort thermal autoclaves, cottage training auditorium, and pure natural preserves.</p>
+    <div class="ambient-light-beam ambient-light-terracotta" style="right: 0; left: auto;"></div>
+
+    <div class="container text-center" style="position: relative; z-index: 2;">
+      <!-- Tag -->
+      <div class="section-tag" style="margin: 0 auto 1rem; display: inline-flex;">
+        <i class="fa-solid fa-camera-retro"></i> Visual Showcase
+      </div>
+
+      <!-- Heading -->
+      <h1 class="heading-serif" style="font-size: clamp(2.2rem, 4.5vw, 3.5rem); color: var(--primary); line-height: 1.15; margin-bottom: 0.85rem;">
+        Infrastructure &amp; <em style="color: var(--accent-hover); font-style: italic;">Canning Gallery</em>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1rem; max-width: 640px; margin: 0 auto 2rem; line-height: 1.7;">
+        A visual walkthrough of our fruit extraction machinery, retort thermal autoclaves, cottage training auditorium, and pure natural preserves.
+      </p>
+
+      <!-- Quick Stats Strip -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; padding: 1.25rem 0; border-top: 1px solid var(--border-light);">
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1;">9+</div>
+          <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 3px;">Photo Highlights</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1;">5</div>
+          <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 3px;">Categories</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--terracotta); line-height: 1;">24+</div>
+          <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 3px;">Years of Operation</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1;">FSSAI</div>
+          <div style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-top: 3px;">Certified Facility</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 1. PHOTO GALLERY GRID SECTION -->
-  <section class="gallery-section" style="padding-top: 1rem; padding-bottom: 3.5rem;">
+  <!-- Gallery Grid Section -->
+  <section class="gallery-section" style="padding-top: 2.5rem; padding-bottom: 4rem;">
     <div class="container">
 
-      <!-- Category Filter Tabs -->
+      <!-- Category Filter Tabs — segmented pill switcher -->
       <div class="filter-tabs gsap-reveal" style="margin-bottom: 2rem;">
-        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All Photos</button>
-        <button class="filter-btn" data-filter="facility"><i class="fa-solid fa-industry"></i> Facility & Machinery</button>
-        <button class="filter-btn" data-filter="operations"><i class="fa-solid fa-blender"></i> Extraction & Batching</button>
-        <button class="filter-btn" data-filter="products"><i class="fa-solid fa-jar"></i> Preserves & Products</button>
+        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All Media</button>
+        <button class="filter-btn" data-filter="videos"><i class="fa-brands fa-youtube"></i> Videos</button>
+        <button class="filter-btn" data-filter="facility"><i class="fa-solid fa-industry"></i> Facility &amp; Machinery</button>
+        <button class="filter-btn" data-filter="operations"><i class="fa-solid fa-blender"></i> Extraction &amp; Batching</button>
+        <button class="filter-btn" data-filter="products"><i class="fa-solid fa-jar"></i> Preserves &amp; Products</button>
         <button class="filter-btn" data-filter="workshops"><i class="fa-solid fa-users-gear"></i> Training Seminars</button>
       </div>
 
       <!-- Authentic Gallery Grid -->
       <div class="gallery-grid gsap-grid-stagger">
         
-        <!-- Photo 1: Machinery -->
-        <div class="gallery-item light-sheen-card" data-category="facility">
-          <img src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80" alt="Stainless Steel Fruit Pulper" class="lightbox-trigger" />
+        <!-- Video 1: Factory Tour -->
+        <div class="gallery-item light-sheen-card" data-category="videos" data-youtube="sBws8MSXN7A">
+          <img src="https://images.unsplash.com/photo-1567789884554-0b308d4c0292?auto=format&fit=crop&w=800&q=80" alt="Factory Tour Video" class="lightbox-trigger" />
           <div class="gallery-overlay">
-            <h4>Stainless Steel Fruit Pulper</h4>
-            <p>Hygienic Extraction Equipment</p>
+            <h4>Factory Tour & Pulping</h4>
+            <p>Watch Video</p>
           </div>
         </div>
 
-        <!-- Photo 2: Mango Extraction -->
+        <!-- Photo 2: Mango Processing -->
         <div class="gallery-item light-sheen-card" data-category="operations">
-          <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80" alt="Alphonso Mango Pulping" class="lightbox-trigger" />
+          <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=800&q=80" alt="Alphonso Mango Pulping" class="lightbox-trigger" />
           <div class="gallery-overlay">
             <h4>Alphonso Mango Extraction</h4>
             <p>Pure Seasonal Batching</p>
           </div>
         </div>
 
-        <!-- Photo 3: Domestic Training Seminar -->
+        <!-- Photo 3: Canning Workshop -->
         <div class="gallery-item light-sheen-card" data-category="workshops">
-          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Women Entrepreneurship Workshop" class="lightbox-trigger" />
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80" alt="Canning Preservation Workshop" class="lightbox-trigger" />
           <div class="gallery-overlay">
             <h4>Domestic Canning Workshop</h4>
             <p>Led by Jalpa G. Patel</p>
@@ -130,7 +162,7 @@
           </div>
         </div>
 
-        <!-- Photo 5: Amla Pressing -->
+        <!-- Photo 5: Amla / Gooseberry Processing -->
         <div class="gallery-item light-sheen-card" data-category="operations">
           <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80" alt="Cold Press Amla Extraction" class="lightbox-trigger" />
           <div class="gallery-overlay">
@@ -139,36 +171,36 @@
           </div>
         </div>
 
-        <!-- Photo 6: Jam Packaging -->
+        <!-- Photo 6: Fruit Jam Jars -->
         <div class="gallery-item light-sheen-card" data-category="products">
-          <img src="https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?auto=format&fit=crop&w=800&q=80" alt="Artisanal Fruit Jam Jars" class="lightbox-trigger" />
+          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80" alt="Artisanal Fruit Jam Jars" class="lightbox-trigger" />
           <div class="gallery-overlay">
             <h4>Artisanal Fruit Jam Jars</h4>
             <p>Hermetic Glass Sealing</p>
           </div>
         </div>
 
-        <!-- Photo 7: Thermal Autoclave Sterilizer -->
+        <!-- Photo 7: Industrial Sterilizer -->
         <div class="gallery-item light-sheen-card" data-category="facility">
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Thermal Autoclave Sterilizer" class="lightbox-trigger" />
+          <img src="https://images.unsplash.com/photo-1581093458791-9d42e3c7e117?auto=format&fit=crop&w=800&q=80" alt="Thermal Autoclave Sterilizer" class="lightbox-trigger" />
           <div class="gallery-overlay">
             <h4>Thermal Autoclave Pasteurizer</h4>
             <p>Zero Preservative Longevity</p>
           </div>
         </div>
 
-        <!-- Photo 8: Women Workshop Class -->
+        <!-- Photo 8: Group Training Session -->
         <div class="gallery-item light-sheen-card" data-category="workshops">
-          <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=800&q=80" alt="Cottage Canning Seminar" class="lightbox-trigger" />
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" alt="Cottage Canning Seminar" class="lightbox-trigger" />
           <div class="gallery-overlay">
             <h4>Cottage Training Seminar</h4>
             <p>Hands-on Practical Training</p>
           </div>
         </div>
 
-        <!-- Photo 9: Kesar Mango Packaging -->
+        <!-- Photo 9: Fruit Preserve Packaging -->
         <div class="gallery-item light-sheen-card" data-category="operations">
-          <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=800&q=80" alt="Gir Kesar Pulp Packaging" class="lightbox-trigger" />
+          <img src="https://images.unsplash.com/photo-1464454709131-ffd692591ee5?auto=format&fit=crop&w=800&q=80" alt="Gir Kesar Pulp Packaging" class="lightbox-trigger" />
           <div class="gallery-overlay">
             <h4>Gir Kesar Pulp Packaging</h4>
             <p>Tin Cans & Retort Pouches</p>

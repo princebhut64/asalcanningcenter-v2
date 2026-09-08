@@ -304,22 +304,32 @@ function initLightboxModal() {
     modal = document.createElement('div');
     modal.className = 'lightbox-modal';
     modal.innerHTML = `
-      <div class="lightbox-content">
-        <span class="lightbox-close">&times;</span>
-        <img src="" alt="Enlarged View" id="lightboxImage" />
+      <div class="lightbox-content" style="max-width: 900px; width: 90%;">
+        <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <div class="lightbox-media-container" id="lightboxMediaContainer" style="position: relative; width: 100%; display: flex; justify-content: center; align-items: center; background: #000; border-radius: 8px; overflow: hidden;">
+        </div>
         <div class="lightbox-caption" id="lightboxCaption"></div>
       </div>
     `;
     document.body.appendChild(modal);
   }
 
-  const modalImg = modal.querySelector('#lightboxImage');
+  const mediaContainer = modal.querySelector('#lightboxMediaContainer');
   const modalCaption = modal.querySelector('#lightboxCaption');
   const closeBtn = modal.querySelector('.lightbox-close');
 
-  const openModal = (imgSrc, captionText) => {
-    if (!imgSrc) return;
-    modalImg.src = imgSrc;
+  const openModal = (mediaData, isVideo, captionText) => {
+    mediaContainer.innerHTML = ''; // clear previous
+    if (isVideo) {
+      // For YouTube Video
+      mediaContainer.style.paddingBottom = '56.25%'; // 16:9 Aspect Ratio
+      mediaContainer.innerHTML = `<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/${mediaData}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    } else {
+      // For Image
+      mediaContainer.style.paddingBottom = '0';
+      mediaContainer.innerHTML = `<img src="${mediaData}" alt="Enlarged View" id="lightboxImage" style="max-height: 80vh; width: auto; object-fit: contain;" />`;
+    }
+
     modalCaption.innerText = captionText || '';
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -335,24 +345,32 @@ function initLightboxModal() {
   const closeModal = () => {
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    mediaContainer.innerHTML = ''; // Stop video playback when closing
   };
 
   document.addEventListener('click', (e) => {
     const targetItem = e.target.closest('.gallery-item, .lightbox-trigger');
     if (targetItem) {
       e.preventDefault();
-      const img = targetItem.tagName === 'IMG' ? targetItem : targetItem.querySelector('img');
-      if (img) {
-        const imgSrc = img.getAttribute('src') || img.getAttribute('data-src');
-        const caption = targetItem.querySelector('h4')?.innerText || img.getAttribute('alt') || '';
-        openModal(imgSrc, caption);
+      
+      const youtubeId = targetItem.getAttribute('data-youtube');
+      const caption = targetItem.querySelector('h4')?.innerText || targetItem.getAttribute('aria-label') || '';
+      
+      if (youtubeId) {
+        openModal(youtubeId, true, caption);
+      } else {
+        const img = targetItem.tagName === 'IMG' ? targetItem : targetItem.querySelector('img');
+        if (img) {
+          const imgSrc = img.getAttribute('src') || img.getAttribute('data-src');
+          openModal(imgSrc, false, caption || img.getAttribute('alt'));
+        }
       }
     }
   });
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
+    if (e.target === modal || e.target.classList.contains('lightbox-content')) closeModal();
   });
 
   document.addEventListener('keydown', (e) => {
