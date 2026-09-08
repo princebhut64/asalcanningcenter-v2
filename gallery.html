@@ -22,8 +22,8 @@
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-info">
-        <div class="top-bar-item">
-          <i class="fa-solid fa-shield-check"></i>
+        <div class="top-bar-item" style="display: flex; align-items: center;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-top-logo" style="margin-right: 8px;" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
         <div class="top-bar-item">
@@ -179,53 +179,60 @@
     </div>
   </section>
 
-  <!-- 2. HIGH-TECH OPERATIONS BANNER WITH GLOWING S-CURVE DESIGN -->
-  <section style="padding-bottom: 3.5rem;">
+  <!-- 2. CANNING & PROCESSING INFRASTRUCTURE HIGHLIGHTS -->
+  <section style="padding: 3.5rem 0 4.5rem; background: var(--cream-dark); border-top: 1px solid var(--border-light);">
     <div class="container">
-      <div class="facility-tour-banner gsap-reveal" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #0B0E13 0%, #1A222E 100%);">
-        
-        <!-- Glowing S-Curve Wave Background -->
-        <svg class="s-curve-bg" viewBox="0 0 1200 600" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.22; pointer-events: none; z-index: 1;">
-          <path d="M0,150 C350,400 650,-80 950,280 C1080,440 1160,220 1200,320 L1200,600 L0,600 Z" fill="url(#goldSGradient)"></path>
-          <path d="M0,280 C250,80 550,480 850,180 C1020,320 1140,150 1200,200 L1200,600 L0,600 Z" fill="url(#terracottaSGradient)"></path>
-          <defs>
-            <linearGradient id="goldSGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#E0A238" stop-opacity="0.8" />
-              <stop offset="50%" stop-color="#C98D28" stop-opacity="0.4" />
-              <stop offset="100%" stop-color="#E0A238" stop-opacity="0.9" />
-            </linearGradient>
-            <linearGradient id="terracottaSGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#B85C38" stop-opacity="0.6" />
-              <stop offset="100%" stop-color="#E0A238" stop-opacity="0.2" />
-            </linearGradient>
-          </defs>
-        </svg>
+      <div class="section-header text-center gsap-reveal" style="max-width: 750px; margin: 0 auto 2.5rem;">
+        <div class="section-tag" style="justify-content: center;"><i class="fa-solid fa-industry"></i> Processing Infrastructure</div>
+        <h2 class="heading-serif" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">Precision & Hygiene Standards</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Our processing unit in Paldi, Ahmedabad is engineered for zero-touch extraction, hermetic double-seam tinning, and temperature-controlled thermal pasteurization.</p>
+      </div>
 
-        <div class="ambient-light-beam ambient-light-gold"></div>
-        <div class="ambient-light-beam ambient-light-terracotta"></div>
+      <div class="facility-tour-grid gsap-grid-stagger">
+        <div class="facility-card light-sheen-card">
+          <div class="facility-card-icon"><i class="fa-solid fa-gears"></i></div>
+          <h4>SS-304 Extraction Machinery</h4>
+          <p>Food-grade stainless steel destoning pulpers and fruit crushers operating under strict sterile standards.</p>
+        </div>
 
-        <div class="section-tag" style="background: rgba(224,162,56,0.2); color: var(--accent); position: relative; z-index: 2;"><i class="fa-solid fa-industry"></i> High-Tech Operations</div>
-        <h2 style="font-family: var(--font-serif); font-size: 2.5rem; color: var(--white); margin-bottom: 0.75rem; position: relative; z-index: 2;">Inside Asal Canning Center: Precision & Hygiene</h2>
-        <p style="color: rgba(255,255,255,0.85); max-width: 750px; font-size: 1rem; position: relative; z-index: 2;">Our processing unit in Paldi, Ahmedabad is engineered for zero-touch extraction, hermetic double-seam tinning, and temperature-controlled retort pasteurization.</p>
+        <div class="facility-card light-sheen-card">
+          <div class="facility-card-icon"><i class="fa-solid fa-temperature-arrow-up"></i></div>
+          <h4>Hermetic Thermal Seaming</h4>
+          <p>Vacuum double-seamer tin capping and retort pouch autoclaves guaranteeing 12 to 24 month ambient shelf life.</p>
+        </div>
 
-        <div class="facility-tour-grid" style="position: relative; z-index: 2;">
-          <div class="facility-card light-sheen-card">
-            <div class="facility-card-icon"><i class="fa-solid fa-gears"></i></div>
-            <h4>SS-304 Extraction Machinery</h4>
-            <p>Food-grade stainless steel destoning pulpers and fruit crushers operating under strict sterile standards.</p>
-          </div>
+        <div class="facility-card light-sheen-card">
+          <div class="facility-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h4>Cottage Training Auditorium</h4>
+          <p>Dedicated workshop center empowering women entrepreneurs and home producers in small-scale food preservation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="facility-card light-sheen-card">
-            <div class="facility-card-icon"><i class="fa-solid fa-temperature-arrow-up"></i></div>
-            <h4>Hermetic Thermal Seaming</h4>
-            <p>Vacuum double-seamer tin capping and retort pouch autoclaves guaranteeing 12 to 24 month shelf life.</p>
-          </div>
-
-          <div class="facility-card light-sheen-card">
-            <div class="facility-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-            <h4>Cottage Training Auditorium</h4>
-            <p>Dedicated workshop center empowering women entrepreneurs and home producers in small-scale food preservation.</p>
-          </div>
+  <!-- Certifications Bar -->
+  <section class="cert-section">
+    <div class="container">
+      <div class="cert-grid">
+        <div class="cert-card">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Official Logo" class="fssai-cert-logo" />
+          <h4>FSSAI Certified</h4>
+          <p>Lic. No.: 10718026000263</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-award"></i>
+          <h4>GCCI Winner</h4>
+          <p>Innovation Award 2007</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-building-flag"></i>
+          <h4>Govt. Recognized</h4>
+          <p>Cottage Industry Center</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-globe"></i>
+          <h4>Export Ready</h4>
+          <p>Hermetic & Retort Packing</p>
         </div>
       </div>
     </div>
@@ -237,8 +244,8 @@
       <div class="footer-col footer-about">
         <h4>ASAL CANNING CENTER</h4>
         <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
-        <div class="top-bar-item" style="color: var(--accent);">
-          <i class="fa-solid fa-shield-check"></i>
+        <div style="color: var(--accent); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-footer-logo" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
       </div>
@@ -248,29 +255,29 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="products.html">Products Catalog</a></li>
           <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
 
       <div class="footer-col footer-links">
-        <h4>Our Services</h4>
+        <h4>Preservation Services</h4>
         <ul>
           <li><a href="products.html">Mango & Fruit Extraction</a></li>
-          <li><a href="products.html">Tomato Puree & Sauce</a></li>
-          <li><a href="products.html">Tin & Pouch Canning</a></li>
+          <li><a href="products.html">Tomato Sauce & Gravies</a></li>
+          <li><a href="products.html">Fruit Jam & Pickle Canning</a></li>
           <li><a href="about.html">Domestic Canning Training</a></li>
-          <li><a href="contact.html">Commercial & Export Orders</a></li>
+          <li><a href="contact.html">Commercial Contract Canning</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Contact Us</h4>
-        <p><i class="fa-solid fa-location-dot text-gold"></i> Paldi, Ahmedabad, Gujarat, India</p>
-        <p><i class="fa-solid fa-phone text-gold"></i> +91 98250 00000</p>
-        <p><i class="fa-solid fa-envelope text-gold"></i> info@asalcanningcenter.com</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-location-dot" style="color: var(--accent); margin-right: 6px;"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-phone" style="color: var(--accent); margin-right: 6px;"></i> +91 98250 62293</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-envelope" style="color: var(--accent); margin-right: 6px;"></i> asalcanning@gmail.com</p>
       </div>
     </div>
 
@@ -282,5 +289,6 @@
 
   <!-- Custom JavaScript -->
   <script src="js/main.js"></script>
+  <script src="js/site-motion.js"></script>
 </body>
 </html>

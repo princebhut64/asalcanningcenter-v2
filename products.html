@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artisanal Product Catalog | Asal Canning Center</title>
+  <title>Category Catalog & Product Formulations | Asal Canning Center</title>
 
   <!-- Google Fonts & Font Awesome Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -13,157 +13,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- Custom Stylesheet -->
+  <!-- Custom Stylesheets -->
   <link rel="stylesheet" href="css/style.css" />
-
-  <style>
-    /* Compact Catalog Banner - Products Visible Above The Fold */
-    .catalog-hero-section {
-      padding: 2.25rem 0 1.5rem;
-      background: linear-gradient(135deg, #FAF8F5 0%, #EFEBE4 100%);
-      text-align: center;
-      position: relative;
-    }
-
-    .catalog-search-bar {
-      max-width: 580px;
-      margin: 0.75rem auto 0;
-      position: relative;
-    }
-
-    .catalog-search-bar input {
-      width: 100%;
-      padding: 0.75rem 1.25rem 0.75rem 2.8rem;
-      font-size: 0.95rem;
-      border: 1.5px solid var(--border-gold);
-      border-radius: var(--radius-full);
-      background: var(--white);
-      color: var(--text-dark);
-      box-shadow: var(--shadow-sm);
-      transition: all var(--transition-fast);
-    }
-
-    .catalog-search-bar input:focus {
-      outline: none;
-      border-color: var(--accent-hover);
-      box-shadow: var(--shadow-glow);
-    }
-
-    .catalog-search-bar i {
-      position: absolute;
-      left: 1.1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--accent-hover);
-      font-size: 1rem;
-    }
-
-    .catalog-layout {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 2rem;
-      padding: 2.25rem 0 4rem;
-      align-items: start;
-    }
-
-    .filter-panel {
-      background: var(--white);
-      padding: 1.5rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-sm);
-      position: sticky;
-      top: 90px;
-    }
-
-    .filter-title {
-      font-family: var(--font-serif);
-      font-size: 1.25rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-light);
-      padding-bottom: 0.5rem;
-    }
-
-    .filter-group {
-      margin-bottom: 1.25rem;
-    }
-
-    .filter-group-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-
-    .filter-list li {
-      margin-bottom: 0.35rem;
-    }
-
-    .filter-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.4rem 0.65rem;
-      border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .filter-link:hover,
-    .filter-link.active {
-      background: rgba(212, 163, 89, 0.15);
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .filter-link .badge-count {
-      background: var(--cream-dark);
-      color: var(--primary);
-      padding: 0.1rem 0.45rem;
-      border-radius: var(--radius-full);
-      font-size: 0.725rem;
-    }
-
-    .filter-link.active .badge-count {
-      background: var(--accent);
-      color: var(--primary-dark);
-      font-weight: 700;
-    }
-
-    .no-results-box {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 3rem 2rem;
-      background: var(--white);
-      border-radius: var(--radius-md);
-      border: 1px dashed var(--border-medium);
-    }
-
-    .no-results-box i {
-      font-size: 2.5rem;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-
-    @media (max-width: 992px) {
-      .catalog-layout {
-        grid-template-columns: 1fr;
-      }
-      .filter-panel {
-        position: static;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/products.css" />
 </head>
 <body>
 
@@ -171,8 +23,8 @@
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-info">
-        <div class="top-bar-item">
-          <i class="fa-solid fa-shield-check"></i>
+        <div class="top-bar-item" style="display: flex; align-items: center;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-top-logo" style="margin-right: 8px;" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
         <div class="top-bar-item">
@@ -182,7 +34,6 @@
       </div>
       <div class="top-bar-links">
         <a href="contact.html"><i class="fa-solid fa-clock"></i> Mon - Sat: 9am - 7pm</a>
-        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
       </div>
     </div>
   </div>
@@ -198,11 +49,11 @@
         </div>
       </a>
 
-      <button class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
+      <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle Mobile Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <nav>
+      <nav id="navbar">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
@@ -217,130 +68,175 @@
     </div>
   </header>
 
-  <!-- Compact Hero Banner & Live Search Bar -->
-  <section class="catalog-hero-section">
+  <!-- Inner Page Hero Section & Instant Search -->
+  <section class="hero-section catalog-hero-section">
     <div class="ambient-light-beam ambient-light-gold"></div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <div class="section-tag" style="margin-bottom: 0.5rem; padding: 0.2rem 0.75rem; font-size: 0.75rem;"><i class="fa-solid fa-jar"></i> Pure Natural Preserves</div>
-      <h1 class="heading-serif" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 0.25rem;">Formulation & Processing Catalog</h1>
-      <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 650px; margin: 0 auto 0.5rem;">Explore artisanal fruit pulps, concentrated purees, jams, squashes, and herbal extracts.</p>
+    <div class="container text-center" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="hero-kicker" style="justify-content: center; margin-bottom: 0.75rem;">
+        <span class="hero-kicker-line"></span> PURE ARTISANAL PRESERVES
+      </div>
+      <h1 class="heading-serif" style="font-size: 2.8rem; color: var(--primary, #14181F); margin-bottom: 0.5rem; font-weight: 700;">Flagship Formulations & Catalog</h1>
+      <p style="color: var(--text-muted, #626D7A); font-size: 1.05rem; max-width: 650px; margin: 0 auto 1.5rem;">Explore artisanal fruit pulps, concentrated purees, jams, squashes, pickles, and herbal care items with instant search.</p>
 
-      <!-- Instant AJAX Live Search Bar -->
-      <div class="catalog-search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" id="productSearchInput" placeholder="Search by name (e.g. Alphonso, Tomato, Jamun, Amla)..." onkeyup="filterProductsAjax()" />
+      <!-- Instant Live Search Bar -->
+      <div class="catalog-search-bar" style="max-width: 650px; margin: 0 auto; position: relative;">
+        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-hover, #C98D28); font-size: 1.1rem;"></i>
+        <input type="text" id="productSearchInput" placeholder="Search flagship products (e.g. Sitafal, Mango, Tomato, Jamun, Amla)..." onkeyup="filterProductsAjax()" />
       </div>
     </div>
   </section>
 
-  <!-- Main Catalog Layout with Dynamic Sidebar & AJAX Filter Grid -->
-  <section style="background: var(--cream-dark);">
-    <div class="container catalog-layout">
+  <!-- Main Catalog Layout with Dynamic Category Hierarchy & Packaging Filters -->
+  <section class="catalog-wrapper">
+    <div class="container catalog-grid">
 
-      <!-- Left AJAX Filter Sidebar -->
-      <aside class="filter-panel">
-        <div class="filter-title">
+      <!-- Left Sidebar: Category Hierarchy & Filter Catalog -->
+      <aside class="category-tree-panel">
+        <div class="tree-title">
           <span><i class="fa-solid fa-sliders"></i> Filter Catalog</span>
-          <button style="font-size: 0.8rem; color: var(--accent-hover); font-weight: 700;" onclick="resetAllFilters()">Reset All</button>
+          <button onclick="resetAllFilters()" class="reset-filter-btn">Reset All</button>
         </div>
 
-        <!-- Category Group -->
-        <div class="filter-group">
-          <span class="filter-group-label">Product Categories</span>
-          <ul class="filter-list" id="categoryFilterList">
-            <li>
-              <div class="filter-link active" data-cat="all" onclick="selectCategoryFilter('all', this)">
-                <span><i class="fa-solid fa-border-all text-gold"></i> All Products</span>
-                <span class="badge-count" id="countAll">11</span>
-              </div>
-            </li>
-            <li>
-              <div class="filter-link" data-cat="Pulp" onclick="selectCategoryFilter('Pulp', this)">
-                <span><i class="fa-solid fa-apple-whole text-gold"></i> Fruit Pulps</span>
-                <span class="badge-count" id="countPulp">4</span>
-              </div>
-            </li>
-            <li>
-              <div class="filter-link" data-cat="Sauces & Gravies" onclick="selectCategoryFilter('Sauces & Gravies', this)">
-                <span><i class="fa-solid fa-mortar-pestle text-gold"></i> Vegetable Purees</span>
-                <span class="badge-count" id="countSauces">2</span>
-              </div>
-            </li>
-            <li>
-              <div class="filter-link" data-cat="Jams & Pickles" onclick="selectCategoryFilter('Jams & Pickles', this)">
-                <span><i class="fa-solid fa-jar text-gold"></i> Jams & Squashes</span>
-                <span class="badge-count" id="countJams">3</span>
-              </div>
-            </li>
-            <li>
-              <div class="filter-link" data-cat="Amla & Herbal Care" onclick="selectCategoryFilter('Amla & Herbal Care', this)">
-                <span><i class="fa-solid fa-leaf text-gold"></i> Health & Extracts</span>
-                <span class="badge-count" id="countHealth">2</span>
-              </div>
-            </li>
+        <!-- All Categories Section -->
+        <div class="filter-group" style="margin-bottom: 1.5rem;">
+          <span class="filter-group-label">ALL CATEGORIES</span>
+          <ul class="tree-list" id="categoryFilterList">
+            <!-- Dynamically Rendered by js/products.js with live counts -->
           </ul>
         </div>
 
-        <!-- Packaging Type Filter -->
-        <div class="filter-group">
-          <span class="filter-group-label">Packaging Type</span>
-          <ul class="filter-list">
+        <!-- Packaging Format Filter Section -->
+        <div class="filter-group" style="padding-top: 1rem; border-top: 1px solid var(--border-light);">
+          <span class="filter-group-label">PACKAGING TYPE</span>
+          <ul class="filter-pkg-list">
             <li>
-              <div class="filter-link" data-pkg="all" onclick="selectPackagingFilter('all', this)">
-                <span>All Packaging Types</span>
+              <div class="pkg-filter-item active" data-pkg="all" onclick="selectPackagingFilter('all', this)">
+                <i class="fa-solid fa-border-all"></i> <span>All Packaging Types</span>
               </div>
             </li>
             <li>
-              <div class="filter-link" data-pkg="Tin" onclick="selectPackagingFilter('Tin', this)">
-                <span>Hermetic Tin Cans</span>
+              <div class="pkg-filter-item" data-pkg="Can" onclick="selectPackagingFilter('Can', this)">
+                <i class="fa-solid fa-box-archive"></i> <span>Hermetic Tin Cans</span>
               </div>
             </li>
             <li>
-              <div class="filter-link" data-pkg="Pouch" onclick="selectPackagingFilter('Pouch', this)">
-                <span>Retort Pouches</span>
+              <div class="pkg-filter-item" data-pkg="Pouch" onclick="selectPackagingFilter('Pouch', this)">
+                <i class="fa-solid fa-box"></i> <span>Sealed Pouches</span>
               </div>
             </li>
             <li>
-              <div class="filter-link" data-pkg="Jar" onclick="selectPackagingFilter('Jar', this)">
-                <span>Glass / PET Jars</span>
+              <div class="pkg-filter-item" data-pkg="Jar" onclick="selectPackagingFilter('Jar', this)">
+                <i class="fa-solid fa-jar"></i> <span>Glass & Ceramic Jars</span>
+              </div>
+            </li>
+            <li>
+              <div class="pkg-filter-item" data-pkg="Bottle" onclick="selectPackagingFilter('Bottle', this)">
+                <i class="fa-solid fa-bottle-droplet"></i> <span>Pouring Bottles</span>
               </div>
             </li>
           </ul>
         </div>
       </aside>
 
-      <!-- Right Product Cards AJAX Grid -->
+      <!-- Right Products Grid Container -->
       <main>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <div class="catalog-header">
           <div>
-            <h3 class="heading-serif" id="currentFilterHeading" style="font-size: 1.5rem;">All Products</h3>
-            <p id="resultsCountText" style="color: var(--text-muted); font-size: 0.85rem;">Showing all 11 formulation items</p>
+            <h2 id="currentCategoryHeading">All Products</h2>
+            <p id="productCountText">Showing all available formulations and pulp extractions</p>
           </div>
-          
-          <select id="sortSelect" class="form-control" style="width: auto; padding: 0.4rem 0.85rem; border-radius: var(--radius-full); font-size: 0.825rem;" onchange="filterProductsAjax()">
-            <option value="default">Sort by: Default</option>
-            <option value="name-asc">Name: A to Z</option>
-            <option value="name-desc">Name: Z to A</option>
-          </select>
+
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <select id="sortSelect" class="form-control" style="width: auto; padding: 0.45rem 1rem; border-radius: 20px; border: 1px solid var(--border-medium); font-size: 0.85rem; background: var(--white); cursor: pointer;" onchange="filterProductsAjax()">
+              <option value="default">Sort by: Default</option>
+              <option value="name-asc">Name: A to Z</option>
+              <option value="name-desc">Name: Z to A</option>
+            </select>
+            <button class="btn btn-outline-gold btn-sm" onclick="resetAllFilters()" style="font-size: 0.8rem; padding: 6px 14px; border-radius: 20px; cursor: pointer;">Reset Filters</button>
+          </div>
         </div>
 
-        <!-- AJAX Dynamic Container -->
-        <div class="product-grid" id="ajaxProductGrid">
+        <div class="product-cards-wrap" id="productsGrid">
           <!-- Rendered dynamically by JavaScript -->
         </div>
+
+        <!-- Dynamic Pagination Controls Container -->
+        <div id="catalogPagination" class="pagination-container"></div>
       </main>
 
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Single Product Quick-View Modal -->
+  <div class="product-modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-hidden="true">
+    <div class="product-modal-card">
+      <button class="modal-close-btn" onclick="closeProductModal()">&times;</button>
+      
+      <div class="modal-gallery">
+        <img src="" alt="Product Detail" class="modal-main-img" id="mImg" />
+      </div>
+
+      <div class="modal-info-panel">
+        <span class="modal-cat-badge" id="mBadge">Category</span>
+        <h3 class="modal-title" id="mTitle">Product Name</h3>
+        <p class="modal-desc" id="mDesc">Description</p>
+
+        <table class="modal-spec-table">
+          <tr>
+            <td>Packaging Option</td>
+            <td id="mPkg">Tin / Pouch / Jar</td>
+          </tr>
+          <tr>
+            <td>Storage & Handling</td>
+            <td id="mStorage">Cool, dry place / Freeze</td>
+          </tr>
+        </table>
+
+        <div class="modal-action-row" style="margin-top: auto;">
+          <a href="contact.html" class="btn-inquire">
+            <i class="fa-solid fa-paper-plane"></i> Inquire Processing / Order
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications Bar -->
+  <section class="cert-section">
+    <div class="container">
+      <div class="cert-grid">
+        <div class="cert-card">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Official Logo" class="fssai-cert-logo" />
+          <h4>FSSAI Certified</h4>
+          <p>Lic. No.: 10718026000263</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-award"></i>
+          <h4>GCCI Winner</h4>
+          <p>Innovation Award 2007</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-building-flag"></i>
+          <h4>Govt. Recognized</h4>
+          <p>Cottage Industry Center</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-globe"></i>
+          <h4>Export Ready</h4>
+          <p>Hermetic & Retort Packing</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
   <footer>
     <div class="container footer-grid">
       <div class="footer-col footer-about">
         <h4>ASAL CANNING CENTER</h4>
         <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
-        <div class="top-bar-item" style="color: var(--accent);">
-          <i class="fa-solid fa-shield-check"></i>
+        <div style="color: var(--accent); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-footer-logo" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
       </div>
@@ -350,29 +246,29 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="products.html">Products Catalog</a></li>
           <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
 
       <div class="footer-col footer-links">
-        <h4>Our Services</h4>
+        <h4>Preservation Services</h4>
         <ul>
           <li><a href="products.html">Mango & Fruit Extraction</a></li>
-          <li><a href="products.html">Tomato Puree & Sauce</a></li>
-          <li><a href="products.html">Tin & Pouch Canning</a></li>
+          <li><a href="products.html">Tomato Sauce & Gravies</a></li>
+          <li><a href="products.html">Fruit Jam & Pickle Canning</a></li>
           <li><a href="about.html">Domestic Canning Training</a></li>
-          <li><a href="contact.html">Commercial & Export Orders</a></li>
+          <li><a href="contact.html">Commercial Contract Canning</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Contact Us</h4>
-        <p><i class="fa-solid fa-location-dot text-gold"></i> Paldi, Ahmedabad, Gujarat, India</p>
-        <p><i class="fa-solid fa-phone text-gold"></i> +91 98250 00000</p>
-        <p><i class="fa-solid fa-envelope text-gold"></i> info@asalcanningcenter.com</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-location-dot" style="color: var(--accent); margin-right: 6px;"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-phone" style="color: var(--accent); margin-right: 6px;"></i> +91 98250 62293</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-envelope" style="color: var(--accent); margin-right: 6px;"></i> asalcanning@gmail.com</p>
       </div>
     </div>
 
@@ -382,8 +278,8 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/site-motion.js"></script>
   <script src="js/products.js"></script>
 </body>
 </html>

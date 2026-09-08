@@ -31,10 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 7. 3D Tilt & Light Sweep Sheen Effect on Cards
   initTiltEffect();
 
-  // 8. Batch Yield & Shelf Life Calculator Initial Run
-  if (document.getElementById('calcProduceSelect')) {
-    calculateBatchYield();
-  }
+  // 8. Batch Yield & Shelf Life Calculator Initial Run & Listeners
+  initBatchCalculator();
 });
 
 /* --------------------------------------------------------------------------
@@ -420,44 +418,155 @@ function initTiltEffect() {
 }
 
 /* --------------------------------------------------------------------------
-   10. BATCH YIELD & SHELF LIFE CALCULATOR
+   10. BATCH YIELD & SHELF LIFE CALCULATOR CONTROLLER
    -------------------------------------------------------------------------- */
+function initBatchCalculator() {
+  const produceSelect = document.getElementById('calcProduceSelect');
+  const weightInput = document.getElementById('calcWeightInput');
+  const pkgSelect = document.getElementById('calcPkgSelect');
+
+  if (!produceSelect || !weightInput || !pkgSelect) return;
+
+  const events = ['change', 'input', 'keyup'];
+  events.forEach(evt => {
+    produceSelect.addEventListener(evt, calculateBatchYield);
+    weightInput.addEventListener(evt, calculateBatchYield);
+    pkgSelect.addEventListener(evt, calculateBatchYield);
+  });
+
+  // Calculate initial load
+  calculateBatchYield();
+}
+
+function setCalcWeightPreset(val) {
+  const weightInput = document.getElementById('calcWeightInput');
+  if (weightInput) {
+    weightInput.value = val;
+    calculateBatchYield();
+
+    // Highlight active preset button
+    document.querySelectorAll('.calc-preset-btn').forEach(btn => {
+      if (parseInt(btn.getAttribute('data-val'), 10) === val) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+}
+
 function calculateBatchYield() {
-  const produce = document.getElementById('calcProduceSelect')?.value || 'mango';
-  const weight = parseFloat(document.getElementById('calcWeightInput')?.value || '50');
-  const pkg = document.getElementById('calcPkgSelect')?.value || 'tin';
+  const produceSelect = document.getElementById('calcProduceSelect');
+  const weightInput = document.getElementById('calcWeightInput');
+  const pkgSelect = document.getElementById('calcPkgSelect');
 
   const outputUnitsEl = document.getElementById('calcOutputUnits');
   const outputShelfEl = document.getElementById('calcOutputShelf');
+  const outputBreakdownEl = document.getElementById('calcBreakdownSummary');
 
-  if (!outputUnitsEl || !outputShelfEl) return;
+  if (!produceSelect || !weightInput || !pkgSelect || !outputUnitsEl || !outputShelfEl) return;
+
+  const produce = produceSelect.value || 'mango';
+  let weight = parseFloat(weightInput.value);
+
+  // Safety fallback for empty or invalid weight
+  if (isNaN(weight) || weight <= 0) {
+    weight = 0;
+  }
+
+  const pkg = pkgSelect.value || 'tin';
 
   let unitWeight = 0.85; // Default 850g tin
   let shelfText = "18 - 24 Mos";
+  let unitLabel = "Cans";
+  let unitSpecText = "850g Hermetic Can";
 
   if (pkg === 'tin') {
     unitWeight = 0.85;
     shelfText = "18 - 24 Mos";
+    unitLabel = "Cans";
+    unitSpecText = "850g Hermetic Can";
   } else if (pkg === 'pouch') {
     unitWeight = 1.0;
     shelfText = "12 - 18 Mos";
+    unitLabel = "Pouches";
+    unitSpecText = "1kg Retort Pouch";
   } else if (pkg === 'jar') {
     unitWeight = 0.5;
     shelfText = "12 - 15 Mos";
+    unitLabel = "Jars";
+    unitSpecText = "500g Glass Jar";
   }
 
-  // Pulp extraction yield factor
-  let yieldFactor = 0.7; // 70% pulp yield for mango
-  if (produce === 'mango') yieldFactor = 0.7;
-  else if (produce === 'tomato') yieldFactor = 0.85;
-  else if (produce === 'amla') yieldFactor = 0.65;
-  else if (produce === 'fruit') yieldFactor = 0.75;
+  // Pulp extraction yield factors
+  let yieldFactor = 0.70; // 70% pulp yield for mango
+  let produceName = "Alphonso / Kesar Mango";
+  let extractType = "Pure Mango Pulp";
+
+  if (produce === 'mango') {
+    yieldFactor = 0.70;
+    produceName = "Alphonso / Kesar Mango";
+    extractType = "Pure Mango Pulp";
+  } else if (produce === 'tomato') {
+    yieldFactor = 0.85;
+    produceName = "Fresh Red Tomato";
+    extractType = "Concentrated Puree";
+  } else if (produce === 'amla') {
+    yieldFactor = 0.65;
+    produceName = "Indian Gooseberry (Amla)";
+    extractType = "Cold-Press Juice";
+  } else if (produce === 'fruit') {
+    yieldFactor = 0.75;
+    produceName = "Mixed Orchard Fruits";
+    extractType = "Fruit Jam Base";
+  }
 
   const totalPulpKg = weight * yieldFactor;
-  const unitsProduced = Math.floor(totalPulpKg / unitWeight);
+  const unitsProduced = weight > 0 ? Math.floor(totalPulpKg / unitWeight) : 0;
+  const formattedUnits = unitsProduced.toLocaleString('en-US');
 
-  let unitLabel = pkg === 'tin' ? 'Cans' : pkg === 'pouch' ? 'Pouches' : 'Jars';
-
-  outputUnitsEl.textContent = `${unitsProduced} ${unitLabel}`;
+  // Update DOM Output
+  outputUnitsEl.textContent = `${formattedUnits} ${unitLabel}`;
   outputShelfEl.textContent = shelfText;
+
+  if (outputBreakdownEl) {
+    if (weight > 0) {
+      outputBreakdownEl.innerHTML = `<i class="fa-solid fa-chart-pie" style="color: var(--accent);"></i> Batch Yield Summary: <strong>${weight} KG</strong> ${produceName} &rarr; <strong>${totalPulpKg.toFixed(1)} KG</strong> ${extractType} (${(yieldFactor * 100).toFixed(0)}% Yield) &rarr; <strong>${formattedUnits} ${unitLabel}</strong> (${unitSpecText})`;
+    } else {
+      outputBreakdownEl.innerHTML = `<i class="fa-solid fa-info-circle" style="color: var(--accent);"></i> Please enter raw produce weight to calculate net yield and packed units.`;
+    }
+  }
+
+  // Sync active preset highlight if applicable
+  document.querySelectorAll('.calc-preset-btn').forEach(btn => {
+    const presetVal = parseInt(btn.getAttribute('data-val'), 10);
+    if (presetVal === weight) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   11. PRODUCT DETAIL THUMBNAIL SWITCHER & ACTIVE BORDER HIGHLIGHTER
+   -------------------------------------------------------------------------- */
+function changeProductDetailImg(thumbEl) {
+  if (!thumbEl) return;
+  const mainImg = document.getElementById('mainProductImg');
+  if (mainImg) {
+    mainImg.src = thumbEl.src;
+  }
+
+  const gallery = thumbEl.parentElement;
+  if (gallery) {
+    const thumbs = gallery.querySelectorAll('img, .product-thumb');
+    thumbs.forEach(t => {
+      t.classList.remove('active');
+      t.style.border = '2px solid var(--border-medium)';
+    });
+  }
+
+  thumbEl.classList.add('active');
+  thumbEl.style.border = '2.5px solid var(--accent)';
 }

@@ -3,18 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alphonso Mango Pulp - Product Specification | Asal Canning Center</title>
+  <title id="pageTitle">Product Details | Asal Canning Center</title>
 
-  <!-- Google Fonts & Icons -->
+  <!-- Google Fonts & Font Awesome Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- GSAP Animation Library -->
+  <!-- GSAP Motion Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .nutrition-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+    }
+    .nutrition-table th, .nutrition-table td {
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nutrition-table th {
+      background: var(--cream-dark);
+      color: var(--primary);
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+    }
+    .method-step {
+      display: flex;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--accent);
+    }
+    .method-step-num {
+      width: 26px;
+      height: 26px;
+      background: var(--primary);
+      color: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -22,8 +64,8 @@
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-info">
-        <div class="top-bar-item">
-          <i class="fa-solid fa-shield-check"></i>
+        <div class="top-bar-item" style="display: flex; align-items: center;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-top-logo" style="margin-right: 8px;" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
         <div class="top-bar-item">
@@ -33,7 +75,6 @@
       </div>
       <div class="top-bar-links">
         <a href="contact.html"><i class="fa-solid fa-clock"></i> Mon - Sat: 9am - 7pm</a>
-        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
       </div>
     </div>
   </div>
@@ -68,7 +109,7 @@
     </div>
   </header>
 
-  <!-- Product Detail Section (Prominent Image Showcase & Compact Top Space) -->
+  <!-- Dynamic Product Detail Section -->
   <section class="story-section" style="padding: 2.25rem 0 3.5rem;">
     <div class="container">
       <div style="margin-bottom: 1.25rem;">
@@ -76,36 +117,64 @@
       </div>
 
       <div class="story-grid" style="align-items: start; grid-template-columns: 1fr 1.15fr; gap: 3rem;">
-        <!-- Left Column: Generous Product Image Showcase -->
+        
+        <!-- Left Column: Image Showcase & Processing Method -->
         <div>
-          <div class="product-img-wrapper lightbox-trigger light-sheen-card" style="height: 480px; border-radius: var(--radius-lg); overflow: hidden; border: 4px solid var(--white); box-shadow: var(--shadow-lg); cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=1000&q=85" alt="Alphonso Mango Pulp Premium Packaging" id="mainProductImg" />
+          <div class="product-img-wrapper light-sheen-card" style="height: 440px; border-radius: var(--radius-lg); overflow: hidden; border: 4px solid var(--white); box-shadow: var(--shadow-lg);">
+            <img src="" alt="Product Image" id="mainProductImg" style="width: 100%; height: 100%; object-fit: cover;" />
           </div>
-          <div style="display: flex; gap: 0.85rem; margin-top: 1rem;">
-            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=300&q=80" alt="Thumb 1" style="width: 85px; height: 85px; object-fit: cover; border-radius: var(--radius-sm); border: 2.5px solid var(--accent); cursor: pointer; transition: transform 0.2s;" onclick="document.getElementById('mainProductImg').src=this.src" />
-            <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=300&q=80" alt="Thumb 2" style="width: 85px; height: 85px; object-fit: cover; border-radius: var(--radius-sm); border: 2px solid var(--border-medium); cursor: pointer; transition: transform 0.2s;" onclick="document.getElementById('mainProductImg').src=this.src" />
+          
+          <!-- Thumbnail Gallery -->
+          <div style="display: flex; gap: 0.85rem; margin-top: 1rem;" id="thumbGallery">
+            <!-- Rendered Dynamically -->
+          </div>
+
+          <!-- Processing & Preservation Method Section -->
+          <div style="background: var(--white); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); margin-top: 1.5rem; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 0.85rem;">
+              <i class="fa-solid fa-gear" style="color: var(--accent-hover); font-size: 1.1rem;"></i>
+              <h3 style="font-family: var(--font-serif); font-size: 1.3rem; color: var(--primary); font-weight: 700;">Processing & Preservation Method</h3>
+            </div>
+            
+            <div id="methodStepsContainer">
+              <div class="method-step">
+                <span class="method-step-num">1</span>
+                <div style="font-size: 0.85rem;"><strong>Sourcing & Quality Inspection:</strong> Hand-picked farm fresh fruit selection evaluated for optimal Brix maturity levels.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">2</span>
+                <div style="font-size: 0.85rem;"><strong>Cold-Press Pulp Extraction:</strong> Mechanically extracted under sterile cold process without added synthetic colors or water dilution.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">3</span>
+                <div style="font-size: 0.85rem;"><strong>Thermal Pasteurization:</strong> Controlled heat treatment to eliminate microbial activity while preserving natural fruit aroma & Vitamin-C.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">4</span>
+                <div style="font-size: 0.85rem;"><strong>Hermetic Canning & Sealing:</strong> Vacuum-sealed in hermetic tins or retort pouches followed by quick cooling for long shelf life.</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Right Column: Details & Technical Specs -->
+        <!-- Right Column: Details, Specifications & Nutritional Values -->
         <div class="story-content">
-          <div class="section-tag" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-star"></i> Pure Natural Preserve</div>
-          <h1 class="heading-serif" style="font-size: 2.6rem; color: var(--primary); margin-bottom: 0.5rem; line-height: 1.15;">Alphonso & Kesar Mango Pulp</h1>
-          <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1.25rem;">Extracted from handpicked Ratnagiri and Gir Kesar mangoes. Processed using hygienic cottage pulp extractions and thermal canning for long-lasting freshness without artificial additives.</p>
+          <div class="section-tag" id="detailCategoryTag" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-star"></i> Pure Natural Preserve</div>
+          <h1 class="heading-serif" id="detailTitle" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem; line-height: 1.15;">Product Title</h1>
+          <p id="detailDesc" style="font-size: 1rem; color: var(--text-muted); margin-bottom: 1.25rem;">Product Description</p>
 
+          <!-- Specifications Box -->
           <div style="background: var(--white); padding: 1.35rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
             <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--primary); margin-bottom: 0.75rem;">Technical Specifications</h4>
-            <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem;">
+            <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.85rem;" id="detailSpecsList">
               <li><strong>FSSAI License:</strong> 10718026000263</li>
-              <li><strong>Ingredients:</strong> 100% Pure Mango Pulp</li>
-              <li><strong>Shelf Life:</strong> 18 to 24 Months</li>
-              <li><strong>Packaging:</strong> Food-Grade Tins & Retort Pouches</li>
-              <li><strong>Net Weight Options:</strong> 850g, 3kg, 5kg Bulk</li>
-              <li><strong>Storage:</strong> Store in Cool & Dry Place</li>
+              <li id="specPkg"><strong>Packaging Option:</strong> Glass Jar / Hermetic Can</li>
+              <li id="specOption"><strong>Specification:</strong> 500g / 850g / 1kg</li>
+              <li id="specStorage"><strong>Storage Rules:</strong> Cool & Dry Place / Freeze</li>
             </ul>
 
             <h4 style="font-family: var(--font-serif); font-size: 1.25rem; color: var(--primary); margin-top: 1.25rem; margin-bottom: 0.4rem;">Nutritional Values (Per 100g)</h4>
-            <table class="nutrition-table">
+            <table class="nutrition-table" id="nutritionTable">
               <thead>
                 <tr>
                   <th>Nutrient Parameter</th>
@@ -137,11 +206,13 @@
             </table>
           </div>
 
+          <!-- Action Buttons -->
           <div class="hero-cta-group">
             <a href="contact.html" class="btn btn-accent">Inquire Bulk Batch Order <i class="fa-solid fa-paper-plane"></i></a>
             <a href="contact.html" class="btn btn-outline-gold">Request Sample <i class="fa-solid fa-jar"></i></a>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -149,90 +220,54 @@
   <!-- Related Products Section -->
   <section class="products-section" style="background-color: var(--cream-dark); padding: 3.5rem 0;">
     <div class="container">
-      <div class="section-header text-center" style="margin-bottom: 2.25rem;">
-        <div class="section-tag"><i class="fa-solid fa-jar"></i> Explore Preserves</div>
-        <h2 class="heading-serif" style="font-size: 2.2rem; color: var(--primary);">You May Also Be Interested In</h2>
-        <p style="color: var(--text-muted); font-size: 0.95rem;">Discover other artisanal fruit pulps, vegetable purees, and natural health extracts.</p>
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-layer-group"></i> Similar Formulations</div>
+        <h2>Related Preserves & Concentrates</h2>
+        <p>Explore other fruit pulps and natural concentrates processed under the same cottage hygiene standards.</p>
       </div>
 
-      <div class="product-grid">
-        
-        <!-- Related Item 1 -->
-        <div class="product-card light-sheen-card">
-          <div class="product-img-wrapper">
-            <span class="product-tag">Seasonal</span>
-            <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=600&q=80" alt="Gir Kesar Mango Pulp" />
-          </div>
-          <div class="product-body">
-            <h3>Gir Kesar Mango Pulp</h3>
-            <p>Famous Gir Kesar mango pulp processed under strict hygienic guidelines for home & commercial use.</p>
-            <div class="product-meta">
-              <span class="product-spec"><i class="fa-solid fa-box"></i> 850g / Retort Pouch</span>
-              <a href="products.html" class="btn btn-outline-gold btn-sm">Details <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Related Item 2 -->
-        <div class="product-card light-sheen-card">
-          <div class="product-img-wrapper">
-            <span class="product-tag">Culinary</span>
-            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80" alt="Tomato Puree" />
-          </div>
-          <div class="product-body">
-            <h3>Tomato Puree & Sauce Paste</h3>
-            <p>Concentrated thick tomato puree prepared from fresh ripe red tomatoes for caterers & homes.</p>
-            <div class="product-meta">
-              <span class="product-spec"><i class="fa-solid fa-layer-group"></i> Bulk & Retail</span>
-              <a href="products.html" class="btn btn-outline-gold btn-sm">Details <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Related Item 3 -->
-        <div class="product-card light-sheen-card">
-          <div class="product-img-wrapper">
-            <span class="product-tag">Immunity</span>
-            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80" alt="Amla Pulp" />
-          </div>
-          <div class="product-body">
-            <h3>Pure Amla Juice & Extract</h3>
-            <p>Vitamin-C rich Indian gooseberry extract processed under cold press guidelines.</p>
-            <div class="product-meta">
-              <span class="product-spec"><i class="fa-solid fa-bottle-droplet"></i> 500ml / 1L</span>
-              <a href="products.html" class="btn btn-outline-gold btn-sm">Details <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Related Item 4 -->
-        <div class="product-card light-sheen-card">
-          <div class="product-img-wrapper">
-            <span class="product-tag">Artisanal</span>
-            <img src="https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?auto=format&fit=crop&w=600&q=80" alt="Mixed Fruit Jam" />
-          </div>
-          <div class="product-body">
-            <h3>Orchard Mixed Fruit Jam</h3>
-            <p>Crafted from orchard-fresh apples, strawberries, and raspberries sealed for peak freshness.</p>
-            <div class="product-meta">
-              <span class="product-spec"><i class="fa-solid fa-jar"></i> 500g Glass Jar</span>
-              <a href="products.html" class="btn btn-outline-gold btn-sm">Details <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
+      <div class="product-cards-wrap" id="relatedProductsGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;">
+        <!-- Dynamically Populated by Script -->
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Certifications Bar -->
+  <section class="cert-section">
+    <div class="container">
+      <div class="cert-grid">
+        <div class="cert-card">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Official Logo" class="fssai-cert-logo" />
+          <h4>FSSAI Certified</h4>
+          <p>Lic. No.: 10718026000263</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-award"></i>
+          <h4>GCCI Winner</h4>
+          <p>Innovation Award 2007</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-building-flag"></i>
+          <h4>Govt. Recognized</h4>
+          <p>Cottage Industry Center</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-globe"></i>
+          <h4>Export Ready</h4>
+          <p>Hermetic & Retort Packing</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
   <footer>
     <div class="container footer-grid">
       <div class="footer-col footer-about">
         <h4>ASAL CANNING CENTER</h4>
         <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
-        <div class="top-bar-item" style="color: var(--accent);">
-          <i class="fa-solid fa-shield-check"></i>
+        <div style="color: var(--accent); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-footer-logo" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
       </div>
@@ -242,29 +277,29 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="products.html">Products Catalog</a></li>
           <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
 
       <div class="footer-col footer-links">
-        <h4>Our Services</h4>
+        <h4>Preservation Services</h4>
         <ul>
           <li><a href="products.html">Mango & Fruit Extraction</a></li>
-          <li><a href="products.html">Tomato Puree & Sauce</a></li>
-          <li><a href="products.html">Tin & Pouch Canning</a></li>
+          <li><a href="products.html">Tomato Sauce & Gravies</a></li>
+          <li><a href="products.html">Fruit Jam & Pickle Canning</a></li>
           <li><a href="about.html">Domestic Canning Training</a></li>
-          <li><a href="contact.html">Commercial & Export Orders</a></li>
+          <li><a href="contact.html">Commercial Contract Canning</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Contact Us</h4>
-        <p><i class="fa-solid fa-location-dot text-gold"></i> Paldi, Ahmedabad, Gujarat, India</p>
-        <p><i class="fa-solid fa-phone text-gold"></i> +91 98250 00000</p>
-        <p><i class="fa-solid fa-envelope text-gold"></i> info@asalcanningcenter.com</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-location-dot" style="color: var(--accent); margin-right: 6px;"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-phone" style="color: var(--accent); margin-right: 6px;"></i> +91 98250 62293</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-envelope" style="color: var(--accent); margin-right: 6px;"></i> asalcanning@gmail.com</p>
       </div>
     </div>
 
@@ -274,7 +309,163 @@
     </div>
   </footer>
 
-  <!-- Custom JavaScript -->
+  <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/site-motion.js"></script>
+  <script src="js/products.js"></script>
+  <script>
+    // Dynamic Product Detail Loader based on URL parameter ?id=...
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const prodId = urlParams.get('id') || 'sitafal-pulp';
+
+      if (typeof productsData !== 'undefined' && productsData.length > 0) {
+        const item = productsData.find(p => p.id === prodId) || productsData[0];
+        
+        document.getElementById('pageTitle').innerText = `${item.title} | Asal Canning Center`;
+        document.getElementById('detailTitle').innerText = item.title;
+        document.getElementById('detailDesc').innerText = item.desc;
+        
+        const catTag = document.getElementById('detailCategoryTag');
+        if (catTag) catTag.innerHTML = `<i class="fa-solid fa-star"></i> ${item.mainCategory} &bull; ${item.subCategory}`;
+
+        const mainImg = document.getElementById('mainProductImg');
+        if (mainImg) {
+          mainImg.src = item.img;
+          mainImg.alt = item.title;
+        }
+
+        // Thumbnails Showcase
+        const thumbGallery = document.getElementById('thumbGallery');
+        if (thumbGallery) {
+          thumbGallery.innerHTML = `
+            <img src="${item.img}" alt="Thumb 1" class="product-thumb active" style="width: 85px; height: 85px; object-fit: cover; border-radius: var(--radius-sm); border: 2.5px solid var(--accent); cursor: pointer; transition: all 0.2s;" onclick="changeProductDetailImg(this)" />
+            <img src="${item.img}" alt="Thumb 2" class="product-thumb" style="width: 85px; height: 85px; object-fit: cover; border-radius: var(--radius-sm); border: 2px solid var(--border-medium); cursor: pointer; opacity: 0.85; transition: all 0.2s;" onclick="changeProductDetailImg(this)" />
+          `;
+        }
+
+        // Specifications
+        const specPkg = document.getElementById('specPkg');
+        if (specPkg) specPkg.innerHTML = `<strong>Packaging Option:</strong> ${item.pkg}`;
+
+        const specOption = document.getElementById('specOption');
+        if (specOption) specOption.innerHTML = `<strong>Specification:</strong> ${item.spec}`;
+
+        const specStorage = document.getElementById('specStorage');
+        if (specStorage) specStorage.innerHTML = `<strong>Storage Rules:</strong> ${item.storage}`;
+
+        // Dynamic Custom Processing Method based on Category
+        const methodStepsContainer = document.getElementById('methodStepsContainer');
+        if (methodStepsContainer) {
+          if (item.mainCategory === 'Pulp') {
+            methodStepsContainer.innerHTML = `
+              <div class="method-step">
+                <span class="method-step-num">1</span>
+                <div style="font-size: 0.85rem;"><strong>Fruit Harvesting & Sorting:</strong> Ripe farm-fresh fruits (Sitafal, Mango, Jamun, Falsa) selected for peak Brix sweetness.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">2</span>
+                <div style="font-size: 0.85rem;"><strong>Hygienic Pulp Extraction:</strong> Cold-pressed pulp extraction without artificial flavorings or added water.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">3</span>
+                <div style="font-size: 0.85rem;"><strong>Thermal Pasteurization:</strong> Gentle heating cycles to eliminate micro-flora while locking in natural nutrients & fiber.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">4</span>
+                <div style="font-size: 0.85rem;"><strong>Hermetic Canning & Deep Freezing:</strong> Sealed into food-grade pouches or hermetic tins and flash-frozen at -18°C.</div>
+              </div>
+            `;
+          } else if (item.mainCategory === 'Sauces & Gravies') {
+            methodStepsContainer.innerHTML = `
+              <div class="method-step">
+                <span class="method-step-num">1</span>
+                <div style="font-size: 0.85rem;"><strong>Vine-Tomato Selection:</strong> Ripe red tomatoes and fresh herbs inspected for solid texture and acidity.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">2</span>
+                <div style="font-size: 0.85rem;"><strong>Slow-Kettle Reduction:</strong> Cooked with garlic, extra virgin olive oil, and authentic Italian/Indian spices.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">3</span>
+                <div style="font-size: 0.85rem;"><strong>Hot-Fill Bottling:</strong> Filled into pre-sterilized glass bottles or hermetic cans at 88°C.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">4</span>
+                <div style="font-size: 0.85rem;"><strong>Vacuum Sealing & Testing:</strong> Safety vacuum cap verification ensuring 12+ months ambient shelf life.</div>
+              </div>
+            `;
+          } else if (item.mainCategory === 'Jams & Pickles') {
+            methodStepsContainer.innerHTML = `
+              <div class="method-step">
+                <span class="method-step-num">1</span>
+                <div style="font-size: 0.85rem;"><strong>Fruit & Spice Blending:</strong> Farm-picked fruits & raw green mangoes chopped and infused with traditional spices or natural sugar syrup.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">2</span>
+                <div style="font-size: 0.85rem;"><strong>Open-Kettle Cooking:</strong> Simmered to rich preserve consistency with natural pectin setting.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">3</span>
+                <div style="font-size: 0.85rem;"><strong>Ceramic / Glass Jar Packing:</strong> Hygienically packed into ceramic jars or glass containers under strict FDCA & FSSAI standards.</div>
+              </div>
+            `;
+          } else {
+            methodStepsContainer.innerHTML = `
+              <div class="method-step">
+                <span class="method-step-num">1</span>
+                <div style="font-size: 0.85rem;"><strong>Herb Harvesting:</strong> Wild Amla, Bhringraj, Brahmi, Jatamansi, and natural botanicals handpicked and cleaned.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">2</span>
+                <div style="font-size: 0.85rem;"><strong>Ayurvedic Decoction Extraction:</strong> Slow simmered in pure sesame & coconut oils or organic honey syrup.</div>
+              </div>
+              <div class="method-step">
+                <span class="method-step-num">3</span>
+                <div style="font-size: 0.85rem;"><strong>Amber Glass Bottling:</strong> UV-protective packaging ensuring therapeutic herb potency remains intact.</div>
+              </div>
+            `;
+          }
+        }
+
+        // Render Related Products
+        const relatedGrid = document.getElementById('relatedProductsGrid');
+        if (relatedGrid) {
+          const relatedItems = productsData.filter(p => p.id !== item.id && (p.mainCategory === item.mainCategory || p.subCategory === item.subCategory)).slice(0, 3);
+          
+          relatedGrid.innerHTML = '';
+          relatedItems.forEach(rel => {
+            const relCard = document.createElement('div');
+            relCard.className = 'product-box light-sheen-card';
+            relCard.onclick = () => window.location.href = `product-detail.html?id=${rel.id}`;
+            relCard.style.cursor = 'pointer';
+
+            relCard.innerHTML = `
+              <div class="img-holder">
+                <span class="item-tag">${rel.badge}</span>
+                <img src="${rel.img}" alt="${rel.title}" />
+              </div>
+              <div class="box-info">
+                <h4>${rel.title}</h4>
+                <p>${rel.desc.length > 85 ? rel.desc.substring(0, 85) + '...' : rel.desc}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border-light);">
+                  <span style="font-size: 0.78rem; font-weight: 700; color: var(--terracotta);"><i class="fa-solid fa-box-open"></i> ${rel.spec}</span>
+                  <span class="view-btn">Details <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+              </div>
+            `;
+            relatedGrid.appendChild(relCard);
+          });
+        }
+      }
+    });
+
+    function changeProductDetailImg(el) {
+      document.querySelectorAll('.product-thumb').forEach(img => img.classList.remove('active'));
+      el.classList.add('active');
+      const main = document.getElementById('mainProductImg');
+      if (main) main.src = el.src;
+    }
+  </script>
 </body>
 </html>

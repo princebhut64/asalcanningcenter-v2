@@ -13,7 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- Custom Stylesheet -->
+  <!-- Custom Stylesheet (Master Warm Alabaster Theme) -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -22,8 +22,8 @@
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-info">
-        <div class="top-bar-item">
-          <i class="fa-solid fa-shield-check"></i>
+        <div class="top-bar-item" style="display: flex; align-items: center;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-top-logo" style="margin-right: 8px;" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
         <div class="top-bar-item">
@@ -68,150 +68,156 @@
     </div>
   </header>
 
-  <!-- News Hero Section -->
-  <section class="hero-section" style="min-height: 45vh; padding-top: 6rem; padding-bottom: 3rem;">
+  <!-- NEWS HERO BANNER (NO SLIDER) -->
+  <section class="hero-section" style="min-height: 42vh; padding: 4rem 0 3rem;">
     <div class="ambient-light-beam ambient-light-gold"></div>
-    <div class="container text-center" style="max-width: 800px; margin: 0 auto; position: relative; z-index: 2;">
-      <div class="section-tag"><i class="fa-solid fa-newspaper"></i> Press & Awards Archive</div>
-      <h1 class="heading-serif" style="font-size: 3.5rem; color: var(--primary);">Recognized Across Leading Media</h1>
-      <p style="color: var(--text-muted); font-size: 1.15rem;">Statewide press coverage, honorary GCCI awards, and magazine highlights recognizing Asal Canning Center's 24+ years of cottage food processing.</p>
+    <div class="ambient-light-beam ambient-light-terracotta"></div>
+    <div class="container text-center" style="max-width: 850px; margin: 0 auto; position: relative; z-index: 2;">
+      <div class="hero-badge" style="margin: 0 auto 1.25rem; display: inline-flex;">
+        <span class="hero-badge-pulse"></span>
+        <span>Public Media Coverage & Honors</span>
+      </div>
+      <h1 class="heading-serif" style="font-size: 3.2rem; color: var(--primary); margin-bottom: 1rem;">
+        Recognized Across <span>Leading Publications</span>
+      </h1>
+      <p style="color: var(--text-muted); font-size: 1.08rem; line-height: 1.65; max-width: 750px; margin: 0 auto 2rem;">
+        Documenting over two decades of excellence in cottage food preservation, state innovation awards, and community empowerment in Paldi, Ahmedabad.
+      </p>
+
+      <!-- Trust Metrics Stats Bar -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border-medium);">
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--accent);">24+</div>
+          <div style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.05em;">Years Legacy</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--accent);">12+</div>
+          <div style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.05em;">Media Clippings</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--terracotta);">GCCI</div>
+          <div style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.05em;">Award Winner</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--primary);">1,000+</div>
+          <div style="font-size: 0.775rem; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 0.05em;">Women Trained</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- News & Media Section -->
-  <section class="blog-section" style="padding-top: 2rem;">
+  <!-- DEDICATED TRUST BUILD & CREDENTIALS SECTION -->
+  <section style="background: var(--cream-dark); padding: 4rem 0; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
     <div class="container">
-
-      <!-- Category Filter Tabs -->
-      <div class="filter-tabs gsap-reveal" style="margin-bottom: 3rem;">
-        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Media (6)</button>
-        <button class="filter-btn" data-filter="press"><i class="fa-solid fa-newspaper"></i> Newspaper Dailies</button>
-        <button class="filter-btn" data-filter="awards"><i class="fa-solid fa-award"></i> Awards & Recognition</button>
-        <button class="filter-btn" data-filter="guides"><i class="fa-solid fa-book-open"></i> Preservation Guides</button>
+      <div class="section-header text-center gsap-reveal" style="max-width: 750px; margin: 0 auto 2.5rem;">
+        <div class="section-tag" style="justify-content: center;"><i class="fa-solid fa-shield-check"></i> Official Credentials</div>
+        <h2 class="heading-serif" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">Why Institutions & Enterprises Trust Us</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Backed by government recognition, chamber awards, and strict FSSAI food safety certifications.</p>
       </div>
 
-      <!-- Articles Grid -->
-      <div class="blog-grid gsap-grid-stagger">
+      <div class="facility-tour-grid gsap-grid-stagger">
+        <div class="facility-card light-sheen-card" style="padding: 1.75rem;">
+          <div class="facility-card-icon" style="background: var(--cream-dark); color: var(--accent);"><i class="fa-solid fa-award"></i></div>
+          <h4 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">GCCI Innovation Award 2007</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted);">Honored by the Gujarat Chamber of Commerce & Industry for groundbreaking cottage food preservation technology.</p>
+        </div>
 
-        <!-- News Item 1 -->
-        <article class="blog-card light-sheen-card" data-category="press">
-          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=600&q=80" alt="Divya Bhaskar Feature" />
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> Divya Bhaskar Daily</span>
-              <span><i class="fa-regular fa-newspaper"></i> Front Page Feature</span>
-            </div>
-            <h3>Pioneering Domestic Food Preservation in Ahmedabad</h3>
-            <p>How Jalpa G. Patel revolutionized seasonal mango pulp extraction and home canning for families across Gujarat.</p>
-            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </article>
+        <div class="facility-card light-sheen-card" style="padding: 1.75rem;">
+          <div class="facility-card-icon" style="background: var(--cream-dark); color: var(--accent);"><i class="fa-solid fa-file-contract"></i></div>
+          <h4 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">FSSAI Lic. 10718026000263</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted);">100% compliant food processing facility under FSSAI & FDCA protocols for zero-preservative longevity.</p>
+        </div>
 
-        <!-- News Item 2 -->
-        <article class="blog-card light-sheen-card" data-category="awards">
-          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="GCCI Award 2007" />
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span><i class="fa-solid fa-award text-gold"></i> GCCI Award 2007</span>
-              <span><i class="fa-solid fa-building-columns"></i> State Industry Board</span>
-            </div>
-            <h3>Awarded for Outstanding Cottage Industry Innovation</h3>
-            <p>Recognized by the Gujarat Chamber of Commerce & Industry for small-scale food processing excellence.</p>
-            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </article>
+        <div class="facility-card light-sheen-card" style="padding: 1.75rem;">
+          <div class="facility-card-icon" style="background: var(--cream-dark); color: var(--terracotta);"><i class="fa-solid fa-newspaper"></i></div>
+          <h4 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">Divya Bhaskar & Times Features</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted);">Covered by top Gujarat dailies celebrating our founder Jalpa G. Patel's women entrepreneurship initiatives.</p>
+        </div>
 
-        <!-- News Item 3 -->
-        <article class="blog-card light-sheen-card" data-category="press">
-          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80" alt="Gujarat Samachar Coverage" />
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> Gujarat Samachar</span>
-              <span><i class="fa-regular fa-newspaper"></i> Food Tech Special</span>
-            </div>
-            <h3>Commercial Retort Pouch Packing for Tomato Concentrates</h3>
-            <p>Coverage on how retort pouches maintain 18+ month shelf life without synthetic chemical preservatives.</p>
-            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </article>
-
-        <!-- News Item 4 -->
-        <article class="blog-card light-sheen-card" data-category="guides">
-          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80" alt="Amla Health Guide" />
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> Umiya Parivar Journal</span>
-              <span><i class="fa-solid fa-heart-pulse"></i> Health Feature</span>
-            </div>
-            <h3>Therapeutic Benefits of Cold Press Amla & Herbal Extracts</h3>
-            <p>An in-depth article detailing cold-pressed gooseberry processing for maximum natural Vitamin C retention.</p>
-            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </article>
-
-        <!-- News Item 5 -->
-        <article class="blog-card light-sheen-card" data-category="awards">
-          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?auto=format&fit=crop&w=600&q=80" alt="Women Empowerment Seminar" />
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> Sandesh News</span>
-              <span><i class="fa-solid fa-users"></i> Community Impact</span>
-            </div>
-            <h3>Training Over 1,000 Women in Home Canning Businesses</h3>
-            <p>Highlighting Asal Canning Center's practical workshops empowering women to launch independent food ventures.</p>
-            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </article>
-
-        <!-- News Item 6 -->
-        <article class="blog-card light-sheen-card" data-category="guides">
-          <div class="blog-img-box lightbox-trigger" style="cursor: pointer;">
-            <img src="https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?auto=format&fit=crop&w=600&q=80" alt="Fruit Jam Preservation" />
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <span><i class="fa-regular fa-calendar"></i> Cottage Food Monthly</span>
-              <span><i class="fa-solid fa-book"></i> Preservation Guide</span>
-            </div>
-            <h3>Mastering Hermetic Double-Seam Canning Standards</h3>
-            <p>Technical guidelines on temperature controls, vacuum seaming, and sterile storage for home & cottage preservers.</p>
-            <a href="blog-detail.html" class="btn btn-outline btn-sm">Read Full Story <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </article>
-
+        <div class="facility-card light-sheen-card" style="padding: 1.75rem;">
+          <div class="facility-card-icon" style="background: var(--cream-dark); color: var(--accent);"><i class="fa-solid fa-globe"></i></div>
+          <h4 style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);">Export & Retort Readiness</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted);">Hermetically sealed canned & retort pouch packaging ready for domestic retail and global export markets.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter / Press Kit Request Banner -->
-  <section class="cert-section" style="padding: 4rem 0;">
-    <div class="container text-center" style="max-width: 750px; margin: 0 auto;">
-      <div class="section-tag" style="background: rgba(224,162,56,0.2); color: var(--accent);"><i class="fa-solid fa-paper-plane"></i> Press Inquiries</div>
-      <h2 class="heading-serif" style="font-size: 2.8rem; color: var(--white); margin-bottom: 0.75rem;">Interested in Media Coverage or Interviews?</h2>
-      <p style="color: rgba(255,255,255,0.8); font-size: 1.05rem; margin-bottom: 2rem;">Contact our press relations team in Paldi, Ahmedabad for official press kits, founder interviews, or cottage training documentation.</p>
+  <!-- MEDIA ARCHIVE GRID SECTION -->
+  <section class="media-section" style="padding: 4rem 0 5rem;">
+    <div class="container">
       
-      <a href="contact.html" class="btn btn-accent">Request Press Kit <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="media-intro gsap-reveal" style="text-align: center; max-width: 800px; margin: 0 auto 2.5rem;">
+        <div class="section-tag" style="justify-content: center;"><i class="fa-solid fa-camera-retro"></i> Press Clippings</div>
+        <h2 class="heading-serif" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">Newspaper Articles & Award Documents</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Click on any press clipping below to view high-resolution archived media coverage.</p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="media-filters gsap-reveal" style="margin-bottom: 2.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-layer-group"></i> All Media (12)</button>
+        <button class="filter-btn" data-filter="newspaper"><i class="fa-solid fa-newspaper"></i> Newspapers</button>
+        <button class="filter-btn" data-filter="awards"><i class="fa-solid fa-award"></i> Awards & Honors</button>
+        <button class="filter-btn" data-filter="magazine"><i class="fa-solid fa-book-open"></i> Magazines</button>
+      </div>
+
+      <!-- Press Cards Grid -->
+      <div class="press-grid gsap-grid-stagger" id="pressGrid">
+        <!-- Dynamically Populated by js/news.js -->
+      </div>
+
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- DOCUMENT LIGHTBOX MODAL -->
+  <div class="document-lightbox" id="docLightbox" role="dialog" aria-modal="true" aria-labelledby="modalDocTitle" aria-hidden="true">
+    <div class="lightbox-frame">
+      <div class="lightbox-header">
+        <h3 id="modalDocTitle">Press Clipping Detail</h3>
+        <button class="lightbox-close-btn" onclick="closeLightbox()">&times;</button>
+      </div>
+      <div class="lightbox-body">
+        <img src="" alt="Clipping Document" id="modalDocImg" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications Bar -->
+  <section class="cert-section">
+    <div class="container">
+      <div class="cert-grid">
+        <div class="cert-card">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Official Logo" class="fssai-cert-logo" />
+          <h4>FSSAI Certified</h4>
+          <p>Lic. No.: 10718026000263</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-award"></i>
+          <h4>GCCI Winner</h4>
+          <p>Innovation Award 2007</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-building-flag"></i>
+          <h4>Govt. Recognized</h4>
+          <p>Cottage Industry Center</p>
+        </div>
+        <div class="cert-card">
+          <i class="fa-solid fa-globe"></i>
+          <h4>Export Ready</h4>
+          <p>Hermetic & Retort Packing</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
   <footer>
     <div class="container footer-grid">
       <div class="footer-col footer-about">
         <h4>ASAL CANNING CENTER</h4>
         <p>Established in 2000 in Paldi, Ahmedabad. FSSAI licensed leader in cottage food processing, fruit pulp extraction, and artisanal preservation.</p>
-        <div class="top-bar-item" style="color: var(--accent);">
-          <i class="fa-solid fa-shield-check"></i>
+        <div style="color: var(--accent); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; margin-top: 10px;">
+          <img src="images/fssai-logo-gold.png" alt="FSSAI Logo" class="fssai-footer-logo" />
           <span><strong>FSSAI Lic. No.:</strong> 10718026000263</span>
         </div>
       </div>
@@ -221,29 +227,29 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About Us</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="products.html">Products Catalog</a></li>
           <li><a href="news.html">News & Media</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact.html">Contact Us</a></li>
         </ul>
       </div>
 
       <div class="footer-col footer-links">
-        <h4>Our Services</h4>
+        <h4>Preservation Services</h4>
         <ul>
           <li><a href="products.html">Mango & Fruit Extraction</a></li>
-          <li><a href="products.html">Tomato Puree & Sauce</a></li>
-          <li><a href="products.html">Tin & Pouch Canning</a></li>
+          <li><a href="products.html">Tomato Sauce & Gravies</a></li>
+          <li><a href="products.html">Fruit Jam & Pickle Canning</a></li>
           <li><a href="about.html">Domestic Canning Training</a></li>
-          <li><a href="contact.html">Commercial & Export Orders</a></li>
+          <li><a href="contact.html">Commercial Contract Canning</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Contact Us</h4>
-        <p><i class="fa-solid fa-location-dot text-gold"></i> Paldi, Ahmedabad, Gujarat, India</p>
-        <p><i class="fa-solid fa-phone text-gold"></i> +91 98250 00000</p>
-        <p><i class="fa-solid fa-envelope text-gold"></i> info@asalcanningcenter.com</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-location-dot" style="color: var(--accent); margin-right: 6px;"></i> Paldi, Ahmedabad, Gujarat, India</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-phone" style="color: var(--accent); margin-right: 6px;"></i> +91 98250 62293</p>
+        <p style="margin-bottom: 0.6rem;"><i class="fa-solid fa-envelope" style="color: var(--accent); margin-right: 6px;"></i> asalcanning@gmail.com</p>
       </div>
     </div>
 
@@ -253,7 +259,9 @@
     </div>
   </footer>
 
-  <!-- Custom JavaScript -->
+  <!-- Scripts -->
   <script src="js/main.js"></script>
+  <script src="js/site-motion.js"></script>
+  <script src="js/news.js"></script>
 </body>
 </html>
