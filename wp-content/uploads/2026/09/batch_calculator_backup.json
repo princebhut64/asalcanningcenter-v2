@@ -1,0 +1,84 @@
+{
+    "acf_fc_layout": "batch_calculator",
+    "calculator_tag": "Interactive Tool",
+    "calculator_title": "Batch Yield & Shelf Life Calculator",
+    "calculator_description": "Estimate your net pulp extraction yield and packed unit output for custom contract processing.",
+    "produce_options": [
+        {
+            "produce_name": "Alphonso \/ Kesar Mango",
+            "produce_label": "Alphonso \/ Kesar Mango (70% Pulp Yield)",
+            "produce_value": "mango",
+            "yield_percentage": "70",
+            "extract_type": "Pure Pulp"
+        },
+        {
+            "produce_name": "Ripe Red Tomato",
+            "produce_label": "Ripe Red Tomato (85% Puree Yield)",
+            "produce_value": "tomato",
+            "yield_percentage": "85",
+            "extract_type": "Puree"
+        },
+        {
+            "produce_name": "Wild Organic Amla",
+            "produce_label": "Wild Organic Amla (65% Juice Yield)",
+            "produce_value": "amla",
+            "yield_percentage": "65",
+            "extract_type": "Juice"
+        },
+        {
+            "produce_name": "Mixed Orchard Fruit",
+            "produce_label": "Mixed Orchard Fruit (75% Jam Yield)",
+            "produce_value": "fruit",
+            "yield_percentage": "75",
+            "extract_type": "Jam"
+        }
+    ],
+    "packaging_options": [
+        {
+            "package_name": "850g Hermetic Tin Can",
+            "package_value": "850g-can",
+            "unit_weight": "0.85",
+            "unit_label": "Cans",
+            "shelf_life": "12 - 24 Months",
+            "package_specification": "850g Hermetic Tin Can"
+        },
+        {
+            "package_name": "1KG Retort Sealed Pouch",
+            "package_value": "1kg-pou",
+            "unit_weight": "1",
+            "unit_label": "Pouches",
+            "shelf_life": "12 Months Ambient",
+            "package_specification": "1KG Retort Sealed Pouch"
+        },
+        {
+            "package_name": "500g Sealed Glass Jar",
+            "package_value": "500g-jar",
+            "unit_weight": "0.5",
+            "unit_label": "jar",
+            "shelf_life": "12 Months Ambient",
+            "package_specification": "500g Sealed Glass Jar"
+        },
+        {
+            "package_name": "500g Stand-up Pouch",
+            "package_value": "500g-pouch",
+            "unit_weight": "0.5",
+            "unit_label": "pouch",
+            "shelf_life": "Frozen \/ Ambient",
+            "package_specification": "500g Sealed Glass Jar"
+        }
+    ],
+    "weight_presets": [
+        {
+            "weight_value": "50"
+        },
+        {
+            "weight_value": "100"
+        },
+        {
+            "weight_value": "240"
+        },
+        {
+            "weight_value": "500"
+        }
+    ]
+}

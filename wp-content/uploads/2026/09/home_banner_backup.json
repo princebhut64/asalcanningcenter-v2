@@ -1,0 +1,96 @@
+{
+    "acf_fc_layout": "home_banner",
+    "hero_badge_text": "FSSAI Certified Cottage Processing",
+    "hero_title": "Pioneers in ",
+    "hero_title_highlight": "Fruit Pulp Processing",
+    "hero_title_second": "& Custom Batch Canning",
+    "hero_description": "Empowering local farmers, home preservers, and food enterprises with standard cold-press pulping, tin canning, and retort pouch packing in Paldi, Ahmedabad.",
+    "hero_primary_button_text": "Explore Catalog",
+    "hero_primary_button_url": "http:\/\/localhost\/asalcanningcenter\/products\/",
+    "hero_secondary_button_text": "Contact Facilitator",
+    "hero_secondary_button_url": "http:\/\/localhost\/asalcanningcenter\/contact-us\/",
+    "hero_image": {
+        "ID": 89,
+        "id": 89,
+        "title": "mango-pulp",
+        "filename": "mango-pulp.jpg",
+        "filesize": 670133,
+        "url": "http:\/\/localhost\/asalcanningcenter\/wp-content\/uploads\/2026\/09\/mango-pulp.jpg",
+        "link": "http:\/\/localhost\/asalcanningcenter\/home\/mango-pulp\/",
+        "alt": "",
+        "author": "1",
+        "description": "",
+        "caption": "",
+        "name": "mango-pulp",
+        "status": "inherit",
+        "uploaded_to": 9,
+        "date": "2026-09-10 18:15:04",
+        "modified": "2026-09-10 18:15:04",
+        "menu_order": 0,
+        "mime_type": "image\/jpeg",
+        "type": "image",
+        "subtype": "jpeg",
+        "icon": "http:\/\/localhost\/asalcanningcenter\/wp-includes\/images\/media\/default.png",
+        "width": 1024,
+        "height": 1024,
+        "sizes": {
+            "thumbnail": "http:\/\/localhost\/asalcanningcenter\/wp-content\/uploads\/2026\/09\/mango-pulp.jpg",
+            "thumbnail-width": 150,
+            "thumbnail-height": 150,
+            "medium": "http:\/\/localhost\/asalcanningcenter\/wp-content\/uploads\/2026\/09\/mango-pulp.jpg",
+            "medium-width": 300,
+            "medium-height": 300,
+            "medium_large": "http:\/\/localhost\/asalcanningcenter\/wp-content\/uploads\/2026\/09\/mango-pulp.jpg",
+            "medium_large-width": 640,
+            "medium_large-height": 640,
+            "large": "http:\/\/localhost\/asalcanningcenter\/wp-content\/uploads\/2026\/09\/mango-pulp.jpg",
+            "large-width": 640,
+            "large-height": 640,
+            "1536x1536": "http:\/\/localhost\/asalcanningcenter\/wp-content\/uploads\/2026\/09\/mango-pulp.jpg",
+            "1536x1536-width": 1024,
+            "1536x1536-height": 1024,
+            "2048x2048": "http:\/\/localhost\/asalcanningcenter\/wp-content\/uploads\/2026\/09\/mango-pulp.jpg",
+            "2048x2048-width": 1024,
+            "2048x2048-height": 1024
+        }
+    },
+    "hero_award_title": "GCCI Award Winner",
+    "hero_award_description": "Excellence in Cottage Technology",
+    "hero_features": [
+        {
+            "feature_text": "100% Pure & Natural"
+        },
+        {
+            "feature_text": "12 - 24 Mo. Ambient Shelf Life"
+        },
+        {
+            "feature_text": "Est. September 18, 2000"
+        }
+    ],
+    "stats": [
+        {
+            "stat_icon": "fa-solid fa-calendar-check",
+            "stat_number": "24",
+            "stat_suffix": "+ Years",
+            "stat_title": "Processing Excellence"
+        },
+        {
+            "stat_icon": "fa-solid fa-jar",
+            "stat_number": "50",
+            "stat_suffix": "+",
+            "stat_title": "Product Formulations"
+        },
+        {
+            "stat_icon": "fa-solid fa-users",
+            "stat_number": "10000",
+            "stat_suffix": "+",
+            "stat_title": "Satisfied Clients"
+        },
+        {
+            "stat_icon": "fa-solid fa-shield",
+            "stat_number": "100",
+            "stat_suffix": "%",
+            "stat_title": "FSSAI Compliant"
+        }
+    ]
+}
