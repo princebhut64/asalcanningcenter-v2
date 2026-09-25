@@ -47,11 +47,17 @@
      * ----------------------------------------------------------------------
      */
 
-    $founder_name = $founder_name ?: 'Ms. Jalpa G. Patel';
+    if (empty($founder_name) || trim($founder_name) === 'Ms. Jalpa G. Patel') {
+      $founder_name = 'Jalpa G. Patel';
+    }
 
-    $founder_role = $founder_role ?: 'Founder & Coordinator';
+    if (empty($founder_role)) {
+      $founder_role = 'FOUNDER & CHIEF FACILITATOR';
+    }
 
-    $founder_description = $founder_description ?: 'Direct consultation available for home canning training, cottage industry licenses, and bulk foreign export orders.';
+    if (empty($founder_description) || strpos($founder_description, 'Direct consultation') !== false) {
+      $founder_description = 'Leading food processing innovations, domestic canning workshops, and small-scale cottage setup mentorship for over two decades.';
+    }
 
     $business_name = $business_name ?: 'Asal Canning Center';
 
@@ -79,7 +85,7 @@
 
       $founder_image_url = wp_get_attachment_image_url(
         $founder_image,
-        'medium'
+        'large'
       );
 
       $founder_image_alt = get_post_meta(
@@ -92,6 +98,12 @@
 
       $founder_image_url = $founder_image;
 
+    }
+
+    // High-trust default: fallback to official square portrait of Jalpa G. Patel
+    if (empty($founder_image_url)) {
+      $founder_image_url = wp_get_attachment_image_url(112, 'large')
+        ?: content_url('/uploads/2026/09/jalpa-patel-founder-square.jpg');
     }
 
 
@@ -126,11 +138,12 @@
          ================================================================ -->
     <div>
 
-      <div class="founder-sidebar-box light-sheen-card gsap-reveal">
+      <!-- Founder Spotlight Card (matches About Us / Heritage design) -->
+      <div class="founder-card light-sheen-card gsap-reveal" style="margin-bottom: 1.25rem;">
 
         <?php if ($founder_image_url) : ?>
 
-          <div class="founder-img-holder">
+          <div class="founder-img-box">
 
             <img
               src="<?php echo esc_url($founder_image_url); ?>"
@@ -142,25 +155,30 @@
         <?php endif; ?>
 
 
-        <h3
-          style="font-family: var(--font-serif); font-size: 1.35rem; color: var(--primary);"
-        >
+        <h3>
           <?php echo esc_html($founder_name); ?>
         </h3>
 
 
-        <span
-          style="color: var(--accent-hover); font-weight: 700; font-size: 0.775rem; text-transform: uppercase; display: block; margin-bottom: 0.5rem;"
-        >
+        <span class="role">
           <?php echo esc_html($founder_role); ?>
         </span>
 
 
-        <p
-          style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.45;"
-        >
+        <p>
           <?php echo esc_html($founder_description); ?>
         </p>
+
+        <!-- Trust & Credential Badges -->
+        <div class="founder-badges">
+          <span class="mini-badge">
+            <i class="fa-solid fa-award"></i>
+            GCCI Award 2007
+          </span>
+          <span class="mini-badge">
+            FSSAI Certified
+          </span>
+        </div>
 
       </div>
 
@@ -404,13 +422,51 @@
            ============================================================== -->
       <?php
         $contact_form = get_sub_field('contact_form');
-        $selected_form = ( ! empty( $contact_form ) ) ? '[contact-form-7 id="' . $contact_form . '"]' : '';
-      ?>
+        $form_id = '';
+        if ( is_object( $contact_form ) && isset( $contact_form->ID ) ) {
+            $form_id = $contact_form->ID;
+        } elseif ( is_array( $contact_form ) && isset( $contact_form['ID'] ) ) {
+            $form_id = $contact_form['ID'];
+        } elseif ( is_scalar( $contact_form ) && ! empty( $contact_form ) ) {
+            $form_id = $contact_form;
+        }
 
+        // Fallback to primary contact form if field is unassigned
+        if ( empty( $form_id ) ) {
+            $form_id = 224;
+        }
+
+        $selected_form = '[contact-form-7 id="' . esc_attr( $form_id ) . '"]';
+      ?>
 
       <?php if ($selected_form) : ?>
 
-        <div style="margin-top: 1.25rem;">
+        <div style="margin-top: 1.5rem;" id="contactFormWrap">
+
+          <?php
+            $inquiry_product = isset($_GET['product']) ? sanitize_text_field(wp_unslash($_GET['product'])) : '';
+            $inquiry_type    = isset($_GET['type']) ? sanitize_text_field(wp_unslash($_GET['type'])) : '';
+          ?>
+
+          <?php if (!empty($inquiry_product)) : ?>
+            <div class="inquiry-product-tag">
+              <i class="fa-solid fa-jar"></i>
+              <div>
+                <strong>Inquiring For: <?php echo esc_html($inquiry_product); ?></strong>
+                <span><?php echo ($inquiry_type === 'sample') ? 'Sample Pack Request &amp; Specifications' : 'Bulk Batch Order &amp; Custom Preservation Consultation'; ?></span>
+              </div>
+            </div>
+          <?php endif; ?>
+
+          <div class="inquiry-trust-banner">
+            <div class="inquiry-trust-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div class="inquiry-trust-text">
+              <strong>Fast Direct Response &bull; Founder Direct Review</strong>
+              <span>Direct consultation with Jalpa G. Patel and our cottage processing team. Typical response within 2–4 business hours.</span>
+            </div>
+          </div>
 
           <?php echo do_shortcode($selected_form); ?>
 

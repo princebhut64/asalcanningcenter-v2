@@ -1,636 +1,326 @@
-<section style="padding: 4rem 0; background: var(--cream-dark);" class="wow-slider-wrapper" id="heroSlider">
+<?php
+/**
+ * Hero Slider Template Part
+ * 
+ * Smooth crossfade slider with zero image blinking and seamless text transitions.
+ * Supports Autoplay, Hover Pause, Touch Swipe, Keyboard Navigation, and Image Preloading.
+ *
+ * @package asalcanningcenter
+ */
 
-    <div class="slide-bg-base" id="slideBg"></div>
+$slides = [];
+if ( have_rows( 'slides' ) ) {
+    while ( have_rows( 'slides' ) ) {
+        the_row();
+        $slide_image       = get_sub_field( 'slide_image' );
+        $slide_title       = get_sub_field( 'slide_title' );
+        $slide_description = get_sub_field( 'slide_description' );
 
-    <div class="slice-canvas" id="sliceCanvas"></div>
+        $img_url = '';
+        $img_alt = '';
+        if ( is_array( $slide_image ) ) {
+            $img_url = $slide_image['url'] ?? '';
+            $img_alt = $slide_image['alt'] ?? '';
+        } elseif ( is_numeric( $slide_image ) ) {
+            $img_url = wp_get_attachment_image_url( $slide_image, 'full' );
+            $img_alt = get_post_meta( $slide_image, '_wp_attachment_image_alt', true );
+        } elseif ( is_string( $slide_image ) ) {
+            $img_url = $slide_image;
+        }
 
-    <div class="slider-overlay-gradient"></div>
+        if ( ! empty( $img_url ) ) {
+            $slides[] = [
+                'url'   => $img_url,
+                'alt'   => $img_alt ?: ( $slide_title ?: 'Asal Canning Center' ),
+                'title' => $slide_title ?: '',
+                'desc'  => $slide_description ?: '',
+            ];
+        }
+    }
+}
 
-    <div class="hero-caption" id="sliderCaption" style="z-index: 10; pointer-events: none;">
+// Fallback if no slides configured
+if ( empty( $slides ) ) {
+    $brand_title    = get_field( 'header_brand_title', 'option' ) ?: 'ASAL CANNING CENTER';
+    $brand_subtitle = get_field( 'header_brand_subtitle', 'option' ) ?: 'Cottage Industry & Food Processing Since 2000';
+    $slides[] = [
+        'url'   => '',
+        'alt'   => $brand_title,
+        'title' => $brand_title,
+        'desc'  => $brand_subtitle,
+    ];
+}
 
-        <h2 id="captionTitle" style="color: #ffffff !important; text-shadow: 0 4px 20px rgba(0,0,0,0.95), 0 2px 6px rgba(0,0,0,0.98); font-weight: 800;"></h2>
+$total_slides = count( $slides );
+?>
 
-        <p id="captionDesc" style="color: #f7fafc !important; text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.95); font-size: clamp(1rem, 2vw, 1.25rem); font-weight: 500;"></p>
+<section class="wow-slider-wrapper hero-smooth-slider" id="heroSlider" aria-roledescription="carousel" aria-label="<?php esc_attr_e( 'Hero Highlights Slider', 'asalcanningcenter' ); ?>">
 
+    <!-- Slides Viewport -->
+    <div class="hero-slides-viewport" id="heroSlidesViewport">
+        <?php foreach ( $slides as $index => $slide ) : ?>
+            <div class="hero-slide-item <?php echo $index === 0 ? 'is-active' : ''; ?>"
+                 data-slide-index="<?php echo esc_attr( $index ); ?>"
+                 role="group"
+                 aria-roledescription="slide"
+                 aria-label="<?php echo esc_attr( sprintf( __( 'Slide %d of %d', 'asalcanningcenter' ), $index + 1, $total_slides ) ); ?>"
+                 <?php echo $index !== 0 ? 'aria-hidden="true"' : ''; ?>>
+                
+                <div class="slide-bg-media"
+                     style="<?php echo ! empty( $slide['url'] ) ? 'background-image: url(\'' . esc_url( $slide['url'] ) . '\');' : ''; ?>"
+                     role="img"
+                     aria-label="<?php echo esc_attr( $slide['alt'] ); ?>"></div>
+                
+                <div class="slider-overlay-gradient"></div>
+
+                <?php if ( ! empty( $slide['title'] ) || ! empty( $slide['desc'] ) ) : ?>
+                    <div class="hero-caption">
+                        <?php if ( ! empty( $slide['title'] ) ) : ?>
+                            <h2 class="slide-caption-title"><?php echo esc_html( $slide['title'] ); ?></h2>
+                        <?php endif; ?>
+                        <?php if ( ! empty( $slide['desc'] ) ) : ?>
+                            <p class="slide-caption-desc"><?php echo esc_html( $slide['desc'] ); ?></p>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
     </div>
 
+    <?php if ( $total_slides > 1 ) : ?>
+        <!-- Slider Navigation Controls -->
+        <button class="slider-nav-btn prev"
+                id="heroSliderPrevBtn"
+                type="button"
+                aria-label="<?php esc_attr_e( 'Previous Slide', 'asalcanningcenter' ); ?>">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
 
-    <button
-        class="slider-nav-btn prev"
-        onclick="prevSliceSlide()"
-        aria-label="Previous Slide"
-    >
-        <i class="fa-solid fa-chevron-left"></i>
-    </button>
+        <button class="slider-nav-btn next"
+                id="heroSliderNextBtn"
+                type="button"
+                aria-label="<?php esc_attr_e( 'Next Slide', 'asalcanningcenter' ); ?>">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
 
-
-    <button
-        class="slider-nav-btn next"
-        onclick="nextSliceSlide()"
-        aria-label="Next Slide"
-    >
-        <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-
-    <div
-        class="slider-dots-box"
-        id="dotsContainer"
-    ></div>
+        <!-- Slider Pagination Dots -->
+        <div class="slider-dots-box" id="heroDotsContainer" role="tablist" aria-label="<?php esc_attr_e( 'Choose slide to display', 'asalcanningcenter' ); ?>">
+            <?php foreach ( $slides as $index => $slide ) : ?>
+                <button class="dot-pill <?php echo $index === 0 ? 'active' : ''; ?>"
+                        type="button"
+                        role="tab"
+                        data-slide-target="<?php echo esc_attr( $index ); ?>"
+                        aria-selected="<?php echo $index === 0 ? 'true' : 'false'; ?>"
+                        aria-label="<?php echo esc_attr( sprintf( __( 'Go to slide %d', 'asalcanningcenter' ), $index + 1 ) ); ?>">
+                </button>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 
 </section>
 
-
 <script>
+(function () {
+    'use strict';
 
-const slidesData = [
-    <?php
-    if (have_rows('slides')) :
-        while (have_rows('slides')) : the_row();
+    function initHeroSlider() {
+        const slider = document.getElementById('heroSlider');
+        if (!slider) return;
 
-            $slide_image       = get_sub_field('slide_image');
-            $slide_title       = get_sub_field('slide_title');
-            $slide_description = get_sub_field('slide_description');
+        const slides = Array.from(slider.querySelectorAll('.hero-slide-item'));
+        const totalSlides = slides.length;
+        if (totalSlides <= 1) return;
 
-            if ($slide_image) :
-    ?>
-    {
-        url: <?php echo wp_json_encode($slide_image); ?>,
-        title: <?php echo wp_json_encode($slide_title); ?>,
-        desc: <?php echo wp_json_encode($slide_description); ?>
-    },
-    <?php
-            endif;
+        const prevBtn = document.getElementById('heroSliderPrevBtn');
+        const nextBtn = document.getElementById('heroSliderNextBtn');
+        const dotsContainer = document.getElementById('heroDotsContainer');
+        const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.dot-pill')) : [];
 
-        endwhile;
-    endif;
-    ?>
-];
+        let currentIndex = 0;
+        let isTransitioning = false;
+        let autoTimer = null;
+        const AUTO_DELAY = 5500;
+        const TRANSITION_DURATION = 850;
 
-
-let currentSlide = 0;
-let isTransitioning = false;
-
-const NUM_SLICES = 8;
-const SLICE_DURATION = 800;
-const AUTO_SLIDE_TIME = 5000;
-
-
-const sliceCanvas = document.getElementById('sliceCanvas');
-const slideBg = document.getElementById('slideBg');
-const captionTitle = document.getElementById('captionTitle');
-const captionDesc = document.getElementById('captionDesc');
-const captionBox = document.getElementById('sliderCaption');
-const dotsContainer = document.getElementById('dotsContainer');
-
-let autoSlideTimer = null;
-
-
-
-/* =========================================================
-   INITIALIZE DOTS
-========================================================= */
-
-function createDots() {
-
-    dotsContainer.innerHTML = '';
-
-    slidesData.forEach((slide, index) => {
-
-        const dot = document.createElement('span');
-
-        dot.className = 'dot-pill';
-
-        if (index === 0) {
-            dot.classList.add('active');
-        }
-
-        dot.addEventListener('click', function () {
-            goToSliceSlide(index);
+        // Preload all slide images to prevent network flash
+        slides.forEach(slide => {
+            const bgEl = slide.querySelector('.slide-bg-media');
+            if (bgEl) {
+                const match = bgEl.style.backgroundImage.match(/url\(["']?([^"')]+)["']?\)/);
+                if (match && match[1]) {
+                    const img = new Image();
+                    img.src = match[1];
+                }
+            }
         });
 
-        dotsContainer.appendChild(dot);
-
-    });
-
-}
-
-
-
-/* =========================================================
-   UPDATE DOTS
-========================================================= */
-
-function updateDots(index) {
-
-    const dots =
-        dotsContainer.querySelectorAll('.dot-pill');
-
-    dots.forEach((dot, i) => {
-
-        dot.classList.toggle(
-            'active',
-            i === index
-        );
-
-    });
-
-}
-
-
-
-/* =========================================================
-   INITIAL SLIDE
-========================================================= */
-
-function setInitialSlide() {
-
-    if (!slidesData.length) {
-        return;
-    }
-
-    const firstSlide = slidesData[0];
-
-
-    /*
-     * Set background immediately
-     */
-
-    slideBg.style.backgroundImage =
-        'url("' + firstSlide.url + '")';
-
-
-    /*
-     * Set caption
-     */
-
-    captionTitle.textContent =
-        firstSlide.title || '';
-
-    captionDesc.textContent =
-        firstSlide.desc || '';
-
-
-    /*
-     * Make sure caption is visible
-     */
-
-    captionBox.style.opacity = '1';
-
-    captionBox.style.transform =
-        'translateX(-50%) translateY(0)';
-
-}
-
-
-
-/* =========================================================
-   CREATE SLICE
-========================================================= */
-
-function createSlice(
-    index,
-    slide,
-    direction
-) {
-
-    const sliceWidth =
-        100 / NUM_SLICES;
-
-
-    const col =
-        document.createElement('div');
-
-    col.className =
-        'slice-col';
-
-
-    col.style.width =
-        sliceWidth + '%';
-
-
-    /*
-     * Inner image
-     */
-
-    const inner =
-        document.createElement('div');
-
-    inner.className =
-        'slice-col-inner';
-
-
-    inner.style.backgroundImage =
-        'url("' + slide.url + '")';
-
-
-    /*
-     * Important:
-     * Every slice uses the same full image.
-     */
-
-    inner.style.width =
-        NUM_SLICES * 100 + '%';
-
-
-    inner.style.left =
-        -(index * 100) + '%';
-
-
-    /*
-     * Starting position
-     */
-
-    if (direction === 'next') {
-
-        if (index % 2 === 0) {
-
-            col.style.transform =
-                'translateY(-70px) rotateY(-45deg) scale(.88)';
-
-        } else {
-
-            col.style.transform =
-                'translateY(70px) rotateY(-45deg) scale(.88)';
-
+        function updateDots(newIndex) {
+            dots.forEach((dot, idx) => {
+                const isActive = idx === newIndex;
+                dot.classList.toggle('active', isActive);
+                dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
         }
 
-    } else {
+        function goToSlide(nextIndex, direction) {
+            if (isTransitioning || nextIndex === currentIndex) return;
+            if (nextIndex < 0) nextIndex = totalSlides - 1;
+            if (nextIndex >= totalSlides) nextIndex = 0;
 
-        if (index % 2 === 0) {
+            isTransitioning = true;
 
-            col.style.transform =
-                'translateY(70px) rotateY(45deg) scale(.88)';
+            const currentSlide = slides[currentIndex];
+            const nextSlide = slides[nextIndex];
 
-        } else {
+            // Setup aria attributes
+            nextSlide.setAttribute('aria-hidden', 'false');
+            currentSlide.setAttribute('aria-hidden', 'true');
 
-            col.style.transform =
-                'translateY(-70px) rotateY(45deg) scale(.88)';
+            // Set current slide to leaving (remains visible at z-index 2 underneath incoming active slide at z-index 3)
+            currentSlide.classList.add('is-leaving');
+            currentSlide.classList.remove('is-active');
 
+            // Force reflow for smooth start
+            void nextSlide.offsetWidth;
+
+            // Activate incoming slide
+            nextSlide.classList.add('is-active');
+
+            updateDots(nextIndex);
+            currentIndex = nextIndex;
+
+            // Once crossfade duration finishes, clean up leaving class and unlock
+            setTimeout(() => {
+                currentSlide.classList.remove('is-leaving');
+                isTransitioning = false;
+            }, TRANSITION_DURATION);
         }
 
-    }
-
-
-    col.style.opacity = '0';
-
-
-    /*
-     * Add inner image
-     */
-
-    col.appendChild(inner);
-
-    sliceCanvas.appendChild(col);
-
-
-    /*
-     * Force browser repaint
-     */
-
-    col.offsetHeight;
-
-
-    /*
-     * Animate slice
-     */
-
-    requestAnimationFrame(() => {
-
-        col.style.opacity = '1';
-
-        col.style.transform =
-            'translateY(0) rotateY(0deg) scale(1)';
-
-    });
-
-}
-
-
-
-/* =========================================================
-   CHANGE SLIDE
-========================================================= */
-
-function triggerSliceTransition(
-    nextIdx,
-    direction = 'next'
-) {
-
-    /*
-     * Prevent multiple clicks
-     */
-
-    if (isTransitioning) {
-        return;
-    }
-
-
-    /*
-     * Invalid slide
-     */
-
-    if (
-        !slidesData[nextIdx] ||
-        nextIdx === currentSlide
-    ) {
-        return;
-    }
-
-
-    isTransitioning = true;
-
-
-    const nextSlide =
-        slidesData[nextIdx];
-
-
-    /*
-     * Clear old slices
-     */
-
-    sliceCanvas.innerHTML = '';
-
-
-    /*
-     * Caption out
-     */
-
-    captionBox.style.opacity = '0';
-
-    captionBox.style.transform =
-        'translateX(-50%) translateY(20px)';
-
-
-
-    /*
-     * Create all slices
-     */
-
-    for (
-        let i = 0;
-        i < NUM_SLICES;
-        i++
-    ) {
-
-        createSlice(
-            i,
-            nextSlide,
-            direction
-        );
-
-    }
-
-
-    /*
-     * Update dots immediately
-     */
-
-    updateDots(nextIdx);
-
-
-
-    /*
-     * Wait until slices finish
-     */
-
-    setTimeout(() => {
-
-
-        /*
-         * IMPORTANT:
-         *
-         * Change background only AFTER
-         * slice animation is completed.
-         */
-
-        slideBg.style.backgroundImage =
-            'url("' + nextSlide.url + '")';
-
-
-
-        /*
-         * Update caption
-         */
-
-        captionTitle.textContent =
-            nextSlide.title || '';
-
-        captionDesc.textContent =
-            nextSlide.desc || '';
-
-
-
-        /*
-         * Caption back in
-         */
-
-        captionBox.style.opacity = '1';
-
-        captionBox.style.transform =
-            'translateX(-50%) translateY(0)';
-
-
-
-        /*
-         * Remove slices
-         *
-         * Background underneath is already
-         * the new slide.
-         */
-
-        sliceCanvas.innerHTML = '';
-
-
-
-        /*
-         * Update current slide
-         */
-
-        currentSlide =
-            nextIdx;
-
-
-        /*
-         * Unlock slider
-         */
-
-        isTransitioning =
-            false;
-
-
-    }, SLICE_DURATION + 100);
-
-}
-
-
-
-/* =========================================================
-   NEXT
-========================================================= */
-
-function nextSliceSlide() {
-
-    if (
-        !slidesData.length ||
-        isTransitioning
-    ) {
-        return;
-    }
-
-
-    const next =
-        (currentSlide + 1)
-        % slidesData.length;
-
-
-    triggerSliceTransition(
-        next,
-        'next'
-    );
-
-
-    resetSliderTimer();
-
-}
-
-
-
-/* =========================================================
-   PREVIOUS
-========================================================= */
-
-function prevSliceSlide() {
-
-    if (
-        !slidesData.length ||
-        isTransitioning
-    ) {
-        return;
-    }
-
-
-    const previous =
-        (
-            currentSlide -
-            1 +
-            slidesData.length
-        )
-        % slidesData.length;
-
-
-    triggerSliceTransition(
-        previous,
-        'prev'
-    );
-
-
-    resetSliderTimer();
-
-}
-
-
-
-/* =========================================================
-   DOT CLICK
-========================================================= */
-
-function goToSliceSlide(index) {
-
-    if (
-        isTransitioning ||
-        index === currentSlide ||
-        !slidesData[index]
-    ) {
-        return;
-    }
-
-
-    /*
-     * Determine direction
-     */
-
-    let direction;
-
-
-    if (index > currentSlide) {
-
-        direction = 'next';
-
-    } else {
-
-        direction = 'prev';
-
-    }
-
-
-    triggerSliceTransition(
-        index,
-        direction
-    );
-
-
-    resetSliderTimer();
-
-}
-
-
-
-/* =========================================================
-   START AUTOPLAY
-========================================================= */
-
-function startSliderTimer() {
-
-    clearInterval(autoSlideTimer);
-
-
-    if (slidesData.length <= 1) {
-        return;
-    }
-
-
-    autoSlideTimer =
-        setInterval(() => {
-
-            if (!isTransitioning) {
-
-                nextSliceSlide();
-
+        function nextSlide() {
+            goToSlide(currentIndex + 1, 'next');
+        }
+
+        function prevSlide() {
+            goToSlide(currentIndex - 1, 'prev');
+        }
+
+        // Arrow button listeners
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextSlide();
+                restartTimer();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevSlide();
+                restartTimer();
+            });
+        }
+
+        // Dot button listeners
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                goToSlide(idx, idx > currentIndex ? 'next' : 'prev');
+                restartTimer();
+            });
+        });
+
+        // Autoplay timer controls
+        function startTimer() {
+            stopTimer();
+            autoTimer = setInterval(() => {
+                if (!isTransitioning) {
+                    nextSlide();
+                }
+            }, AUTO_DELAY);
+        }
+
+        function stopTimer() {
+            if (autoTimer) {
+                clearInterval(autoTimer);
+                autoTimer = null;
             }
+        }
 
-        }, AUTO_SLIDE_TIME);
+        function restartTimer() {
+            stopTimer();
+            startTimer();
+        }
 
-}
+        // Pause on Hover so users can read slide without sudden change
+        slider.addEventListener('mouseenter', stopTimer);
+        slider.addEventListener('mouseleave', startTimer);
 
+        // Pause when tab is not active
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopTimer();
+            } else {
+                startTimer();
+            }
+        });
 
+        // Touch Swipe Navigation for mobile devices
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
 
-/* =========================================================
-   RESET AUTOPLAY
-========================================================= */
+        slider.addEventListener('touchstart', (e) => {
+            if (!e.changedTouches || !e.changedTouches.length) return;
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
 
-function resetSliderTimer() {
+        slider.addEventListener('touchend', (e) => {
+            if (!e.changedTouches || !e.changedTouches.length) return;
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
 
-    clearInterval(autoSlideTimer);
+        function handleSwipe() {
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+                if (diffX < 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                restartTimer();
+            }
+        }
 
-    startSliderTimer();
+        // Keyboard Arrow Navigation
+        window.addEventListener('keydown', (e) => {
+            // Only if hero slider is partially or fully in view
+            const rect = slider.getBoundingClientRect();
+            const inView = rect.top < window.innerHeight && rect.bottom > 0;
+            if (!inView) return;
 
-}
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+                restartTimer();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+                restartTimer();
+            }
+        });
 
+        // Initialize autoplay
+        startTimer();
+    }
 
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-if (slidesData.length > 0) {
-
-    createDots();
-
-    setInitialSlide();
-
-    startSliderTimer();
-
-}
-
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHeroSlider);
+    } else {
+        initHeroSlider();
+    }
+})();
 </script>

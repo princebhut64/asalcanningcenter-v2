@@ -42,16 +42,7 @@
   }
 
   function initHeroParallax() {
-    const hero = document.querySelector('.wow-slider-wrapper');
-    const image = hero && hero.querySelector('.slide-bg-base');
-    if (!hero || !image || reducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
-    hero.addEventListener('pointermove', event => {
-      const bounds = hero.getBoundingClientRect();
-      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 10;
-      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 6;
-      image.style.transform = `scale(1.08) translate3d(${x}px, ${y}px, 0)`;
-    }, { passive: true });
-    hero.addEventListener('pointerleave', () => { image.style.transform = ''; });
+    // Rely on pure cinematic CSS Ken Burns transition for maximum 60fps stability without mousemove repaint jitter
   }
 
   document.addEventListener('DOMContentLoaded', () => {

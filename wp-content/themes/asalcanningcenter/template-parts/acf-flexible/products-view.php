@@ -348,6 +348,27 @@
                 <!-- Rendered dynamically -->
             </div>
 
+            <!-- Auto-Load on Scroll Sentinel & Loader -->
+            <div
+                id="productScrollSentinel"
+                class="infinite-scroll-sentinel"
+                style="display: none;"
+            >
+                <div class="infinite-scroll-loader">
+                    <div class="spinner"></div>
+                    <span class="loader-text">Loading more products...</span>
+                </div>
+            </div>
+
+            <div
+                id="productEndNotice"
+                class="catalog-end-notice"
+                style="display: none;"
+            >
+                <i class="fa-solid fa-circle-check" style="color: var(--accent); margin-right: 6px;"></i>
+                You've viewed all available products
+            </div>
+
 
         </div>
 

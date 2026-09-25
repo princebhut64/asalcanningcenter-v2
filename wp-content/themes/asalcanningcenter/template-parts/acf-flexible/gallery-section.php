@@ -37,8 +37,69 @@
 
       <?php
       $gallery_items = get_sub_field('gallery_items');
+      if (!is_array($gallery_items)) {
+          $gallery_items = [];
+      }
 
-      if ($gallery_items) :
+      $authentic_gallery_defaults = [
+          [
+              'gallery_image'       => home_url('/wp-content/uploads/2026/09/gallery-training-jalpa-patel.jpg'),
+              'media_type'          => 'image',
+              'youtube_id'          => '',
+              'gallery_category'    => 'workshops',
+              'gallery_title'       => 'Training Seminars with Jalpa Patel',
+              'gallery_description' => 'Founder Jalpa Patel conducting commercial canning and preservation workshop for women entrepreneurs.',
+          ],
+          [
+              'gallery_image'       => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
+              'media_type'          => 'image',
+              'youtube_id'          => '',
+              'gallery_category'    => 'operations',
+              'gallery_title'       => 'Continuous SS-304 Pulper Extraction',
+              'gallery_description' => 'High-capacity SS-304 continuous pulping system extracting fresh fruit pulp under zero-touch hygiene.',
+          ],
+          [
+              'gallery_image'       => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+              'media_type'          => 'image',
+              'youtube_id'          => '',
+              'gallery_category'    => 'operations',
+              'gallery_title'       => 'Pouch Dispensing Station',
+              'gallery_description' => 'Aseptic pouch filling and hermetic heat-sealing line delivering airtight protection.',
+          ],
+          [
+              'gallery_image'       => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
+              'media_type'          => 'image',
+              'youtube_id'          => '',
+              'gallery_category'    => 'facility',
+              'gallery_title'       => 'Thermal Vats & Herbal Processing',
+              'gallery_description' => 'Heavy-gauge steam-jacketed thermal vats for slow boiling of herbal decoctions and fruit syrups.',
+          ],
+          [
+              'gallery_image'       => home_url('/wp-content/uploads/2026/09/gallery-women-workshop.jpg'),
+              'media_type'          => 'image',
+              'youtube_id'          => '',
+              'gallery_category'    => 'workshops',
+              'gallery_title'       => 'Women Fruit Preservation Clinic',
+              'gallery_description' => 'Capacity building training program empowering regional women in commercial cottage food processing.',
+          ],
+          [
+              'gallery_image'       => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+              'media_type'          => 'image',
+              'youtube_id'          => '',
+              'gallery_category'    => 'operations',
+              'gallery_title'       => 'Farm Harvest Sourcing & Sorting Crates',
+              'gallery_description' => 'Direct farm-sourced fresh fruits inspected and graded for peak natural sweetness and maturity.',
+          ],
+      ];
+
+      $existing_titles = array_map(function($i) { return strtolower(trim($i['gallery_title'] ?? '')); }, $gallery_items);
+      foreach ($authentic_gallery_defaults as $default_item) {
+          if (!in_array(strtolower(trim($default_item['gallery_title'])), $existing_titles, true)) {
+              $gallery_items[] = $default_item;
+          }
+      }
+
+      if (!empty($gallery_items)) :
 
         foreach ($gallery_items as $item) :
 
@@ -137,6 +198,27 @@
       endif;
       ?>
 
+    </div>
+
+    <!-- Auto-Load on Scroll Sentinel & Loader -->
+    <div
+      id="galleryScrollSentinel"
+      class="infinite-scroll-sentinel"
+      style="display: none;"
+    >
+      <div class="infinite-scroll-loader">
+        <div class="spinner"></div>
+        <span class="loader-text">Loading more gallery media...</span>
+      </div>
+    </div>
+
+    <div
+      id="galleryEndNotice"
+      class="gallery-end-notice"
+      style="display: none;"
+    >
+      <i class="fa-solid fa-circle-check" style="color: var(--accent); margin-right: 6px;"></i>
+      You've viewed all gallery items
     </div>
 
   </div>

@@ -92,6 +92,47 @@ $faq_items       = get_sub_field('faq_items');
         </div>
 
     </div>
+
+    <script>
+    (function() {
+        function splitFAQColumns() {
+            const containers = document.querySelectorAll('.faq-container');
+            containers.forEach(function(container) {
+                if (container.querySelector('.faq-column')) return;
+                const items = Array.from(container.querySelectorAll(':scope > .faq-item'));
+                const total = items.length;
+                if (total <= 1) return;
+
+                // Divide items into 2 columns: left gets Math.ceil(total / 2)
+                const leftCount = Math.ceil(total / 2);
+
+                const leftCol = document.createElement('div');
+                leftCol.className = 'faq-column faq-column-left';
+
+                const rightCol = document.createElement('div');
+                rightCol.className = 'faq-column faq-column-right';
+
+                items.forEach(function(item, index) {
+                    if (index < leftCount) {
+                        leftCol.appendChild(item);
+                    } else {
+                        rightCol.appendChild(item);
+                    }
+                });
+
+                container.innerHTML = '';
+                container.appendChild(leftCol);
+                container.appendChild(rightCol);
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', splitFAQColumns);
+        } else {
+            splitFAQColumns();
+        }
+    })();
+    </script>
 </section>
 
 <?php endif; ?>

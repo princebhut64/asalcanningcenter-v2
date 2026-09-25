@@ -97,17 +97,31 @@ function register_products_cpt_and_taxonomies() {
      * PRODUCT CATEGORY TAXONOMY
      * ========================================================= */
     $category_labels = array(
-        'name'              => 'Categories',
-        'singular_name'     => 'Category',
-        'search_items'      => 'Search Categories',
-        'all_items'         => 'All Categories',
-        'parent_item'       => 'Parent Category',
-        'parent_item_colon' => 'Parent Category:',
-        'edit_item'         => 'Edit Category',
-        'update_item'       => 'Update Category',
-        'add_new_item'      => 'Add New Category',
-        'new_item_name'     => 'New Category Name',
-        'menu_name'         => 'Category',
+        'name'                       => 'Categories',
+        'singular_name'              => 'Category',
+        'search_items'               => 'Search Categories',
+        'popular_items'              => 'Popular Categories',
+        'all_items'                  => 'All Categories',
+        'parent_item'                => 'Parent Category',
+        'parent_item_colon'          => 'Parent Category:',
+        'edit_item'                  => 'Edit Category',
+        'view_item'                  => 'View Category',
+        'update_item'                => 'Update Category',
+        'add_new_item'               => 'Add New Category',
+        'new_item_name'              => 'New Category Name',
+        'separate_items_with_commas' => 'Separate categories with commas',
+        'add_or_remove_items'        => 'Add or remove categories',
+        'choose_from_most_used'      => 'Choose from most used categories',
+        'not_found'                  => 'No categories found.',
+        'no_terms'                   => 'No categories',
+        'items_list_navigation'      => 'Categories list navigation',
+        'items_list'                 => 'Categories list',
+        'back_to_items'              => '<- Back to Categories',
+        'menu_name'                  => 'Categories',
+        'name_field_description'     => 'The name is how it appears on your site.',
+        'parent_field_description'   => 'Assign a parent term to create a hierarchy (e.g. Fruits -> Tropical Fruits).',
+        'slug_field_description'     => 'The "slug" is the URL-friendly version of the name.',
+        'desc_field_description'     => 'The description is not prominent by default.',
     );
 
     $category_args = array(
@@ -118,6 +132,11 @@ function register_products_cpt_and_taxonomies() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'show_in_rest'      => true,
+        'show_tagcloud'     => false,
+
+        /* Force the standard hierarchical (categories-style) meta box
+         * which includes the inline "Add New Category" input + parent selector */
+        'meta_box_cb'       => 'post_categories_meta_box',
 
         'rewrite'           => array(
             'slug' => 'product-category',
@@ -135,17 +154,27 @@ function register_products_cpt_and_taxonomies() {
      * PACKAGING TYPE TAXONOMY
      * ========================================================= */
     $packaging_labels = array(
-        'name'              => 'Packaging Types',
-        'singular_name'     => 'Packaging Type',
-        'search_items'      => 'Search Packaging Types',
-        'all_items'         => 'All Packaging Types',
-        'parent_item'       => 'Parent Packaging Type',
-        'parent_item_colon' => 'Parent Packaging Type:',
-        'edit_item'         => 'Edit Packaging Type',
-        'update_item'       => 'Update Packaging Type',
-        'add_new_item'      => 'Add New Packaging Type',
-        'new_item_name'     => 'New Packaging Type Name',
-        'menu_name'         => 'Packaging Type',
+        'name'                       => 'Packaging Types',
+        'singular_name'              => 'Packaging Type',
+        'search_items'               => 'Search Packaging Types',
+        'popular_items'              => 'Popular Packaging Types',
+        'all_items'                  => 'All Packaging Types',
+        'parent_item'                => 'Parent Packaging Type',
+        'parent_item_colon'          => 'Parent Packaging Type:',
+        'edit_item'                  => 'Edit Packaging Type',
+        'view_item'                  => 'View Packaging Type',
+        'update_item'                => 'Update Packaging Type',
+        'add_new_item'               => 'Add New Packaging Type',
+        'new_item_name'              => 'New Packaging Type Name',
+        'separate_items_with_commas' => 'Separate packaging types with commas',
+        'add_or_remove_items'        => 'Add or remove packaging types',
+        'choose_from_most_used'      => 'Choose from most used packaging types',
+        'not_found'                  => 'No packaging types found.',
+        'no_terms'                   => 'No packaging types',
+        'items_list_navigation'      => 'Packaging types list navigation',
+        'items_list'                 => 'Packaging types list',
+        'back_to_items'              => '<- Back to Packaging Types',
+        'menu_name'                  => 'Packaging Types',
     );
 
     $packaging_args = array(
@@ -156,6 +185,11 @@ function register_products_cpt_and_taxonomies() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'show_in_rest'      => true,
+        'show_tagcloud'     => false,
+
+        /* Force the standard hierarchical (categories-style) meta box
+         * which includes the inline "Add New" input + parent selector */
+        'meta_box_cb'       => 'post_categories_meta_box',
 
         'rewrite'           => array(
             'slug' => 'packaging-type',
@@ -182,6 +216,11 @@ add_action(
  * ------------------------------------------------------------
  */
 function asal_get_products_catalog_data() {
+
+    $cached = get_transient('asal_products_catalog_cache');
+    if ($cached !== false && is_array($cached)) {
+        return $cached;
+    }
 
     $products = [];
 
@@ -410,6 +449,18 @@ function asal_get_products_catalog_data() {
         wp_reset_postdata();
     }
 
+    set_transient('asal_products_catalog_cache', $products, 12 * HOUR_IN_SECONDS);
 
     return $products;
 }
+
+/**
+ * Invalidate products catalog transient on product/category updates
+ */
+function asal_clear_products_catalog_cache() {
+    delete_transient('asal_products_catalog_cache');
+}
+add_action('save_post_products', 'asal_clear_products_catalog_cache');
+add_action('deleted_post', 'asal_clear_products_catalog_cache');
+add_action('edited_product_category', 'asal_clear_products_catalog_cache');
+add_action('created_product_category', 'asal_clear_products_catalog_cache');

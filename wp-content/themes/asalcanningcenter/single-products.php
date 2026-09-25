@@ -393,64 +393,299 @@ $nutritional_values = get_field(
 
 
                 <!-- ==================================================
-                     THUMBNAIL GALLERY
+                     THUMBNAIL GALLERY & JOURNEY SHOWCASE
                      ================================================== -->
 
                 <?php
+                $gallery_slides = [];
 
-                if (
-                    !empty(
-                        $product_gallery
-                    )
-                ) :
+                // 1. Featured image as first slide
+                if ($featured_image) {
+                    $gallery_slides[] = [
+                        'image_url'     => $featured_image,
+                        'thumbnail_url' => $featured_image,
+                        'title'         => 'Primary Packshot: ' . $product_title,
+                        'badge'         => 'Packshot',
+                    ];
+                }
 
+                // 2. Curated Authentic Journey & Showcase Presets
+                $product_slug = get_post_field('post_name', $product_id);
+                $journey_presets = [
+                    '18-herbs-medicinal-hair-oil-200ml-amber-bottle' => [
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/hair-oil-girl-showcase.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/hair-oil-girl-showcase.jpg'),
+                            'title'         => 'Showcase: Long Black Hair Wellness Result',
+                            'badge'         => 'Showcase',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
+                            'title'         => 'Raw Botanicals: 18 Medicinal Herbs & Roots Sourcing',
+                            'badge'         => 'Botanicals',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
+                            'title'         => 'Decoction: Traditional Copper Vat Slow Infusion',
+                            'badge'         => 'Vat Infusion',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
+                            'title'         => 'Herbal Formulation: Ayurvedic Nectar Infusion',
+                            'badge'         => 'Heritage',
+                        ],
+                    ],
+                    'alphonso-kesar-mango-pulp-850g-can-1kg-pouch' => [
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'title'         => 'Journey Step 1: Farm Crate Sourcing & Mango Sorting',
+                            'badge'         => 'Sourcing',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
+                            'title'         => 'Journey Step 2: Continuous SS-304 Pulper Extraction',
+                            'badge'         => 'Extraction',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'title'         => 'Journey Step 3: Food-Grade Sealed Pouch Packaging Station',
+                            'badge'         => 'Pouch Filling',
+                        ],
+                    ],
+                    'jamun-pulp-500g-stand-up-pouch' => [
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
+                            'title'         => 'Journey Step 1: Pure Jamun Continuous Pulper Extraction',
+                            'badge'         => 'Extraction',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'title'         => 'Journey Step 2: Wild Jamun Farm Sourcing & Inspection',
+                            'badge'         => 'Sourcing',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'title'         => 'Journey Step 3: Aseptic Pouch Filling & Nitrogen Flush',
+                            'badge'         => 'Pouch Filling',
+                        ],
+                    ],
+                    'sitafal-pulp-custard-apple-500g-pouch-jar' => [
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
+                            'title'         => 'Journey Step 1: Continuous SS-304 Custard Apple Pulper',
+                            'badge'         => 'Extraction',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'title'         => 'Journey Step 2: Fresh Custard Apple Crate Sorting',
+                            'badge'         => 'Sourcing',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'title'         => 'Journey Step 3: Sealed Stand-up Pouch Packaging',
+                            'badge'         => 'Pouch Filling',
+                        ],
+                    ],
+                    'falsa-fruit-pulp-500g-sealed-pouch' => [
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
+                            'title'         => 'Journey Step 1: Stainless Steel Fruit Pulp Extraction',
+                            'badge'         => 'Extraction',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
+                            'title'         => 'Journey Step 2: Wild Forest Berry Harvest Sorting',
+                            'badge'         => 'Sourcing',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
+                            'title'         => 'Journey Step 3: Hermetic Pouch Dispensing Station',
+                            'badge'         => 'Pouch Filling',
+                        ],
+                    ],
+                    'artisanal-amla-chyawanprash-500g-glass-jar' => [
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
+                            'title'         => 'Journey Step 1: Wild Winter Amla & Raw Botanicals',
+                            'badge'         => 'Raw Herbs',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
+                            'title'         => 'Journey Step 2: Desi Cow Ghee Open Vat Slow Roasting',
+                            'badge'         => 'Vat Roasting',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
+                            'title'         => 'Journey Step 3: Classical Rasayana Health Formulation',
+                            'badge'         => 'Showcase',
+                        ],
+                    ],
+                    'amla-murabba-in-honey-syrup-500g-glass-jar' => [
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
+                            'title'         => 'Journey Step 1: Handpicked Banarasi Winter Amla',
+                            'badge'         => 'Raw Amla',
+                        ],
+                        [
+                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
+                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
+                            'title'         => 'Journey Step 2: Slow Honey Infusion in Thermal Vats',
+                            'badge'         => 'Honey Vats',
+                        ],
+                    ],
+                ];
+
+                // Append matching presets
+                if (isset($journey_presets[$product_slug])) {
+                    foreach ($journey_presets[$product_slug] as $preset) {
+                        $existing_urls = array_column($gallery_slides, 'image_url');
+                        if (!in_array($preset['image_url'], $existing_urls, true)) {
+                            $gallery_slides[] = $preset;
+                        }
+                    }
+                }
+
+                // 3. Append any other ACF gallery images
+                if (!empty($product_gallery)) {
+                    foreach ($product_gallery as $gallery_image) {
+                        $image_url = '';
+                        $thumbnail_url = '';
+                        $image_alt = $product_title;
+
+                        if (is_array($gallery_image)) {
+                            $image_url = $gallery_image['url'] ?? '';
+                            $image_alt = $gallery_image['alt'] ?? $product_title;
+                            $thumbnail_url = $gallery_image['sizes']['thumbnail'] ?? $image_url;
+                        } else {
+                            $image_url = wp_get_attachment_image_url($gallery_image, 'large');
+                            $thumbnail_url = wp_get_attachment_image_url($gallery_image, 'thumbnail') ?: $image_url;
+                            $meta_alt = get_post_meta($gallery_image, '_wp_attachment_image_alt', true);
+                            if ($meta_alt) {
+                                $image_alt = $meta_alt;
+                            }
+                        }
+
+                        if ($image_url) {
+                            $existing_urls = array_column($gallery_slides, 'image_url');
+                            if (!in_array($image_url, $existing_urls, true)) {
+                                $gallery_slides[] = [
+                                    'image_url'     => $image_url,
+                                    'thumbnail_url' => $thumbnail_url ?: $image_url,
+                                    'title'         => $image_alt ?: $product_title,
+                                    'badge'         => 'Gallery',
+                                ];
+                            }
+                        }
+                    }
+                }
+
+                if (!empty($gallery_slides)) :
                 ?>
+
+                    <div
+                        class="gallery-meta-bar"
+                        style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            margin-top: 1.15rem;
+                            margin-bottom: 0.65rem;
+                            padding: 0.45rem 0.85rem;
+                            background: var(--cream);
+                            border-radius: var(--radius-sm);
+                            border: 1px solid var(--border-light);
+                            flex-wrap: wrap;
+                            gap: 0.5rem;
+                        "
+                    >
+                        <span
+                            style="
+                                font-size: 0.8rem;
+                                font-weight: 700;
+                                color: var(--accent-hover);
+                                text-transform: uppercase;
+                                letter-spacing: 0.05em;
+                                display: flex;
+                                align-items: center;
+                                gap: 6px;
+                            "
+                        >
+                            <i class="fa-solid fa-camera-retro"></i>
+                            Journey &amp; Showcase Photos
+                        </span>
+
+                        <span
+                            id="activeImageLabel"
+                            style="
+                                font-size: 0.8rem;
+                                color: var(--text-dark);
+                                font-weight: 600;
+                                background: var(--white);
+                                padding: 2px 10px;
+                                border-radius: 12px;
+                                border: 1px solid var(--border-light);
+                            "
+                        >
+                            <?php echo esc_html($gallery_slides[0]['title'] ?? $product_title); ?>
+                        </span>
+                    </div>
 
                     <div
                         style="
                             display: flex;
                             gap: 0.85rem;
-                            margin-top: 1rem;
+                            margin-top: 0.5rem;
                             flex-wrap: wrap;
                         "
                         id="thumbGallery"
                     >
-
-                        <?php
-
-                        /*
-                         * Featured image thumbnail
-                         */
-
-                        if (
-                            $featured_image
-                        ) :
-
+                        <?php foreach ($gallery_slides as $index => $slide) : 
+                            $is_active = ($index === 0);
                         ?>
-
                             <div
-                                class="product-thumb active"
+                                class="product-thumb <?php echo $is_active ? 'active' : ''; ?>"
+                                role="button"
+                                tabindex="0"
+                                title="<?php echo esc_attr($slide['title']); ?>"
                                 style="
-                                    width: 80px;
-                                    height: 80px;
+                                    width: 82px;
+                                    height: 82px;
                                     border-radius: 8px;
                                     overflow: hidden;
                                     cursor: pointer;
-                                    border: 2px solid var(--accent-hover);
+                                    border: 2px solid <?php echo $is_active ? 'var(--accent-hover)' : 'transparent'; ?>;
+                                    position: relative;
+                                    transition: all 0.2s ease;
+                                    background: var(--cream);
+                                    box-shadow: <?php echo $is_active ? '0 0 0 2px rgba(201, 141, 40, 0.35)' : 'var(--shadow-sm)'; ?>;
                                 "
                                 onclick="changeProductImage(this)"
+                                onkeydown="if(event.key==='Enter'||event.key===' ')changeProductImage(this)"
                             >
-
                                 <img
-                                    src="<?php echo esc_url(
-                                        $featured_image
-                                    ); ?>"
-                                    alt="<?php echo esc_attr(
-                                        $product_title
-                                    ); ?>"
-                                    data-full-image="<?php echo esc_url(
-                                        $featured_image
-                                    ); ?>"
+                                    src="<?php echo esc_url($slide['thumbnail_url']); ?>"
+                                    alt="<?php echo esc_attr($slide['title']); ?>"
+                                    data-full-image="<?php echo esc_url($slide['image_url']); ?>"
+                                    data-caption="<?php echo esc_attr($slide['title']); ?>"
                                     style="
                                         width: 100%;
                                         height: 100%;
@@ -458,116 +693,34 @@ $nutritional_values = get_field(
                                     "
                                 />
 
+                                <?php if (!empty($slide['badge'])) : ?>
+                                    <span
+                                        style="
+                                            position: absolute;
+                                            bottom: 0;
+                                            left: 0;
+                                            right: 0;
+                                            background: rgba(20, 24, 31, 0.8);
+                                            color: #fff;
+                                            font-size: 0.65rem;
+                                            font-weight: 600;
+                                            text-align: center;
+                                            padding: 1px 2px;
+                                            line-height: 1.2;
+                                            white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                        "
+                                    >
+                                        <?php echo esc_html($slide['badge']); ?>
+                                    </span>
+                                <?php endif; ?>
                             </div>
-
-                        <?php
-
-                        endif;
-
-
-                        /*
-                         * ACF Gallery
-                         */
-
-                        foreach (
-                            $product_gallery
-                            as $gallery_image
-                        ) :
-
-                            if (
-                                is_array(
-                                    $gallery_image
-                                )
-                            ) {
-
-                                $image_url =
-                                    $gallery_image['url']
-                                    ?? '';
-
-                                $image_alt =
-                                    $gallery_image['alt']
-                                    ?? $product_title;
-
-                                $thumbnail_url =
-                                    $gallery_image['sizes']['thumbnail']
-                                    ?? $image_url;
-
-                            } else {
-
-                                $image_url =
-                                    wp_get_attachment_image_url(
-                                        $gallery_image,
-                                        'large'
-                                    );
-
-                                $thumbnail_url =
-                                    wp_get_attachment_image_url(
-                                        $gallery_image,
-                                        'thumbnail'
-                                    );
-
-                                $image_alt =
-                                    get_post_meta(
-                                        $gallery_image,
-                                        '_wp_attachment_image_alt',
-                                        true
-                                    );
-
-                                if (
-                                    !$image_alt
-                                ) {
-
-                                    $image_alt =
-                                        $product_title;
-                                }
-                            }
-
-                        ?>
-
-                            <div
-                                class="product-thumb"
-                                style="
-                                    width: 80px;
-                                    height: 80px;
-                                    border-radius: 8px;
-                                    overflow: hidden;
-                                    cursor: pointer;
-                                    border: 2px solid transparent;
-                                "
-                                onclick="changeProductImage(this)"
-                            >
-
-                                <img
-                                    src="<?php echo esc_url(
-                                        $thumbnail_url
-                                    ); ?>"
-                                    alt="<?php echo esc_attr(
-                                        $image_alt
-                                    ); ?>"
-                                    data-full-image="<?php echo esc_url(
-                                        $image_url
-                                    ); ?>"
-                                    style="
-                                        width: 100%;
-                                        height: 100%;
-                                        object-fit: cover;
-                                    "
-                                />
-
-                            </div>
-
-                        <?php
-
-                        endforeach;
-
-                        ?>
-
+                        <?php endforeach; ?>
                     </div>
 
                 <?php
-
                 endif;
-
                 ?>
 
 
@@ -1203,9 +1356,10 @@ $nutritional_values = get_field(
 
                         <a
                             href="<?php echo esc_url(
-                                home_url(
-                                    '/contact-us/'
-                                )
+                                add_query_arg([
+                                    'product' => $product_title,
+                                    'type'    => 'bulk',
+                                ], home_url('/contact-us/#contactFormWrap'))
                             ); ?>"
                             class="btn btn-accent"
                         >
@@ -1252,9 +1406,10 @@ $nutritional_values = get_field(
 
                         <a
                             href="<?php echo esc_url(
-                                home_url(
-                                    '/contact-us/'
-                                )
+                                add_query_arg([
+                                    'product' => $product_title,
+                                    'type'    => 'sample',
+                                ], home_url('/contact-us/#contactFormWrap'))
                             ); ?>"
                             class="btn btn-outline-gold"
                         >
@@ -1843,6 +1998,10 @@ function changeProductImage(element) {
             'mainProductImg'
         );
 
+    const label =
+        document.getElementById(
+            'activeImageLabel'
+        );
 
     if (
         !image ||
@@ -1851,46 +2010,57 @@ function changeProductImage(element) {
         return;
     }
 
-
     const fullImage =
         image.getAttribute(
             'data-full-image'
         );
 
+    const caption =
+        image.getAttribute(
+            'data-caption'
+        ) || image.getAttribute('alt');
 
     if (fullImage) {
-
-        mainImage.src =
-            fullImage;
-
+        mainImage.style.opacity = '0.35';
+        mainImage.style.transition = 'opacity 0.2s ease-in-out';
+        setTimeout(function() {
+            mainImage.src = fullImage;
+            if (caption) {
+                mainImage.alt = caption;
+            }
+            mainImage.style.opacity = '1';
+        }, 120);
     }
 
+    if (label && caption) {
+        label.textContent = caption;
+    }
 
     /*
      * Remove active
      */
-
     document
         .querySelectorAll(
             '.product-thumb'
         )
         .forEach(
             function (thumb) {
-
+                thumb.classList.remove('active');
                 thumb.style.border =
                     '2px solid transparent';
-
+                thumb.style.boxShadow =
+                    'var(--shadow-sm)';
             }
         );
-
 
     /*
      * Add active
      */
-
+    element.classList.add('active');
     element.style.border =
         '2px solid var(--accent-hover)';
-
+    element.style.boxShadow =
+        '0 0 0 2px rgba(201, 141, 40, 0.35)';
 }
 
 </script>
