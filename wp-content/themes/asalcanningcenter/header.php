@@ -46,16 +46,17 @@ $cta_url  = get_field('header_cta_url', 'option');
 	<header>
 		<div class="container header-content">
 		<a href="<?php echo esc_url(home_url('/')); ?>" class="brand">
-			<div class="brand-badge"><?php echo esc_html($header_established); ?></div>
+			<img src="<?php echo esc_url( get_template_directory_uri() . '/new-logo.png' ); ?>" 
+                 alt="<?php echo esc_attr( $brand_title ?: get_bloginfo( 'name' ) ); ?>" 
+                 class="brand-logo-img"
+                 width="72"
+                 height="72"
+                 style="height: 68px; width: auto; max-width: 80px; object-fit: contain; flex-shrink: 0; display: block;">
 			<div class="brand-title">
-			<h1><?php echo esc_html($brand_title); ?></h1>
-			<span><?php echo esc_html($brand_subtitle); ?></span>
+			    <h1><?php echo esc_html( $brand_title ?: 'ASAL CANNING CENTER' ); ?></h1>
+			    <span><?php echo esc_html( $brand_subtitle ?: 'COTTAGE INDUSTRY & FOOD PROCESSING' ); ?></span>
 			</div>
 		</a>
-
-		<button class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
-			<i class="fa-solid fa-bars"></i>
-		</button>
 
 		<nav class="main-navigation">
 
@@ -71,9 +72,23 @@ $cta_url  = get_field('header_cta_url', 'option');
             );
             ?>
 
+            <?php if (!empty($cta_text)) : ?>
+                <div class="mobile-nav-cta-wrapper">
+                    <a href="<?php echo esc_url($cta_url ?: '#'); ?>" class="btn btn-accent btn-sm mobile-nav-cta">
+                        <?php echo esc_html($cta_text); ?> <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            <?php endif; ?>
+
         </nav>
 
-		<a href="<?php echo esc_url($cta_url ?: '#'); ?>" class="btn btn-accent btn-sm header-cta"><?php echo esc_html($cta_text); ?> <i class="fa-solid fa-arrow-right"></i></a>
+		<?php if (!empty($cta_text)) : ?>
+			<a href="<?php echo esc_url($cta_url ?: '#'); ?>" class="btn btn-accent btn-sm header-cta"><?php echo esc_html($cta_text); ?> <i class="fa-solid fa-arrow-right"></i></a>
+		<?php endif; ?>
+
+		<button class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
+			<i class="fa-solid fa-bars"></i>
+		</button>
 		</div>
 	</header><!-- #masthead -->
 

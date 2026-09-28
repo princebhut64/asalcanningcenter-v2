@@ -490,8 +490,13 @@ function initLightboxModal() {
 
     if (isVideo) {
       mediaContainer.style.paddingBottom = '56.25%';
+      let cleanId = (mediaData || '').trim();
+      const ytMatch = cleanId.match(/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+      if (ytMatch && ytMatch[1]) {
+        cleanId = ytMatch[1];
+      }
       const iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(mediaData) + '?autoplay=1&rel=0';
+      iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(cleanId) + '?autoplay=1&rel=0';
       iframe.title = captionText || 'YouTube video';
       Object.assign(iframe.style, { position:'absolute', top:'0', left:'0', width:'100%', height:'100%', border:'0' });
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');

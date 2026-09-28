@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '3.9.0' );
+	define( '_S_VERSION', '4.1.1' );
 }
 
 /**
@@ -247,6 +247,11 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  * Contact Form 7 Handler & Inquiries Storage.
  */
 require get_template_directory() . '/inc/contact-inquiries.php';
+
+/**
+ * SMTP Service & Email Automation Suite.
+ */
+require get_template_directory() . '/inc/smtp-mail-manager.php';
 
 /**
  * Ensure 'Videos' category choice is always available in Media Archive ACF fields

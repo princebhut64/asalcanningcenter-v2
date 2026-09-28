@@ -230,6 +230,17 @@ function asal_capture_cf7_inquiry( $contact_form, &$abort, $submission ) {
         update_post_meta( $post_id, '_inquiry_subject', $subject );
         update_post_meta( $post_id, '_inquiry_date', current_time( 'mysql' ) );
         update_post_meta( $post_id, '_inquiry_ip', sanitize_text_field( $_SERVER['REMOTE_ADDR'] ?? '' ) );
+
+        // Automatically dispatch customer "Thank You for Reaching Out" email & admin lead alert
+        if ( function_exists( 'asal_dispatch_inquiry_emails' ) ) {
+            asal_dispatch_inquiry_emails( $post_id, [
+                'name'    => $name,
+                'phone'   => $phone,
+                'email'   => $email,
+                'subject' => $subject,
+                'message' => $message,
+            ] );
+        }
     }
 }
 
@@ -252,11 +263,12 @@ function asal_handle_cf7_local_mail( $skip_mail, $contact_form ) {
         'development' === $env
     );
 
-    // If a dedicated SMTP plugin is active and configured, let it send
+    // If SMTP is active and configured, let it send
     $has_smtp = class_exists( 'WPMailSMTP\Core' )
              || class_exists( 'PostSMTP' )
              || class_exists( 'FluentMail' )
-             || defined( 'WPMS_ON' );
+             || defined( 'WPMS_ON' )
+             || ( function_exists( 'asal_is_smtp_active' ) && asal_is_smtp_active() );
 
     if ( $is_local && ! $has_smtp ) {
         return true; // Bypass PHP mail() so CF7 reports mail_sent_ok ("Thank you for your message. It has been sent.")

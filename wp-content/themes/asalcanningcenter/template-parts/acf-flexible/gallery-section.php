@@ -37,66 +37,8 @@
 
       <?php
       $gallery_items = get_sub_field('gallery_items');
-      if (!is_array($gallery_items)) {
+      if (!is_array($gallery_items) || empty($gallery_items)) {
           $gallery_items = [];
-      }
-
-      $authentic_gallery_defaults = [
-          [
-              'gallery_image'       => home_url('/wp-content/uploads/2026/09/gallery-training-jalpa-patel.jpg'),
-              'media_type'          => 'image',
-              'youtube_id'          => '',
-              'gallery_category'    => 'workshops',
-              'gallery_title'       => 'Training Seminars with Jalpa Patel',
-              'gallery_description' => 'Founder Jalpa Patel conducting commercial canning and preservation workshop for women entrepreneurs.',
-          ],
-          [
-              'gallery_image'       => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
-              'media_type'          => 'image',
-              'youtube_id'          => '',
-              'gallery_category'    => 'operations',
-              'gallery_title'       => 'Continuous SS-304 Pulper Extraction',
-              'gallery_description' => 'High-capacity SS-304 continuous pulping system extracting fresh fruit pulp under zero-touch hygiene.',
-          ],
-          [
-              'gallery_image'       => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-              'media_type'          => 'image',
-              'youtube_id'          => '',
-              'gallery_category'    => 'operations',
-              'gallery_title'       => 'Pouch Dispensing Station',
-              'gallery_description' => 'Aseptic pouch filling and hermetic heat-sealing line delivering airtight protection.',
-          ],
-          [
-              'gallery_image'       => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
-              'media_type'          => 'image',
-              'youtube_id'          => '',
-              'gallery_category'    => 'facility',
-              'gallery_title'       => 'Thermal Vats & Herbal Processing',
-              'gallery_description' => 'Heavy-gauge steam-jacketed thermal vats for slow boiling of herbal decoctions and fruit syrups.',
-          ],
-          [
-              'gallery_image'       => home_url('/wp-content/uploads/2026/09/gallery-women-workshop.jpg'),
-              'media_type'          => 'image',
-              'youtube_id'          => '',
-              'gallery_category'    => 'workshops',
-              'gallery_title'       => 'Women Fruit Preservation Clinic',
-              'gallery_description' => 'Capacity building training program empowering regional women in commercial cottage food processing.',
-          ],
-          [
-              'gallery_image'       => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-              'media_type'          => 'image',
-              'youtube_id'          => '',
-              'gallery_category'    => 'operations',
-              'gallery_title'       => 'Farm Harvest Sourcing & Sorting Crates',
-              'gallery_description' => 'Direct farm-sourced fresh fruits inspected and graded for peak natural sweetness and maturity.',
-          ],
-      ];
-
-      $existing_titles = array_map(function($i) { return strtolower(trim($i['gallery_title'] ?? '')); }, $gallery_items);
-      foreach ($authentic_gallery_defaults as $default_item) {
-          if (!in_array(strtolower(trim($default_item['gallery_title'])), $existing_titles, true)) {
-              $gallery_items[] = $default_item;
-          }
       }
 
       if (!empty($gallery_items)) :
@@ -105,10 +47,13 @@
 
           $gallery_image       = $item['gallery_image'] ?? '';
           $media_type          = $item['media_type'] ?? 'image';
-          $youtube_id          = $item['youtube_id'] ?? '';
+          $youtube_raw         = $item['youtube_id'] ?? '';
+          $youtube_id          = function_exists('asal_clean_youtube_id') ? asal_clean_youtube_id($youtube_raw) : trim((string)$youtube_raw);
           $gallery_category    = $item['gallery_category'] ?? '';
           $gallery_title       = $item['gallery_title'] ?? '';
           $gallery_description = $item['gallery_description'] ?? '';
+
+          $is_video = ($media_type === 'video' || $gallery_category === 'videos' || !empty($youtube_id));
 
           /*
            * Image URL
@@ -139,6 +84,11 @@
             $image_url = $gallery_image;
           }
 
+          // Fallback to YouTube HQ thumbnail for video items if no custom image uploaded
+          if (empty($image_url) && !empty($youtube_id)) {
+            $image_url = 'https://img.youtube.com/vi/' . esc_attr($youtube_id) . '/hqdefault.jpg';
+          }
+
           if (empty($image_alt)) {
             $image_alt = __('Asal Canning Center Facility Gallery', 'asalcanningcenter');
           }
@@ -153,16 +103,16 @@
            * If media type is video but category is empty,
            * automatically use videos category.
            */
-          if ($media_type === 'video' && empty($data_category)) {
+          if ($is_video && empty($data_category)) {
             $data_category = 'videos';
           }
 
       ?>
 
         <div
-          class="gallery-item light-sheen-card"
+          class="gallery-item light-sheen-card<?php echo $is_video ? ' gallery-video-card' : ''; ?>"
           data-category="<?php echo esc_attr($data_category); ?>"
-          <?php if ($media_type === 'video' && $youtube_id) : ?>
+          <?php if ($is_video && $youtube_id) : ?>
             data-youtube="<?php echo esc_attr($youtube_id); ?>"
           <?php endif; ?>
         >

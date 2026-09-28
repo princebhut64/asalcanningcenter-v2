@@ -8,42 +8,8 @@ $media_title = get_sub_field('media_title');
 $media_description = get_sub_field('media_description');
 
 $media_items = get_sub_field('media_items');
-if (!is_array($media_items)) {
+if (!is_array($media_items) || empty($media_items)) {
     $media_items = [];
-}
-
-$authentic_media_defaults = [
-    [
-        'media_image'    => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
-        'media_title'    => 'Amla Health Drink & Herbal Wellness Feature',
-        'media_date'     => 'Ayurvedic Health & Nutrition Review',
-        'media_category' => 'magazine',
-        'media_type'     => 'image',
-        'youtube_id'     => '',
-    ],
-    [
-        'media_image'    => home_url('/wp-content/uploads/2026/09/gallery-women-workshop.jpg'),
-        'media_title'    => 'Women Preservation Clinic Excellence Award',
-        'media_date'     => 'Gujarat State Cottage Industry Honor',
-        'media_category' => 'awards',
-        'media_type'     => 'image',
-        'youtube_id'     => '',
-    ],
-    [
-        'media_image'    => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
-        'media_title'    => 'Continuous SS-304 Pulper Machine Innovation Feature',
-        'media_date'     => 'Industrial Food Machinery Daily',
-        'media_category' => 'newspaper',
-        'media_type'     => 'image',
-        'youtube_id'     => '',
-    ],
-];
-
-$existing_media_titles = array_map(function($i) { return strtolower(trim($i['media_title'] ?? '')); }, $media_items);
-foreach ($authentic_media_defaults as $default_media) {
-    if (!in_array(strtolower(trim($default_media['media_title'])), $existing_media_titles, true)) {
-        $media_items[] = $default_media;
-    }
 }
 
 

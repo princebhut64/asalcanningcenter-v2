@@ -28,6 +28,14 @@ if ( have_rows( 'page_builder', $_term ) ) {
 		the_row();
 		$layout_section = get_row_layout();
 
+		// Exclude Batch Yield & Shelf Life Calculator section from Home Page
+		if ( 'batch_calculator' === $layout_section ) {
+			$is_front = is_front_page() || is_home() || ( isset( $_term->ID ) && (int) $_term->ID === (int) get_option( 'page_on_front' ) );
+			if ( $is_front ) {
+				continue;
+			}
+		}
+
 		switch ( $layout_section ) {
 			case 'home_banner':
 			case 'brand_story_and_founder_spotlight':

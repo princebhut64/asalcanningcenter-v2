@@ -30,6 +30,34 @@ $footer_fssai_license = get_field('footer_fssai_license', 'option');
 
 // Certifications
 $certifications = get_field('certifications', 'option');
+if ( empty( $certifications ) ) {
+    $certifications = [
+        [
+            'cert_logo'        => 41,
+            'cert_icon'        => '',
+            'cert_title'       => 'FSSAI Certified',
+            'cert_description' => 'Lic. No.: 10718026000263',
+        ],
+        [
+            'cert_logo'        => '',
+            'cert_icon'        => 'fa-solid fa-trademark',
+            'cert_title'       => 'Registered Trade Mark',
+            'cert_description' => 'Trade Mark No.: 3340551',
+        ],
+        [
+            'cert_logo'        => '',
+            'cert_icon'        => 'fa-solid fa-building-flag',
+            'cert_title'       => 'Govt. Recognized',
+            'cert_description' => 'Cottage Industry Center',
+        ],
+        [
+            'cert_logo'        => '',
+            'cert_icon'        => 'fa-solid fa-globe',
+            'cert_title'       => 'Export Ready',
+            'cert_description' => 'Hermetic & Retort Packing',
+        ],
+    ];
+}
 
 // Contact Information
 $footer_address = get_field('footer_address', 'option');

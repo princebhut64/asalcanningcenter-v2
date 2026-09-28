@@ -80,6 +80,8 @@ function register_products_cpt_and_taxonomies() {
             'excerpt',
         ),
 
+        'taxonomies'         => array('product_category', 'packaging_type'),
+
         'has_archive'        => false,
 
         'rewrite'            => array(
@@ -132,11 +134,8 @@ function register_products_cpt_and_taxonomies() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'show_in_rest'      => true,
+        'rest_base'         => 'product_category',
         'show_tagcloud'     => false,
-
-        /* Force the standard hierarchical (categories-style) meta box
-         * which includes the inline "Add New Category" input + parent selector */
-        'meta_box_cb'       => 'post_categories_meta_box',
 
         'rewrite'           => array(
             'slug' => 'product-category',
@@ -185,11 +184,8 @@ function register_products_cpt_and_taxonomies() {
         'show_ui'           => true,
         'show_admin_column' => true,
         'show_in_rest'      => true,
+        'rest_base'         => 'packaging_type',
         'show_tagcloud'     => false,
-
-        /* Force the standard hierarchical (categories-style) meta box
-         * which includes the inline "Add New" input + parent selector */
-        'meta_box_cb'       => 'post_categories_meta_box',
 
         'rewrite'           => array(
             'slug' => 'packaging-type',
@@ -464,3 +460,22 @@ add_action('save_post_products', 'asal_clear_products_catalog_cache');
 add_action('deleted_post', 'asal_clear_products_catalog_cache');
 add_action('edited_product_category', 'asal_clear_products_catalog_cache');
 add_action('created_product_category', 'asal_clear_products_catalog_cache');
+
+/**
+ * Global Helper to extract YouTube video ID from pure ID, share URL, embed URL, or shorts URL
+ */
+if (!function_exists('asal_clean_youtube_id')) {
+    function asal_clean_youtube_id($url_or_id) {
+        $input = trim((string) $url_or_id);
+        if (empty($input)) {
+            return '';
+        }
+        if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $input)) {
+            return $input;
+        }
+        if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i', $input, $matches)) {
+            return $matches[1];
+        }
+        return $input;
+    }
+}

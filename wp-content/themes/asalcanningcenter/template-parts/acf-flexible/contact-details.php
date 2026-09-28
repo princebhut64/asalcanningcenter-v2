@@ -172,8 +172,8 @@
         <!-- Trust & Credential Badges -->
         <div class="founder-badges">
           <span class="mini-badge">
-            <i class="fa-solid fa-award"></i>
-            GCCI Award 2007
+            <i class="fa-solid fa-trademark"></i>
+            Trade Mark Regd.
           </span>
           <span class="mini-badge">
             FSSAI Certified

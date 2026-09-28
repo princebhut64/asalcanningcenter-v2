@@ -602,54 +602,6 @@ $nutritional_values = get_field(
                 ?>
 
                     <div
-                        class="gallery-meta-bar"
-                        style="
-                            display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            margin-top: 1.15rem;
-                            margin-bottom: 0.65rem;
-                            padding: 0.45rem 0.85rem;
-                            background: var(--cream);
-                            border-radius: var(--radius-sm);
-                            border: 1px solid var(--border-light);
-                            flex-wrap: wrap;
-                            gap: 0.5rem;
-                        "
-                    >
-                        <span
-                            style="
-                                font-size: 0.8rem;
-                                font-weight: 700;
-                                color: var(--accent-hover);
-                                text-transform: uppercase;
-                                letter-spacing: 0.05em;
-                                display: flex;
-                                align-items: center;
-                                gap: 6px;
-                            "
-                        >
-                            <i class="fa-solid fa-camera-retro"></i>
-                            Journey &amp; Showcase Photos
-                        </span>
-
-                        <span
-                            id="activeImageLabel"
-                            style="
-                                font-size: 0.8rem;
-                                color: var(--text-dark);
-                                font-weight: 600;
-                                background: var(--white);
-                                padding: 2px 10px;
-                                border-radius: 12px;
-                                border: 1px solid var(--border-light);
-                            "
-                        >
-                            <?php echo esc_html($gallery_slides[0]['title'] ?? $product_title); ?>
-                        </span>
-                    </div>
-
-                    <div
                         style="
                             display: flex;
                             gap: 0.85rem;
