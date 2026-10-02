@@ -1,0 +1,32 @@
+# Database dumps
+
+
+# Logs and error files
+*.log
+error_log
+debug.log
+
+# Environment & Config
+.env
+.env.*
+!.env.example
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node dependencies and build caches
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# WordPress uploads / backup directories
+# wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/backups/

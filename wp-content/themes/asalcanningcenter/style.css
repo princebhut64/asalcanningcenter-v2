@@ -2655,6 +2655,20 @@ footer {
   z-index: 5 !important;
 }
 
+.item-tag:empty,
+.product-tag:empty,
+.badge-tag:empty {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Single-Line Product Details Pill Button */
 .view-btn {
   display: inline-flex !important;

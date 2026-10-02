@@ -75,7 +75,6 @@ function register_products_cpt_and_taxonomies() {
 
         'supports'           => array(
             'title',
-            'editor',
             'thumbnail',
             'excerpt',
         ),
@@ -339,14 +338,13 @@ function asal_get_products_catalog_data() {
              * ==================================================
              */
 
-            $image = get_the_post_thumbnail_url(
-                $product_id,
-                'large'
-            );
-
+            $image = '';
+            $primary_img = get_field('primary_product_image', $product_id);
+            if ($primary_img) {
+                $image = is_array($primary_img) ? ($primary_img['url'] ?? '') : wp_get_attachment_image_url($primary_img, 'large');
+            }
             if (!$image) {
-
-                $image = '';
+                $image = get_the_post_thumbnail_url($product_id, 'large') ?: '';
             }
 
 
@@ -356,10 +354,12 @@ function asal_get_products_catalog_data() {
              * ==================================================
              */
 
-            $badge = get_field(
-                'product_badge',
-                $product_id
-            );
+            $show_badge = get_field('show_product_badge', $product_id);
+            $badge = '';
+            if (!empty($show_badge)) {
+                $badge_val = get_field('product_badge', $product_id);
+                $badge = !empty($badge_val) ? trim((string) $badge_val) : '';
+            }
 
             $description = get_field(
                 'short_description',
@@ -368,11 +368,6 @@ function asal_get_products_catalog_data() {
 
             $rating_text = get_field(
                 'rating_text',
-                $product_id
-            );
-
-            $product_packaging = get_field(
-                'product_packaging',
                 $product_id
             );
 
@@ -479,3 +474,45 @@ if (!function_exists('asal_clean_youtube_id')) {
         return $input;
     }
 }
+
+/**
+ * Synchronize Primary Product Image with WordPress Featured Image
+ */
+add_filter('acf/load_value/name=primary_product_image', function($value, $post_id, $field) {
+    if (empty($value) && $post_id && is_numeric($post_id)) {
+        $thumb_id = get_post_thumbnail_id($post_id);
+        if ($thumb_id) {
+            return (int) $thumb_id;
+        }
+    }
+    return $value;
+}, 10, 3);
+
+add_action('acf/save_post', function($post_id) {
+    if (get_post_type($post_id) !== 'products') {
+        return;
+    }
+    $primary_image = get_field('primary_product_image', $post_id);
+    if (!empty($primary_image)) {
+        $attachment_id = is_array($primary_image) ? ($primary_image['ID'] ?? 0) : (int) $primary_image;
+        if ($attachment_id > 0) {
+            set_post_thumbnail($post_id, $attachment_id);
+        }
+    } elseif (has_post_thumbnail($post_id)) {
+        $thumb_id = get_post_thumbnail_id($post_id);
+        if ($thumb_id) {
+            update_field('primary_product_image', $thumb_id, $post_id);
+        }
+    }
+}, 20);
+
+/**
+ * Use classic edit interface for products custom post type
+ * Enables full-width ACF Tabs directly below the title for seamless editing
+ */
+add_filter('use_block_editor_for_post_type', function($use_block_editor, $post_type) {
+    if ($post_type === 'products') {
+        return false;
+    }
+    return $use_block_editor;
+}, 10, 2);

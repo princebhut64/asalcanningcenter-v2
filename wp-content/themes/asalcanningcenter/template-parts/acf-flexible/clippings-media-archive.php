@@ -29,24 +29,7 @@ if (!$media_description) {
 }
 
 
-/**
- * Helper to extract YouTube video ID from pure ID or full YouTube URL
- */
-if (!function_exists('asal_clean_youtube_id')) {
-    function asal_clean_youtube_id($url_or_id) {
-        $input = trim((string) $url_or_id);
-        if (empty($input)) {
-            return '';
-        }
-        if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $input)) {
-            return $input;
-        }
-        if (preg_match('/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i', $input, $matches)) {
-            return $matches[1];
-        }
-        return $input;
-    }
-}
+
 
 /*
  * Count media

@@ -367,7 +367,6 @@ function asal_get_email_template_season_coming( $data = [] ) {
 
     $img_crates  = esc_url( asal_get_email_image_url( 'pulp-journey-sourcing-crates.jpg' ) );
     $img_machine = esc_url( asal_get_email_image_url( 'pulp-journey-machine-extraction.jpg' ) );
-    $img_filling = esc_url( asal_get_email_image_url( 'pulp-journey-pouch-filling.jpg' ) );
 
     $phone       = get_field( 'footer_phone', 'option' ) ?: '+91 98250 62293';
     $clean_phone = preg_replace( '/[^0-9+]/', '', $phone );

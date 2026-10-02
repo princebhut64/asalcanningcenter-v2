@@ -14,6 +14,65 @@ RewriteRule . /asalcanningcenter/index.php [L]
 # END WordPress
 
 # ==============================================================================
+# SECURITY HARDENING
+# ==============================================================================
+
+# Disable directory browsing
+Options -Indexes
+
+# Block sensitive files, database dumps, logs, and git/env files
+<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op]|env|git.*|lock))$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Protect wp-config.php
+<Files "wp-config.php">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</Files>
+
+# Protect xmlrpc.php to prevent DDoS pingbacks & brute force attacks
+<Files "xmlrpc.php">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</Files>
+
+# Protect readme.html and license.txt (prevent WP version fingerprinting)
+<FilesMatch "^(readme\.html|license\.txt|wp-config-sample\.php)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Security HTTP Response Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ==============================================================================
 # SPEED OPTIMIZATION: GZIP / DEFLATE COMPRESSION
 # ==============================================================================
 <IfModule mod_deflate.c>

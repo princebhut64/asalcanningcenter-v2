@@ -22,17 +22,16 @@ $product_id = get_the_ID();
 
 $product_title = get_the_title();
 
-$product_url = get_permalink();
-
 
 // ============================================================
 // ACF FIELDS
 // ============================================================
 
-$product_badge = get_field(
-    'product_badge',
-    $product_id
-);
+$show_product_badge = get_field('show_product_badge', $product_id);
+$product_badge = '';
+if (!empty($show_product_badge)) {
+    $product_badge = get_field('product_badge', $product_id) ?: '';
+}
 
 $short_description = get_field(
     'short_description',
@@ -79,10 +78,14 @@ $back_to_product_catalog_link = get_field(
 // FEATURED IMAGE
 // ============================================================
 
-$featured_image = get_the_post_thumbnail_url(
-    $product_id,
-    'large'
-);
+$featured_image = '';
+$primary_img = get_field('primary_product_image', $product_id);
+if ($primary_img) {
+    $featured_image = is_array($primary_img) ? ($primary_img['url'] ?? '') : wp_get_attachment_image_url($primary_img, 'large');
+}
+if (!$featured_image) {
+    $featured_image = get_the_post_thumbnail_url($product_id, 'large');
+}
 
 
 // ============================================================
@@ -192,24 +195,144 @@ $packaging_text =
 
 
 // ============================================================
-// PROCESSING METHOD
+// PROCESSING METHOD NORMALIZATION
 // ============================================================
 
-$processing_method = get_field(
-    'processing_method',
-    $product_id
-);
+$processing_method = get_field('processing_method', $product_id);
+if (empty($processing_method)) {
+    $raw_pm = get_post_meta($product_id, 'processing_method', true);
+    if (!empty($raw_pm)) {
+        $processing_method = $raw_pm;
+    }
+}
+
+// Decode JSON, serialized string, or multiline text format if string given
+if (is_string($processing_method)) {
+    $trimmed_pm = trim($processing_method);
+    if (strpos($trimmed_pm, '[') === 0 || strpos($trimmed_pm, '{') === 0) {
+        $decoded_pm = json_decode($trimmed_pm, true);
+        if (is_array($decoded_pm)) {
+            $processing_method = $decoded_pm;
+        }
+    } elseif (strpos($trimmed_pm, 'a:') === 0) {
+        $un_pm = @unserialize($trimmed_pm, ['allowed_classes' => false]);
+        if (is_array($un_pm)) {
+            $processing_method = $un_pm;
+        }
+    } elseif (!empty($trimmed_pm) && !is_numeric($trimmed_pm)) {
+        $pm_lines = preg_split('/\r\n|\r|\n/', $trimmed_pm);
+        $parsed_steps = [];
+        foreach ($pm_lines as $pm_line) {
+            $pm_line = trim($pm_line);
+            if (!$pm_line) continue;
+            if (strpos($pm_line, ':') !== false) {
+                list($st_title, $st_desc) = explode(':', $pm_line, 2);
+                $parsed_steps[] = [
+                    'step_title'       => trim($st_title),
+                    'step_description' => trim($st_desc),
+                ];
+            } else {
+                $parsed_steps[] = [
+                    'step_title'       => '',
+                    'step_description' => $pm_line,
+                ];
+            }
+        }
+        if (!empty($parsed_steps)) {
+            $processing_method = $parsed_steps;
+        }
+    }
+}
+
+// Guarantee array structure
+if (is_array($processing_method)) {
+    $normalized_pm = [];
+    foreach ($processing_method as $step) {
+        if (!is_array($step)) continue;
+        $title = $step['step_title'] ?? $step['title'] ?? $step['name'] ?? '';
+        $desc  = $step['step_description'] ?? $step['description'] ?? $step['value'] ?? $step['desc'] ?? '';
+        if ($title !== '' || $desc !== '') {
+            $normalized_pm[] = [
+                'step_title'       => $title,
+                'step_description' => $desc,
+            ];
+        }
+    }
+    $processing_method = $normalized_pm;
+} else {
+    $processing_method = [];
+}
 
 
 // ============================================================
-// NUTRITIONAL VALUES
+// NUTRITIONAL VALUES NORMALIZATION
 // ============================================================
 
-$nutritional_values = get_field(
-    'nutritional_values',
-    $product_id
-);
+$nutritional_values = get_field('nutritional_values', $product_id);
+if (empty($nutritional_values)) {
+    $raw_nv = get_post_meta($product_id, 'nutritional_values', true);
+    if (!empty($raw_nv)) {
+        $nutritional_values = $raw_nv;
+    }
+}
 
+// Decode JSON, serialized string, or multiline text format if string given
+if (is_string($nutritional_values)) {
+    $trimmed_nv = trim($nutritional_values);
+    if (strpos($trimmed_nv, '[') === 0 || strpos($trimmed_nv, '{') === 0) {
+        $decoded_nv = json_decode($trimmed_nv, true);
+        if (is_array($decoded_nv)) {
+            $nutritional_values = $decoded_nv;
+        }
+    } elseif (strpos($trimmed_nv, 'a:') === 0) {
+        $un_nv = @unserialize($trimmed_nv, ['allowed_classes' => false]);
+        if (is_array($un_nv)) {
+            $nutritional_values = $un_nv;
+        }
+    } elseif (!empty($trimmed_nv) && !is_numeric($trimmed_nv)) {
+        $nv_lines = preg_split('/\r\n|\r|\n/', $trimmed_nv);
+        $parsed_nutrients = [];
+        foreach ($nv_lines as $nv_line) {
+            $nv_line = trim($nv_line);
+            if (!$nv_line) continue;
+            if (strpos($nv_line, ':') !== false) {
+                list($nt_name, $nt_val) = explode(':', $nv_line, 2);
+                $parsed_nutrients[] = [
+                    'nutrient_name'  => trim($nt_name),
+                    'nutrient_value' => trim($nt_val),
+                ];
+            } elseif (strpos($nv_line, '-') !== false) {
+                list($nt_name, $nt_val) = explode('-', $nv_line, 2);
+                $parsed_nutrients[] = [
+                    'nutrient_name'  => trim($nt_name),
+                    'nutrient_value' => trim($nt_val),
+                ];
+            }
+        }
+        if (!empty($parsed_nutrients)) {
+            $nutritional_values = $parsed_nutrients;
+        }
+    }
+}
+
+// Guarantee array structure
+if (is_array($nutritional_values)) {
+    $normalized_nv = [];
+    foreach ($nutritional_values as $item) {
+        if (!is_array($item)) continue;
+        $name = $item['nutrient_name'] ?? $item['name'] ?? $item['title'] ?? $item['key'] ?? '';
+        $val  = $item['nutrient_value'] ?? $item['value'] ?? $item['val'] ?? $item['amount'] ?? '';
+        if ($name !== '' || $val !== '') {
+            $normalized_nv[] = [
+                'nutrient_name'  => $name,
+                'nutrient_value' => $val,
+            ];
+        }
+    }
+    $nutritional_values = $normalized_nv;
+} else {
+    $nutritional_values = [];
+}
 ?>
 
 <section
@@ -409,162 +532,7 @@ $nutritional_values = get_field(
                     ];
                 }
 
-                // 2. Curated Authentic Journey & Showcase Presets
-                $product_slug = get_post_field('post_name', $product_id);
-                $journey_presets = [
-                    '18-herbs-medicinal-hair-oil-200ml-amber-bottle' => [
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/hair-oil-girl-showcase.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/hair-oil-girl-showcase.jpg'),
-                            'title'         => 'Showcase: Long Black Hair Wellness Result',
-                            'badge'         => 'Showcase',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
-                            'title'         => 'Raw Botanicals: 18 Medicinal Herbs & Roots Sourcing',
-                            'badge'         => 'Botanicals',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
-                            'title'         => 'Decoction: Traditional Copper Vat Slow Infusion',
-                            'badge'         => 'Vat Infusion',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
-                            'title'         => 'Herbal Formulation: Ayurvedic Nectar Infusion',
-                            'badge'         => 'Heritage',
-                        ],
-                    ],
-                    'alphonso-kesar-mango-pulp-850g-can-1kg-pouch' => [
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'title'         => 'Journey Step 1: Farm Crate Sourcing & Mango Sorting',
-                            'badge'         => 'Sourcing',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
-                            'title'         => 'Journey Step 2: Continuous SS-304 Pulper Extraction',
-                            'badge'         => 'Extraction',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'title'         => 'Journey Step 3: Food-Grade Sealed Pouch Packaging Station',
-                            'badge'         => 'Pouch Filling',
-                        ],
-                    ],
-                    'jamun-pulp-500g-stand-up-pouch' => [
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
-                            'title'         => 'Journey Step 1: Pure Jamun Continuous Pulper Extraction',
-                            'badge'         => 'Extraction',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'title'         => 'Journey Step 2: Wild Jamun Farm Sourcing & Inspection',
-                            'badge'         => 'Sourcing',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'title'         => 'Journey Step 3: Aseptic Pouch Filling & Nitrogen Flush',
-                            'badge'         => 'Pouch Filling',
-                        ],
-                    ],
-                    'sitafal-pulp-custard-apple-500g-pouch-jar' => [
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-machine-extraction.jpg'),
-                            'title'         => 'Journey Step 1: Continuous SS-304 Custard Apple Pulper',
-                            'badge'         => 'Extraction',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'title'         => 'Journey Step 2: Fresh Custard Apple Crate Sorting',
-                            'badge'         => 'Sourcing',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'title'         => 'Journey Step 3: Sealed Stand-up Pouch Packaging',
-                            'badge'         => 'Pouch Filling',
-                        ],
-                    ],
-                    'falsa-fruit-pulp-500g-sealed-pouch' => [
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-jamun-extraction.jpg'),
-                            'title'         => 'Journey Step 1: Stainless Steel Fruit Pulp Extraction',
-                            'badge'         => 'Extraction',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-sourcing-crates.jpg'),
-                            'title'         => 'Journey Step 2: Wild Forest Berry Harvest Sorting',
-                            'badge'         => 'Sourcing',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/pulp-journey-pouch-filling.jpg'),
-                            'title'         => 'Journey Step 3: Hermetic Pouch Dispensing Station',
-                            'badge'         => 'Pouch Filling',
-                        ],
-                    ],
-                    'artisanal-amla-chyawanprash-500g-glass-jar' => [
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
-                            'title'         => 'Journey Step 1: Wild Winter Amla & Raw Botanicals',
-                            'badge'         => 'Raw Herbs',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
-                            'title'         => 'Journey Step 2: Desi Cow Ghee Open Vat Slow Roasting',
-                            'badge'         => 'Vat Roasting',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-drink-banner.jpg'),
-                            'title'         => 'Journey Step 3: Classical Rasayana Health Formulation',
-                            'badge'         => 'Showcase',
-                        ],
-                    ],
-                    'amla-murabba-in-honey-syrup-500g-glass-jar' => [
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-raw-amla-turmeric.jpg'),
-                            'title'         => 'Journey Step 1: Handpicked Banarasi Winter Amla',
-                            'badge'         => 'Raw Amla',
-                        ],
-                        [
-                            'image_url'     => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
-                            'thumbnail_url' => home_url('/wp-content/uploads/2026/09/herbal-amla-vat-boiling.jpg'),
-                            'title'         => 'Journey Step 2: Slow Honey Infusion in Thermal Vats',
-                            'badge'         => 'Honey Vats',
-                        ],
-                    ],
-                ];
-
-                // Append matching presets
-                if (isset($journey_presets[$product_slug])) {
-                    foreach ($journey_presets[$product_slug] as $preset) {
-                        $existing_urls = array_column($gallery_slides, 'image_url');
-                        if (!in_array($preset['image_url'], $existing_urls, true)) {
-                            $gallery_slides[] = $preset;
-                        }
-                    }
-                }
-
-                // 3. Append any other ACF gallery images
+                // 2. Load Gallery Images: Use ACF product_gallery uploaded by Admin
                 if (!empty($product_gallery)) {
                     foreach ($product_gallery as $gallery_image) {
                         $image_url = '';
@@ -576,9 +544,10 @@ $nutritional_values = get_field(
                             $image_alt = $gallery_image['alt'] ?? $product_title;
                             $thumbnail_url = $gallery_image['sizes']['thumbnail'] ?? $image_url;
                         } else {
-                            $image_url = wp_get_attachment_image_url($gallery_image, 'large');
-                            $thumbnail_url = wp_get_attachment_image_url($gallery_image, 'thumbnail') ?: $image_url;
-                            $meta_alt = get_post_meta($gallery_image, '_wp_attachment_image_alt', true);
+                            $attachment_id = (int) $gallery_image;
+                            $image_url = wp_get_attachment_image_url($attachment_id, 'large');
+                            $thumbnail_url = wp_get_attachment_image_url($attachment_id, 'thumbnail') ?: $image_url;
+                            $meta_alt = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
                             if ($meta_alt) {
                                 $image_alt = $meta_alt;
                             }
@@ -598,7 +567,7 @@ $nutritional_values = get_field(
                     }
                 }
 
-                if (!empty($gallery_slides)) :
+                if (!empty($gallery_slides) && count($gallery_slides) > 1) :
                 ?>
 
                     <div
@@ -644,29 +613,6 @@ $nutritional_values = get_field(
                                         object-fit: cover;
                                     "
                                 />
-
-                                <?php if (!empty($slide['badge'])) : ?>
-                                    <span
-                                        style="
-                                            position: absolute;
-                                            bottom: 0;
-                                            left: 0;
-                                            right: 0;
-                                            background: rgba(20, 24, 31, 0.8);
-                                            color: #fff;
-                                            font-size: 0.65rem;
-                                            font-weight: 600;
-                                            text-align: center;
-                                            padding: 1px 2px;
-                                            line-height: 1.2;
-                                            white-space: nowrap;
-                                            overflow: hidden;
-                                            text-overflow: ellipsis;
-                                        "
-                                    >
-                                        <?php echo esc_html($slide['badge']); ?>
-                                    </span>
-                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -729,9 +675,8 @@ $nutritional_values = get_field(
                         <?php
 
                         if (
-                            !empty(
-                                $processing_method
-                            )
+                            !empty($processing_method) &&
+                            is_array($processing_method)
                         ) :
 
                             $step_number = 1;
@@ -858,42 +803,19 @@ $nutritional_values = get_field(
 
                 <!-- CATEGORY -->
 
-                <div
-                    class="section-tag"
-                    style="
-                        margin-bottom: 0.5rem;
-                    "
-                >
-
-                    <i
-                        class="fa-solid fa-star"
-                    ></i>
-
-                    <?php
-
-                    if ($product_badge) {
-
-                        echo esc_html(
-                            $product_badge
-                        );
-
-                    } elseif (
-                        $main_category
-                    ) {
-
-                        echo esc_html(
-                            $main_category
-                        );
-
-                    } else {
-
-                        echo 'Pure Natural Preserve';
-
-                    }
-
-                    ?>
-
-                </div>
+                <?php if (!empty($product_badge) && trim($product_badge) !== '') : ?>
+                    <div
+                        class="section-tag"
+                        style="
+                            margin-bottom: 0.5rem;
+                        "
+                    >
+                        <i
+                            class="fa-solid fa-star"
+                        ></i>
+                        <?php echo esc_html(trim($product_badge)); ?>
+                    </div>
+                <?php endif; ?>
 
 
                 <!-- TITLE -->
@@ -1162,9 +1084,8 @@ $nutritional_values = get_field(
                     <?php
 
                     if (
-                        !empty(
-                            $nutritional_values
-                        )
+                        !empty($nutritional_values) &&
+                        is_array($nutritional_values)
                     ) :
 
                     ?>
@@ -1609,12 +1530,11 @@ $nutritional_values = get_field(
                         get_the_ID();
 
 
-                    $related_badge =
-                        get_field(
-                            'product_badge',
-                            $related_id
-                        );
-
+                    $related_show_badge = get_field('show_product_badge', $related_id);
+                    $related_badge = '';
+                    if (!empty($related_show_badge)) {
+                        $related_badge = get_field('product_badge', $related_id) ?: '';
+                    }
 
                     $related_desc =
                         get_field(
@@ -1622,12 +1542,17 @@ $nutritional_values = get_field(
                             $related_id
                         );
 
-
-                    $related_img =
-                        get_the_post_thumbnail_url(
+                    $related_img = '';
+                    $rel_primary = get_field('primary_product_image', $related_id);
+                    if ($rel_primary) {
+                        $related_img = is_array($rel_primary) ? ($rel_primary['sizes']['medium'] ?? $rel_primary['url']) : wp_get_attachment_image_url($rel_primary, 'medium');
+                    }
+                    if (!$related_img) {
+                        $related_img = get_the_post_thumbnail_url(
                             $related_id,
                             'medium'
                         );
+                    }
 
 
                     $related_packaging =

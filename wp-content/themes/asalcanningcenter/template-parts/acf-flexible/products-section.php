@@ -104,10 +104,17 @@ $view_more_button = get_sub_field('view_more_button');
                      * --------------------------------
                      */
 
-                    $product_image = get_the_post_thumbnail_url(
-                        $product_id,
-                        'large'
-                    );
+                    $product_image = '';
+                    $primary_img = get_field('primary_product_image', $product_id);
+                    if ($primary_img) {
+                        $product_image = is_array($primary_img) ? ($primary_img['url'] ?? '') : wp_get_attachment_image_url($primary_img, 'large');
+                    }
+                    if (!$product_image) {
+                        $product_image = get_the_post_thumbnail_url(
+                            $product_id,
+                            'large'
+                        );
+                    }
 
 
                     /*
@@ -116,10 +123,11 @@ $view_more_button = get_sub_field('view_more_button');
                      * --------------------------------
                      */
 
-                    $product_badge = get_field(
-                        'product_badge',
-                        $product_id
-                    );
+                    $show_badge = get_field('show_product_badge', $product_id);
+                    $product_badge = '';
+                    if (!empty($show_badge)) {
+                        $product_badge = get_field('product_badge', $product_id) ?: '';
+                    }
 
                     $product_rating = get_field(
                         'rating_text',
@@ -143,10 +151,10 @@ $view_more_button = get_sub_field('view_more_button');
                         <!-- Product Image -->
                         <div class="img-holder">
 
-                            <?php if ($product_badge) : ?>
+                            <?php if (!empty($product_badge) && trim($product_badge) !== '') : ?>
 
                                 <span class="item-tag">
-                                    <?php echo esc_html($product_badge); ?>
+                                    <?php echo esc_html(trim($product_badge)); ?>
                                 </span>
 
                             <?php endif; ?>

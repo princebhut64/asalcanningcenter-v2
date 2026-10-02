@@ -35,7 +35,6 @@
 
 <?php
 // Brand Settings
-$header_established = get_field('header_established', 'option');
 $brand_title        = get_field('header_brand_title', 'option');
 $brand_subtitle     = get_field('header_brand_subtitle', 'option');
 

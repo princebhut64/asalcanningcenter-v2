@@ -450,7 +450,7 @@
     };
 
     const title = escapeHtml(p.title);
-    const badge = escapeHtml(p.badge);
+    const badge = (p.badge && typeof p.badge === 'string') ? escapeHtml(p.badge.trim()) : '';
     const image = escapeHtml(p.img);
     const rating_text = escapeHtml(p.rating_text);
     const specification = escapeHtml(p.spec);
@@ -464,7 +464,7 @@
 
     card.innerHTML = `
       <div class="img-holder">
-        <span class="item-tag">${badge}</span>
+        ${badge ? `<span class="item-tag">${badge}</span>` : ''}
         ${
           image
             ? `<img src="${image}" alt="${title}" loading="lazy" />`

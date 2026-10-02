@@ -241,10 +241,6 @@ if (!empty($packaging_options)) {
 
               $package_name = $package['package_name'] ?? '';
 
-              $unit_weight = floatval(
-                  $package['unit_weight'] ?? 0
-              );
-
               $shelf_life = $package['shelf_life'] ?? '';
 
               ?>

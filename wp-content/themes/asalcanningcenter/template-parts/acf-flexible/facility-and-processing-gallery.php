@@ -72,10 +72,6 @@ $gallery_button      = get_sub_field('gallery_button');
                     ? ($image['alt'] ?? $title)
                     : get_post_meta($image, '_wp_attachment_image_alt', true);
 
-                $full_image_url = is_array($image)
-                    ? ($image['url'] ?? '')
-                    : wp_get_attachment_image_url($image, 'full');
-
             ?>
 
                 <div class="gallery-item light-sheen-card">

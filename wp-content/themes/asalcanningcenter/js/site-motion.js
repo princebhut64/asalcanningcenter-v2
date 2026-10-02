@@ -41,16 +41,11 @@
     document.body.classList.add('page-ready');
   }
 
-  function initHeroParallax() {
-    // Rely on pure cinematic CSS Ken Burns transition for maximum 60fps stability without mousemove repaint jitter
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
     syncResponsiveState();
     window.addEventListener('resize', syncResponsiveState, { passive: true });
     initHeader();
     initReveals();
     initPageTransitions();
-    initHeroParallax();
   });
 })();

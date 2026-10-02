@@ -22,18 +22,21 @@ require_once __DIR__ . '/email-templates.php';
  * 1. Get or Default SMTP Settings
  */
 function asal_get_smtp_settings() {
+    $admin_email = get_option( 'admin_email', '' );
+    $site_name   = get_bloginfo( 'name' );
+
     $defaults = [
-        'enabled'                   => 1,
+        'enabled'                   => 0,
         'host'                      => 'smtp.gmail.com',
         'port'                      => 587,
         'encryption'                => 'tls', // 'tls', 'ssl', 'none'
         'auth'                      => 1,
-        'username'                  => 'xlcreater000@gmail.com',
-        'password'                  => 'agakseqzssarohhz',
-        'from_email'                => 'xlcreater000@gmail.com',
-        'from_name'                 => 'Asal Canning Center',
-        'admin_email'               => 'xlcreater000@gmail.com',
-        'disable_ssl_verify'        => 1, // Crucial for Windows/XAMPP localhost compatibility
+        'username'                  => '',
+        'password'                  => '',
+        'from_email'                => $admin_email,
+        'from_name'                 => $site_name ?: 'Asal Canning Center',
+        'admin_email'               => $admin_email,
+        'disable_ssl_verify'        => 0,
         'customer_autoresponder'    => 1,
         'admin_notification'        => 1,
         'public_image_base'         => '',
@@ -420,7 +423,7 @@ function asal_render_smtp_admin_page() {
                                     <button type="button" class="button" onclick="asalTogglePassword()">Show</button>
                                 </div>
                                 <p class="description" style="font-size: 11px; margin-top: 4px; color: #64748B;">
-                                    For Gmail: Use a 16-character <strong>Google App Password</strong> (e.g. <code>agak seqz ssar ohhz</code>).
+                                    For Gmail: Use a 16-character <strong>Google App Password</strong> (e.g. <code>abcd efgh ijkl mnop</code>).
                                 </p>
                             </td>
                         </tr>
